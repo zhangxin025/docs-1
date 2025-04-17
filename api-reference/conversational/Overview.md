@@ -1,7 +1,6 @@
+## 
 
-## Overview
-
-<img src="../assets/conversation_bg.png" alt="image.png"/>
+![image.png](../assets/conversation_bg.png)
 
 The Conversational Video Interface (CVI) is an end-to-end pipeline for creating real-time multimodal video conversations with a replica that can see, hear, and respond similarly to how a human would. Developers can deploy video AI agents in minutes using CVI.
 
@@ -49,35 +48,26 @@ Easily create high-quality AI replicas of you or your customers, powered by our 
 
 [View attachment "conversationdemo.png.mp4"](https://alidocs.dingtalk.com/document/preview?chInfo=im&cid=63008155837&dentryKey=GYja4bXQUWqvXZJ8&docKey=ybEnB54D5WNd3lP1&dontjump=true&iframeQuery=anchorId%3DX02m9ievobkstzq0sv5fr&type=d&utm_medium=im_card&utm_source=im)
 
-### Try it out!
+### Try it out\!
 
-You can try chatting with Elara on our website to get a taste of what a conversation with CVI looks like.[**Try Out CVI Now!**Note that Elara can see and hear you.](https://duix.com/home)
+You can try chatting with Elara on our website to get a taste of what a conversation with CVI looks like.[\*\*Try Out CVI Now\!\*\*Note that Elara can see and hear you.](https://duix.com/home)
 
 ## What components does CVI provide, and what can I customize?
 
 CVI provides a full pipeline allowing you to easily create video conversations. You can immediately jump into a real-time conversation with the generated Session link URL. CVI provides the following layers:
 
-*   WebRTC/Session link (using Daily)
-    
-*   Speech recognition (ASR), with interrupts, and Semantic/Lexical turn taking, using our model.
-    
-*   Optimized, conversational LLM
-    
-*   Text-to-speech (TTS)
-    
+- WebRTC/Session link (using Daily)
+- Speech recognition (ASR), with interrupts, and Semantic/Lexical turn taking, using our model.
+- Optimized, conversational LLM
+- Text-to-speech (TTS)
 
 You can choose to customize or bring your own layers as well. For example, you can:
 
-*   Use OpenAI real-time API or other voice-to-voice models
-    
-*   Bring your own LLM/conversation logic or enable function calling for DUIX-optimized LLMs.
-    
-*   Customize the TTS or ASR engine, and turn taking settings
-    
-*   Use text parrot mode to directly drive a replica video.
-    
-*   Directly access the video streams and create a custom UI.
-    
+- Use OpenAI real-time API or other voice-to-voice models
+- Bring your own LLM/conversation logic or enable function calling for DUIX-optimized LLMs.
+- Customize the TTS or ASR engine, and turn taking settings
+- Use text parrot mode to directly drive a replica video.
+- Directly access the video streams and create a custom UI.
 
 ## Key Concepts
 
@@ -97,16 +87,14 @@ Learn more about [**creating a persona**](https://platform.duix.com/create).
 
 A replica is a talking-head/avatar of a human containing a voice and face clone, used as the video output layer for CVI. You can use stock replicas from DUIX or create your own with a few minutes of training data. A replica is key for video generation and CVI.
 
-Learn how to [**create a great replica**](https://docs.duix.com/sections/introduction).
-
 ## Getting Started
 
 ### No Code
 
-You can easily try out CVI using the template. 
+You can easily try out CVI using the template.
 
 ### API Quick Start
 
-Check out the [**Quick Start Guide**](https://docs.duix.com/sections/introduction) to learn how to use the APIs to create a persona and conversation. Be sure to grab an API key first!
+Check out the [**Quick Start Guide**](https://docs.duix.com/sections/introduction) to learn how to use the APIs to create a persona and conversation. Be sure to grab an API key first\!
 
 Visit duix.com for more information.
