@@ -1,4 +1,3 @@
-# Creating a Conversation
 
 > Creating a conversation immediately starts accumulating usage.When you create a conversation CVI immediately starts running and the replica waits in the WebRTC/Daily room listening for your participant to join. Your billing/Duration usage starts as soon as the conversation is creating and runs until the conversation timeout or when you end the conversation. This also uses up one of your concurrency spots.
 

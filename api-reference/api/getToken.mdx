@@ -1,28 +1,38 @@
 ---
-title: 'Get Token'
-description: 'The access token is the service authentication credential for calling DUIX interactive services. All HTTP call interfaces need to place the Token in the Header.'
+title: "Get Token"
+description: "The access token is the service authentication credential for calling DUIX interactive services. All HTTP call interfaces need to place the Token in the Header."
 ---
 
 ### Method to Get Token
+
 Here's how to get an access token.
+
 ### Prerequisites
-You have obtained ```appKey``` and ```appId```, which can be found in the created API Keys.
+
+You have obtained `appKey` and `appId`, which can be found in the created API Keys.
 Steps
+
 1. Generate a signature using appKey and appId.
 2. Use the signature as the input parameter for the init method of the h5 sdk.
+
 ### Signature Generation
+
 The signature uses the JWT mechanism. Users can refer to the following to complete the signature.
+
 ### Parameter Description
+
 The following parameters need to be prepared for signature generation
 
-| Name | Type | Description | Example |
-| --- | --- | --- | --- |
-| appId | string | Session identifier, obtained after successful session creation | xxxxxxx  |
-| appKey | string | Session key, obtained after successful session creation | xxxxxxx |
-| sigExp | Integer | Signature validity time, in seconds |  1800 |
+| Name   | Type    | Description                                                    | Example |
+| ------ | ------- | -------------------------------------------------------------- | ------- |
+| appId  | string  | Session identifier, obtained after successful session creation | xxxxxxx |
+| appKey | string  | Session key, obtained after successful session creation        | xxxxxxx |
+| sigExp | Integer | Signature validity time, in seconds                            | 1800    |
 
 ### Demo Code
+
 The sample code for the signature is as follows, Java version example
+
 ```
 Import pom dependency
 
@@ -31,8 +41,8 @@ Import pom dependency
     <artifactId>java-jwt</artifactId>
     <version>3.8.3</version>
 </dependency>
-
 ```
+
 ```
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -63,10 +73,10 @@ public class SigUtils {
                 .sign(Algorithm.HMAC256(appKey));
     }
 }
-
 ```
 
-** Note: This signature (Token) is the H5 SDK's sign
+\*\* Note: This signature (Token) is the H5 SDK's sign
 
 ### Integration Development
+
 With the AppID, secret key, and Token obtained in the above steps, you can learn in detail from the SDK and API overview how to integrate DUIX into your service on various platforms.

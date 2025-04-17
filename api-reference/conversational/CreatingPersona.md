@@ -1,4 +1,3 @@
-# Creating a Persona
 
 Personas are the ‘character’ or ‘AI agent personality’ and contain all of the settings and configuration for that character or agent. For example, you can create a persona for ‘Loving girlfriend’ or ‘Dr. Ava’. Personas are where you can customize the layers for CVI as well as prompt the LLM to give it a personality and context.
 

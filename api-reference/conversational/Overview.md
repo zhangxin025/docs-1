@@ -10,21 +10,23 @@ CVI provides a complete pipeline to have a conversation while also allowing you 
 
 ## Key Features
 
-## Face-to-face interactions
+<CardGroup cols={2}>
+  <Card title="Face-to-face interactions" icon="sparkles" color="#f14acc">
+    The first interface that speaks our language. CVI is multimodal and understands and uses facial expressions, body language, and has natural conversational awareness including interrupts and turn-taking.
+  </Card>
+  <Card title="World's lowest latency" icon="sparkles" color="#eb4ccf">
+    The world’s fastest interface of its kind, with SLAs as fast as under 1s latency utterance-to-utterance.
+  </Card>
+</CardGroup>
 
-The first interface that speaks our language. CVI is multimodal and understands and uses facial expressions, body language, and has natural conversational awareness including interrupts and turn-taking.
-
-## World's lowest latency
-
-The world's fastest interface of its kind, with SLAs as fast as under 1s latency utterance-to-utterance.
-
-## End-to-end solution
-
-CVI provides a turn-key solution, delivering all the components to easily deploy AI video agents without having to worry about WebRTC, ASR, or anything else.
-
-## Focused on naturalness
-
-Easily create high-quality AI replicas of you or your customers, powered by our state-of-the-art replica models.
+<CardGroup cols={2}>
+  <Card title="End-to-end solution" icon="sparkles" color="#e561d1">
+    CVI provides a turn-key solution, delivering all the components to easily deploy AI video agents without having to worry about WebRTC, ASR, or anything else.
+  </Card>
+  <Card title="Focused on naturalness" icon="sparkles" color="#ef54e7">
+    Easily create high-quality AI replicas of you or your customers, powered by our state-of-the-art replica models.
+  </Card>
+</CardGroup>
 
 ## Face-to-face interactions
 
