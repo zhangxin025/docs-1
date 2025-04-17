@@ -1,6 +1,13 @@
-# **Introduction**
-
 Take a look at our Docs and API Reference to learn how to use DUIX\!
+
+<Card title="Developer Portal" icon="sparkles" iconType="regular" color="#e85abe" horizontal={false} href="https://platform.duix.com/home">
+  Generate conversations and create replicas through the Developer Portal
+</Card>
+
+<Card title="Contact Us" icon="sparkles" color="#f640b4" href="mailto:feedback@duix.com">
+  Ran into an issue? Don't hesitate to reach out
+</Card>
+
 
 # Getting started
 
