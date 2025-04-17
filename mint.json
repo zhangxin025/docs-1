@@ -39,7 +39,6 @@
       "group": "API Documentation",
       "pages": [
         "api-reference/api/Introduction",
-        "api-reference/api/gettingStarted",
         "api-reference/api/createYourFirstConvsation",
         "api-reference/api/getYourAPIKeys",
         "api-reference/api/getToken",
@@ -96,8 +95,6 @@
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/duix",
-    "github": "https://github.com/duix",
-    "linkedin": "https://linkedin.com/company/duix"
+    "github": "https://github.com/duix"
   }
 }
