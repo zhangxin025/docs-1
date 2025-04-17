@@ -1,21 +1,21 @@
 
-# Introduction
-
-Take a look at our Docs and API Reference to learn how to use DUIX!
+Take a look at our Docs and API Reference to learn how to use DUIX\!
 
 :::
 Developer Portal
 
 Generate conversations and create replicas through the Developer Portal
 
-[https://platform.duix.com/home: https://platform.duix.com/home](https://platform.duix.com/home)
+https://platform.duix.com/home
 :::
+
+
 :::
 Contact Us
 
 Ran into an issue? Don't hesitate to reach out
 
-mailto:feedback@duix.com
+mailto:[feedback@duix.com](mailto:feedback@duix.com)
 :::
 
 # Getting started
