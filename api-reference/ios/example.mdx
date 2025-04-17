@@ -1,0 +1,76 @@
+---
+title: 'Code Example'
+description: ''
+---
+See detailed code in the Demo
+```
+/// Set a custom View
+[DigitalManager manager].remote_view = self.customView;
+
+#pragma mark -SDK initialization
+[[GJAccess manager] getCamerapermissions:^(bool isPermis) {
+    if (isPermis)  {
+        [[DigitalManager manager] initWithAppId:AppId appKey:AppKey conversationId:ConversationId block:^(BOOL isSuccee, NSString *errorMsg) {
+            if (isSuccee) {
+                [[DigitalManager manager] toStart];
+            } else {
+                NSLog(@"GJDigitalDemo==errorMsg==%@",errorMsg);
+            }
+        }];
+    }
+}];
+
+#pragma mark - End Conversation
+- (void)toStop {
+    self.digitalShow = NO; // Hide digital display
+    [[DigitalManager manager] toStop]; // Stop the session
+}
+
+#pragma mark -SDK Delegate DigitalViewDelegate
+#pragma mark -Video Load Completion
+- (void)onVideoShow:(BOOL)isSuccess progress:(float)progress {
+    if (isSuccess) {
+        self.digitalShow = YES;
+        NSLog(@"GJDigitalDemo==Load Complete");
+    } else {
+        NSLog(@"GJDigitalDemo==Loading - %lf", progress); // Log loading progress
+    }
+}
+
+#pragma mark - Error Handling
+- (void)onError:(NSInteger)error_code errorMsg:(NSString *)errorMsg {
+    // Handle different error codes
+    switch (error_code) {
+        case -1:
+        case -2:
+            // MQTT connection issues
+            break;
+        case 50001:
+            // Invalid or empty AppId
+            break;
+        case 50002:
+            // Resource check failed, contact admin
+            break;
+        case 50003:
+            // Resource occupied, check and try again
+            break;
+        case 50004:
+            // Human request timeout
+            break;
+        case 50005:
+            // Exception retrieving resources from group
+            break;
+        case 50006:
+            // Signature failure
+            break;
+        case 50007:
+            // Insufficient total concurrency of resources, please check and try again
+            break;
+        case 50009:
+            // Resource timeout or not configured
+            break;
+    }
+    NSLog(@"GJDigitalDemo==errorMsg==%@", errorMsg);
+}
+
+```

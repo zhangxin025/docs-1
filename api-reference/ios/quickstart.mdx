@@ -1,0 +1,18 @@
+---
+title: 'Quick Start'
+description: ''
+---
+
+Authorize microphone permission before calling
+```
+- (void)toStart {
+
+    [[DigitalManager manager] initWithAppId:AppId appKey:AppKey conversationId:ConversationId block:^(BOOL isSuccee, NSString *errorMsg) {
+        if (isSuccee) {
+            [[DigitalManager manager] toStart];
+        } else {
+            NSLog(@"GJDigitalDemo==errorMsg==%@",errorMsg);
+        }
+    }];
+}
+```

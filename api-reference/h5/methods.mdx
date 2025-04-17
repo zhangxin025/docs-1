@@ -1,0 +1,165 @@
+---
+title: 'Methods'
+description: ''
+---
+
+#### init(option: object): Promise
+> ```js
+> duix.init({
+>   sign: '',
+>   containerLable: '.remote-container'   
+> })
+> ```
+
+***Parameters***
+
+| Name| Type |Required | Description | 
+| :-----------------| :-------------- | :----------------------------------------------------------- | :------    | 
+| containerLable   | string   |  Yes |  Digital human container. The digital human will be rendered in this DOM. | 
+| sign | string   |   Yes    |  Authentication string. [How to get sign?](https://duix.guiji.ai/document/server-api/sign.html) |
+
+#### start(option:object): Promise
+
+Calling the `start` method will begin rendering the digital human and initiate interaction.
+> **Note:** This method needs to be called after the `intialSucccess` event is triggered. The `intialSucccess` event indicates that all resources are prepared. As follows:
+>
+> ```js
+> duix.on('intialSucccess', () => {
+>   duix.start({
+>      conversationId: '',    
+>      muted: true,
+>      wipeGreen: false,
+>  }).then(res => {
+>     console.log('res', res)
+>  })
+> })
+> ```
+
+***Parameters***
+
+| key         | Type    | Required | Default | Description                                                  |
+| ----------- | ------- | ---- | ------ | ------------------------------------------------------------ |
+| conversationId| number | Yes | | Platform conversation id|
+| muted       | boolean | No   | false  | Whether to start the digital human video in muted mode.<br/>**Important note:** Due to [autoplay policy](https://developer.mozilla.org/en-US/docs/Web/Media/Autoplay_guide) restrictions, if your webpage has not had any click interaction with the user yet, please set this parameter to `true`, **otherwise it will cause the digital human to fail to load**. If you have such a requirement, it is recommended that you start in mute mode first, and design an interaction in your product, such as a "Start" button to call `duix.setVideoMuted(false)` |
+| openAsr     | boolean | No   | false  | Whether to directly enable real-time recognition. If this is set to true, it is equivalent to calling the `openAsr` method immediately after calling start |
+| wipeGreen   | boolean | No   | false  | Whether to perform green screen removal on the video. *When creating a session on the platform, a pure green background image needs to be uploaded* |
+| userId   | number | No   | | User unique identifier |
+
+#### setVideoMuted(flag:boolean)
+
+Set whether the digital human video is muted, true is muted, false is unmuted.
+
+#### break()
+
+Interrupt the digital human speaking
+
+#### speak(option: Object): Promise
+
+Drive the digital human to speak, supporting text-driven and audio file-driven modes.
+
+```javascript
+duix.speak({content: '', audio: 'https://your.website.com/xxx/x.wav'})
+```
+
+***Parameters***
+
+| Name| Type |Required | Description | 
+| :-----------------| :-------------- | :----------------------------------------------------------- | ------    | 
+| content   | string   |  Yes |  Text for the digital human to answer |
+| audio | string   |   No    |  Digital human answer audio address, which can be obtained through `getAnswer` to get the platform-configured answer|
+| interrupt | boolean   |   No    |  Whether to interrupt the previous speech |
+
+#### answer(option: Object): Promise
+
+Digital human answers a question
+
+```javascript
+duix.answer({question: 'xxx'})
+```
+
+***Parameters***
+
+| Name| Type |Required | Description | 
+| :-----------------| :-------------- | :----------------------------------------------------------- | ------    | 
+| question   | string   |  Yes |  Question text |
+| interrupt | boolean   |   No    |  Whether to interrupt the previous speech |
+
+#### getAnswer(option: Object): Promise
+
+Get the answer to a question from the platform
+
+```javascript
+duix.getAnswer({ question: 'what is your name?' })
+```
+
+***Parameters***
+
+| Name| Type |Required | Description | 
+| :-----------------| :-------------- | :----------------------------------------------------------- | ------    | 
+| question   | string   |  Yes |  Question text | 
+| userId   | number   |  No |  Business-side user unique ID, if specified, the obtained answer will have memory function enabled | 
+
+
+***Return data***
+
+| Name| Type | Description | 
+| :-----------------| :-------------- | :----------------------------------------------------------- | 
+| answer   | string   | Text answered by the digital human |  
+| audio | string   |   Digital human answer audio address |
+
+#### startRecord():Promise
+
+Start recording.
+
+#### stopRecord():Promise
+
+End recording. After successful recording, it will return the speech recognition result (text) and return a Promise.
+
+#### openAsr():Promise
+
+Enable real-time speech recognition (note that this method needs to be called when the show event is triggered). After enabling real-time speech recognition, you can monitor the `asrResult` event to receive recognition (text) results.
+
+#### closeAsr():Promise
+
+Close real-time speech recognition.
+
+#### stop()
+
+Stop the current session. It is recommended to call this method in the page unload event to prevent resources from not being released in time when refreshing or closing the webpage.
+
+```js
+window.addEventListener('beforeunload', function(event) {
+  if (duix) {
+    duix.stop()
+  }
+});
+````
+
+#### getLocalStream()
+
+Get the local audio stream, which is convenient for external audio visualization and other functions
+
+#### getRemoteStream()
+
+Get the remote audio and video stream, which is convenient for external customization
+
+#### resume()
+
+Resume playback, currently only for some mobile browsers where even if autoplay is triggered by user operation, it still doesn't work. Triggering the resume method through user operation in the 4009 error can solve this.
+
+#### on(eventname, callback)
+
+Listen for events.
+
+##### Parameters
+
+###### eventname
+
+Event name, see the table below for details.
+
+###### callback
+
+Callback function
+
+## Return Format Description
+For methods that return `Promise`, the parameter format is ` { err, data } `. If `err` is not empty, it means the call failed.

@@ -1,0 +1,460 @@
+---
+title: 'Open API'
+description: 'Management Interfaces'
+---
+
+# OpenAPI Integration
+## Prerequisites
+### Construct Signature to Get Token
+
+When integrating with the duix-openapi-v2 platform, you need to integrate code to generate tokens in your own platform. The method for generating tokens can be referenced in the following code:
+
+[How to Get Token](https://ahuahua.mintlify.app/api-reference/Get%20Token)
+
+## Management Interfaces
+
+Management-type HTTP requests have a common convention that requires passing a token in the request header.
+
+
+### Interaction Process
+
+<img src="../assets/img.png" alt="image.png"/>
+
+### Get APP Real-time Concurrent Number
+
+##### Interface Address:
+
+/duix-openapi-v2/sdk/v2/getconcurrentNumber
+
+##### Request Method: `GET`
+
+**Interface Description**:
+
+Query the concurrent number under a specific APP
+
+##### Parameter Description
+
+| Parameter Name | Type   | Pass Method | Parameter Description |
+| -------- | ------ | -------- | ----------------- |
+| appId    | String | Query    | APPID created from the platform |
+
+**Response Parameters**:
+
+| Parameter Name | Type |
+| -------- | ----- |
+|code|String|
+|data|ConcurrentStatus|
+|cropId|String|
+|totalConcurrentNumber|integer(int32)|
+|userConcurrentNumber|integer(int32)|
+|message|String|
+|success|boolean|
+
+**Response Example**:
+
+```json
+{
+  "code": "",
+  "data": {
+    "cropId": "",
+    "totalConcurrentNumber": 0,
+    "userConcurrentNumber": 0
+  },
+  "message": "",
+  "success": true
+}
+```
+
+### Get APP Real-time Sessions
+
+##### Interface Address:
+
+/duix-openapi-v2/sdk/v2/getconcurrentList
+
+##### Request Method: `GET`
+
+##### Interface Description:
+
+Query the list of "in call" sessions under a specific APP.
+
+##### Parameter Description
+
+| Parameter Name | Type   | Pass Method | Parameter Description |
+| -------- | ------ | -------- | ----------------- |
+| appId    | String | Query    | APPID created from the platform |
+
+### Close All Sessions of an APP
+
+##### Interface Address:
+
+/duix-openapi-v2/sdk/v2/distroyCallSessionsByAppId
+
+##### Request Method: `GET`
+
+##### Interface Description:
+
+Close all sessions under a specific APP
+
+##### Parameter Description
+
+| Parameter Name | Type   | Pass Method | Parameter Description |
+| -------- | ------ | -------- | ----------------- |
+| appId    | String | Query    | APPID created from the platform |
+
+##### Response Example:
+
+```json
+{
+  "code": "",
+  "data": "",
+  "message": "",
+  "success": true
+}
+```
+
+### Close Specified Session
+
+##### Interface Address:
+/duix-openapi-v2/sdk/v2/sessionStop
+
+##### Request Method: `GET`
+
+##### Parameter Description
+| Parameter Name | Type | Pass Method | Parameter Description |
+| -------- | -------- | ----- | -------- |
+|uuid|String|Query|sessionId field returned by the `start-complete` event|
+
+
+### Third-party Dialog Integration (Non-streaming)
+
+##### Other Session Integration: Other session platforms can be provided for digital humans to use in the following way. The DUIX platform can, through your digital human, use the POST method to request a remote URL you define to get answers to questions.
+
+<img src="../assets/_tmp_dingtalkgov_qt_clipbord_pic_5.png" alt="image.png"/>
+
+##### Session Platform Integration Example: You can refer to this example of session platform integration. This open-source application implements a dialogue platform integration, which implements casual conversation functionality.
+
+##### Request Specification: The DUIX platform will send question requests (questions customers ask your digital human) in the following format via POST to your remote URL.
+
+##### Parameter Description
+| Field | Type | Description | Required |
+| -------- | ------ | ----- | -------- |
+|sid|String|Your user ID, generated when creating a user. Can be viewed in account information.|Y
+|dh-code|String|Digital human code, generated when each digital human is created, can be viewed in the digital human overview.|Y
+|dh-question|String|The content of the question you need to ask the digital human|Y
+|dh-conversation-id|String|Conversation ID, a unique identifier for the conversation|Y
+|dh-context|String|Context information generated during the conversation, this information is a stringified JSON format data.|N
+
+##### Request Example:
+
+```json
+{
+  "sid": "100003",
+  "dh-code": "187265485019156480",
+  "dh-question": "who are you?",
+  "dh-conversation-id": "0513e935-041f-48e0-9330-652ef4194511",
+  "dh-context": "{}"
+}
+```
+
+**Response Specification**: When you receive a question request, you need to respond in the following format.
+
+| Field    | Type    | Required | Remarks          |
+|---------| ------- | -------- |-----------------|
+| code    | String  | Y        | Status code returned |
+| msg     | String  | N        | Success/error description message |
+| data    | object  | N        | Specific content returned |
+| success | Boolean | Y        | Whether successful |
+
+**Valid Response Types**:
+
+| Code | Status       | Response                         |
+| ---- | ------------ | -------------------------------- |
+| 200  | OK           | Response body according to the specification below |
+| 400  | Bad Request  | Request body/headers are invalid |
+| 401  | Unauthorized | Authentication information is invalid |
+| 403  | Forbidden    | Authentication failed |
+| 500  | Server Error | Service exception |
+
+**Response Body Specification**:
+
+| Field          | Type   | Description                                                  | Required |
+| -------------- | ------ | ------------------------------------------------------------ | -------- |
+| conversationId | String | Conversation ID, a unique identifier for the conversation, same as the dh-conversation-id in the request parameter body. | Y        |
+| question       | String | The question asked by the user.                               | N        |
+| answer         | String | The answer to the question the user asked the digital human, this is a stringified JSON object. | Y        |
+| intent         | String | The intent matched by the question on the platform            | N        |
+| errorMsg       | String | Description of the exception or error                         | N        |
+| extra          | String | Additional information, JSON string                           | N        |
+
+```json
+{
+  "code": "200",
+  "msg": "SUCCESS",
+  "success": true,
+  "data": {
+    "conversationId": "0513e935-041f-48e0-9330-652ef4194511",
+    "question": "who are you?",
+    "answer": {
+      "answer": "Welcome to UneeQ, how can I help?",
+      "operations": {
+        "tipPhrases": {
+          "phrases": ["yes", "no"]
+        },
+        "canShowText": 1
+      }
+    },
+    "intent": "introduce",
+    "errorMsg": "",
+    "extra": "{}"
+  }
+}
+```
+
+**Expected Response Time**: The interaction with digital humans is sensitive to latency due to their real-time nature. Therefore, response time is an important factor to consider when processing requests from the DUIX platform. These services should respond within 95% of the time within 20 seconds. If the response time exceeds 20s, the request will report a timeout error, but the digital human will continue to respond.
+
+### Third-party Dialog Integration (Streaming)
+
+##### Other Session Integration: Other session platforms can be provided for digital humans to use in the following way. The DUIX platform can, through your digital human, use the POST method to request a remote URL you define to get answers to questions.
+
+<img src="./assets/_tmp_dingtalkgov_qt_clipbord_pic_5.png" alt="image.png"/>
+
+##### Session Platform Integration Example: You can refer to this example of session platform integration. This open-source application implements a dialogue platform integration, which implements casual conversation functionality.
+
+##### Request Specification: The DUIX platform will send question requests (questions customers ask your digital human) in the following format via POST to your remote URL.
+
+##### Parameter Description
+| Field | Type | Description | Required |
+| -------- | ------ | ----- | -------- |
+|sid|String|Your user ID, generated when creating a user. Can be viewed in account information.|Y
+|dh-code|String|Digital human code, generated when each digital human is created, can be viewed in the digital human overview.|Y
+|dh-question|String|The content of the question you need to ask the digital human|Y
+|dh-conversation-id|String|Conversation ID, a unique identifier for the conversation|Y
+|dh-context|String|Context information generated during the conversation, this information is a stringified JSON format data.|N
+
+##### Request Example:
+
+```json
+{
+  "sid": "100003",
+  "dh-code": "187265485019156480",
+  "dh-question": "who are you?",
+  "dh-conversation-id": "0513e935-041f-48e0-9330-652ef4194511",
+  "dh-context": "{}"
+}
+```
+
+
+**Response Body Specification**:
+
+| Field  | Type   | Description | Required |
+| ------ | ------ | ----------- | -------- |
+| answer | String | Return answer | Y        |
+| isEnd  | boolean | Whether to end | Y        |
+
+```json
+{
+    "answer": "Let the Cowherd and Weaver Girl meet on the Milky Way.",
+    "isEnd": false
+}
+```
+
+**Expected Response Time**: The interaction with digital humans is sensitive to latency due to their real-time nature. Therefore, response time is an important factor to consider when processing requests from the DUIX platform. These services should respond within 95% of the time within 20 seconds. If the response time exceeds 20s, the request will report a timeout error, but the digital human will continue to respond.
+
+
+### Get Conversation Details
+
+##### Interface Address:
+
+/duix-openapi-v2/sdk/getConversationById?conversationId=[duix platform conversation id]
+
+##### Request Method: `GET`
+
+**Interface Description**:
+
+Query conversation details based on the conversation id created by the duix platform
+
+##### Parameter Description
+
+| Parameter Name | Type   | Pass Method | Parameter Description |
+| -------- | ------ | -------- | ----------------- |
+| conversationId    | String | Query    | conversationId created by the platform |
+
+**Response Parameters**:
+
+| Parameter Name | Type | Description |
+| -------- | ----- |  ----- |
+|code|String| Return code |
+|data|JSON| Return data|
+|detailDto| JSON | Conversation resource details (including model, background, tts) |
+|detailDto.backgroundDto| JSON | Conversation resource details (background) |
+|detailDto.modelId| String | Model ID |
+|detailDto.modelName| String | Model Name |
+|detailDto.modelIdType| String | Model Type (0: Cloud Digital Human, 1: Local Digital Human) |
+|detailDto.localModelInfo| JSON | Local Digital Human Information |
+|detailDto.backgroundDto| JSON | Conversation resource details (background) |
+|detailDto.backgroundDto.backgroundUrl| String | Background Address |
+|scriptDtoList| JSON | Frontend Dialog Details |
+|scriptDtoList.scriptType| String | 0 Wake-up Word, 1 Opening Line, 2 Waiting Phrase, 3 Unknown Question, 4 Farewell Phrase, 5 Interruption Phrase, 6 Interruption Sentence, 7 Guiding Phrase) |
+|scriptDtoList.scriptContent| String | Frontend Dialog Text |
+|scriptDtoList.ttsContent| String| Frontend Dialog Audio |
+|message| String | Text Prompt |
+|success| boolean | Success Flag |
+
+**Response Example**:
+
+```json
+{
+	"success": true,
+	"code": "200",
+	"message": "SUCCESS",
+	"msg": "SUCCESS",
+	"data": {
+		"id": "108",
+		"conversationName": "Unnamed-18:04",
+		"language": "zh",
+		"corpId": "1003645",
+		"userId": "3959",
+		"conversationConfigDto": null,
+		"maxConversation": 2,
+		"dataModelIsUsed": 1,
+		"knowledgeIsUsed": 1,
+		"fileIsUsed": 0,
+		"thirdIsUsed": 0,
+		"isFreedom": 0,
+		"asrProvider": null,
+		"conversationInfoDto": {
+			"id": 109,
+			"name": "1",
+			"nickName": "",
+			"gender": 1,
+			"age": 0,
+			"height": 0,
+			"weight": 0,
+			"characters": "",
+			"backStory": ""
+		},
+		"detailDto": {
+			"id": 95,
+			"conversationId": "108",
+			"proportion": "16:9",
+			"terminalType": 0,
+			"modelId": "321486924406853",
+			"modelIdType": 0,
+			"imageId": null,
+			"sceneId": null,
+			"modelName": "Model name",
+			"sceneType": 0,
+			"background": 1,
+			"backgroundDto": {
+				"id": 1,
+				"backgroundCode": "1591003727513522176",
+				"backgroundName": "zuoyi.jpg",
+				"backgroundUrl": "/video-server/jpg/1592809647136509954.jpg",
+				"fileType": 0,
+				"proportion": "16:9",
+				"userId": null
+			},
+			"modelConfig": null,
+			"ttsId": "15",
+			"ttsName": "guina",
+			"ttsConfig": null,
+			"ttsUrl": "",
+			"ttsVolume": 0,
+			"ttsSpeaker": "zhifeng_emo",
+			"ttsSpeedRate": 0,
+			"ttsPitch": 0,
+			"ttsSource": 20,
+			"samplePictureUrl": "/model/2023/02/06/c5348a17fac75feb0152a0c599b7af87.png",
+			"videoWidth": 1920,
+			"videoHeight": 1920,
+			"humanProportion": "9:16",
+			"humanWidth": 540,
+			"humanHeight": 960,
+			"humanX": 690,
+			"humanY": 120,
+			"localModelInfo": null
+		},
+		"knowledgeDtoList": [],
+		"kbConversationDto": null,
+		"modelDtoList": [
+			{
+				"id": 487,
+				"conversationId": "108",
+				"largeModelType": 0,
+				"modelCode": 0,
+				"largeName": "chatbot_law",
+				"modelId": "1",
+				"prompt": "Task: Your name is Zhang San, a real celebrity with a mischievous tone, humor, and a love for joking. Chatting with fans and friends, generating content replies in an oral style. \Requirements for generation: 1. Use my own name, 2. Meet the persona, 3. Prohibit the generation of English content, all must be generated in Chinese. 4. Within 30 words.",
+				"botUrl": ""
+			}
+		],
+		"thirdDto": null,
+		"scriptDtoList": [
+			{
+				"id": 2728,
+				"conversationId": "108",
+				"scriptType": 0,
+				"scriptContent": "Els silvrants",
+				"ttsContent": null,
+				"emotion": "0"
+			},
+			{
+				"id": 2729,
+				"conversationId": "108",
+				"scriptType": 1,
+				"scriptContent": "Hello, welcome to Duix",
+				"ttsContent": "https://digital-public-dev.obs.cn-east-3.myhuaweicloud.com/tts-proxy/2024-02-20/1800-_-633043663081836544--FC34641E6EB0A22404C845E219904E81.wav",
+				"emotion": "0"
+			},
+			{
+				"id": 2730,
+				"conversationId": "108",
+				"scriptType": 2,
+				"scriptContent": "Wait a moment, I'll think about it",
+				"ttsContent": "https://digital-public-dev.obs.cn-east-3.myhuaweicloud.com/tts-proxy/2024-02-20/1630-_-633043667485855744--3F501A3CA51F4DFAFBACE254DD2E3E32.wav",
+				"emotion": "0"
+			},
+			{
+				"id": 2731,
+				"conversationId": "108",
+				"scriptType": 3,
+				"scriptContent": "Sorry, I don't quite understand what you mean",
+				"ttsContent": "https://digital-public-dev.obs.cn-east-3.myhuaweicloud.com/tts-proxy/2024-02-20/2300-_-633043669830471680--2C5A656A6FBEA2CE09037F21F3DF8434.wav",
+				"emotion": "0"
+			},
+			{
+				"id": 2732,
+				"conversationId": "108",
+				"scriptType": 4,
+				"scriptContent": "Sorry, I don't quite understand what you mean",
+				"ttsContent": "https://digital-public-dev.obs.cn-east-3.myhuaweicloud.com/tts-proxy/2024-02-20/560-_-633043672326082560--051995577E5C4B5818F952C04A7997E2.wav",
+				"emotion": "0"
+			},
+			{
+				"id": 2733,
+				"conversationId": "108",
+				"scriptType": 5,
+				"scriptContent": "Stop talking",
+				"ttsContent": null,
+				"emotion": "0"
+			},
+			{
+				"id": 2734,
+				"conversationId": "108",
+				"scriptType": 6,
+				"scriptContent": "Okay, you can speak first",
+				"ttsContent": "https://digital-public-dev.obs.cn-east-3.myhuaweicloud.com/tts-proxy/2024-02-20/1600-_-633043674196742144--FC70FD95B50E8CEC9D9151905AE13F7F.wav",
+				"emotion": "0"
+			},
+			{
+				"id": 2735,
+				"conversationId": "108",
+				"scriptType": 7,
+				"scriptContent": "What is a digital person",
+				"ttsContent": "https://digital-public-dev.obs.cn-east-3.myhuaweicloud.com/tts-proxy/2024-02-20/1080-_-633043676541358080--414A4CBCE8B52677F05DAECFD1437BD0.wav",
+				"emotion": "0"
+			}
+		]
+	}
+}
+```

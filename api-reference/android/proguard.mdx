@@ -1,0 +1,12 @@
+---
+title: 'Proguard Configuration'
+description: ''
+---
+
+Add the following configuration to your project's proguard-rules.pro file:
+
+```
+-keep class org.webrtc.**{ *; }
+-keep class org.eclipse.paho.client.** { *; }
+-keep class org.eclipse.paho.uri.** { *; }
+```

@@ -1,0 +1,10 @@
+---
+title: 'Frequently Asked Questions'
+description: ''
+---
+
+1. Some browsers, especially mobile browsers, require user interaction to play digital human videos. It is recommended that the start event be triggered by user clicks, even if muted is a silent state, otherwise some browsers may not display the digital human.
+2. Some WeChat browsers on iOS systems require calling navigator.mediaDevices.getUserMedia for authorization before playing remote streams.
+3. If ASR recognition is enabled, user authorization for getUserMedia will be needed. Due to browser restrictions, local debugging requires an HTTPS environment.
+4. For WeChat Mini Program integration, it can be connected through the web-view component.
+5. Some mobile browsers still cannot adapt to the browser's autoplay policy even if start is called by user click. When receiving a 4009 error, you can trigger the resume method through a user event.

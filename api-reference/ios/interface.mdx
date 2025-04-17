@@ -1,0 +1,192 @@
+---
+title: 'Key Interfaces'
+description: ''
+---
+
+```
+/**
+ * SDK initialization
+ *
+ * - Parameters:
+ *   - appId: App ID
+ *   - appKey: App key
+ *   - conversationId: Session ID
+ *   - block: Callback
+ */
+- (void)initWithAppId:(NSString *)appId appKey:(NSString *)appKey conversationId:(NSString *)conversationId block:(void (^)(BOOL isSuccee, NSString *errorMsg))block;
+
+/**
+ * Start communication
+ */
+- (void)toStart;
+
+/**
+ * End communication
+ */
+- (void)toStop;
+
+/**
+ * Text-driven digital human
+ *
+ * - Parameters:
+ *   - text: Text content
+ *   - interrupt: Whether to interrupt the previous speech
+ */
+- (void)commandEventWithText:(NSString *)text interrupt:(BOOL)interrupt;
+
+/**
+ * Audio-driven digital human
+ *
+ * - Parameters:
+ *   - audioUrl: Audio URL
+ *   - interrupt: Whether to interrupt the previous speech
+ */
+- (void)commandEventWithAudioUrl:(NSString *)audioUrl interrupt:(BOOL)interrupt;
+
+/**
+ * Text question and answer
+ *
+ * - Parameters:
+ *   - text: Text content
+ *   - interrupt: Whether to interrupt the previous speech
+ */
+- (void)commandAskWithText:(NSString *)text interrupt:(BOOL)interrupt;
+
+/**
+ * Interrupt digital human broadcasting
+ */
+- (void)toBreakDigital;
+
+/**
+ * Microphone sound pickup
+ *
+ * - Parameter isEnabled: YES indicates sound pickup, NO indicates mute
+ */
+- (void)setMute:(BOOL)isEnabled;
+
+/**
+ * Mute digital human
+ *
+ * - Parameter enable: YES indicates mute, NO indicates sound pickup
+ */
+- (void)toSpeakerMute:(BOOL)enable;
+
+```
+SDK Delegate
+```
+@protocol DigitalViewDelegate <NSObject>
+
+/**
+ * Load digital human resources
+ *
+ * - Parameters:
+ *   - isSuccess: Whether the loading was successful
+ *   - progress: Loading progress
+ */
+- (void)onVideoShow:(BOOL)isSuccess progress:(float)progress;
+
+/**
+ * Exception callback
+ *
+ * - Parameters:
+ *   - errorCode: Error code
+ *   - errorMsg: Error message
+ */
+- (void)onError:(NSInteger)errorCode errorMsg:(NSString *)errorMsg;
+
+@optional
+
+/**
+ * ASR (Automatic Speech Recognition) start recognition
+ */
+- (void)toWebrtcAsrStart;
+
+/**
+ * ASR recognition
+ *
+ * - Parameters:
+ *   - asrText: Recognized text
+ *   - isFinish: Whether it has finished
+ */
+- (void)toWebrtcAsrText:(NSString *)asrText isFinish:(BOOL)isFinish;
+
+/**
+ * Start speaking
+ *
+ * - Parameter dict: Dictionary information for starting to speak
+ */
+- (void)toSpeakStart:(NSDictionary *)dict;
+
+/**
+ * Stop speaking
+ *
+ * - Parameter dict: Dictionary information for stopping to speak
+ */
+- (void)toSpeakStop:(NSDictionary *)dict;
+
+/**
+ * Audio version start speaking
+ *
+ * - Parameter dict: Dictionary information for starting to speak
+ */
+- (void)toTTSSpeakStart:(NSDictionary *)dict;
+
+/**
+ * Audio version stop speaking
+ *
+ * - Parameter dict: Dictionary information for stopping to speak
+ */
+- (void)toTTSSpeakStop:(NSDictionary *)dict;
+
+/**
+ * Central control ends the call and sends a bye event
+ */
+- (void)onByeBye;
+
+/**
+ * Remote video communication completed
+ */
+- (void)onRTCReomteSuccess;
+
+/**
+ * Whether audio loading was successful
+ *
+ * - Parameter isSuccess: Whether it was successful
+ */
+- (void)onAudioShow:(BOOL)isSuccess;
+
+/**
+ * WebRTC connection status callback
+ *
+ * - Parameter state: RTCIceConnectionState
+ */
+- (void)didIceConnectionChange:(RTCIceConnectionState)state;
+
+/**
+ * Central control notifies the client after obtaining rendering endpoint information
+ *
+ * - Parameters:
+ *   - ID: id
+ *   - name: name
+ */
+- (void)onRender:(NSString *)ID name:(NSString *)name;
+
+/**
+ * Get the local video's video stream
+ *
+ * - Parameters:
+ *   - capturer: Capturer
+ *   - frame: Video frame
+ */
+- (void)capturer:(RTCVideoCapturer *)capturer didCaptureVideoFrame:(RTCVideoFrame *)frame;
+
+/**
+ * Get remote audio stream
+ *
+ * - Parameter sampleBuffer: Buffer
+ */
+- (void)onRemoteAudioBuffer:(CMSampleBufferRef)sampleBuffer;
+
+
+@end
+```

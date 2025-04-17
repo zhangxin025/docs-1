@@ -1,0 +1,61 @@
+---
+title: 'Quick Start'
+description: ''
+---
+
+When integrating the digital human module code in an Activity, please ensure that you have dynamically obtained microphone permission before starting if you need to use the microphone.
+
+```kotlin
+class DisplayActivity : BaseActivity() {
+
+    private var eglBaseContext = EglBase.create().eglBaseContext
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // ...
+
+        binding.render.init(eglBaseContext, null)
+        binding.render.setScalingType(RendererCommon.ScalingType.SCALE_ASPECT_FILL)
+        binding.render.setMirror(false)
+        binding.render.setEnableHardwareScaler(false /* enabled */)
+
+        VirtualFactory.init("your appId", "your appSecret")
+
+        player = VirtualFactory.getPlayer(mContext, eglBaseContext)
+        player?.addCallback(object : Player.Callback {
+            override fun onShow() {
+                // can show digital human
+            }
+
+            override fun onError(msgType: Int, msgSubType: Int, msg: String?) {
+                // Log.e(TAG, "connect error")
+            }
+
+            override fun onAsrResult(text: String?, sentenceEnd: Boolean) {
+                
+            }
+
+            override fun onVideoTrack(
+                track: VideoTrack,
+            ) {
+                runOnUiThread {
+                    // Add source for digital human view
+                    track.addSink(binding.render)
+                }
+            }
+        })
+        player?.connect("your conversation id")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Release resources 
+        player?.release()
+        binding.render.release()
+    }
+}
+```
+
+***Now!***  
+
+You can now have a conversation with the digital human using the microphone.

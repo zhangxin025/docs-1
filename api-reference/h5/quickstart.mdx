@@ -1,0 +1,37 @@
+---
+title: 'Quick Start'
+description: ''
+---
+
+## Installation
+
+```shell
+npm i duix-guiji-light -S
+```
+
+## Quick Start
+
+```js
+
+import DUIX from 'duix-guiji-light'
+
+const duix = new DUIX()
+
+duix.on('intialSucccess', () => {
+  // start session
+  duix.start({
+    conversationId: '',
+    openAsr: true
+  }).then(res => {
+    console.info(res)
+  })
+})
+
+// initialization
+duix.init({
+  sign: 'xxxx',
+  containerLable: '.remote-container'
+})
+
+```
+**Note:** Do not put the duix instance in Vue's data or React's state (no need to make it reactive).
