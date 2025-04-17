@@ -1,4 +1,3 @@
-
 Take a look at our Docs and API Reference to learn how to use DUIX\!
 
 :::
@@ -8,7 +7,6 @@ Generate conversations and create replicas through the Developer Portal
 
 https://platform.duix.com/home
 :::
-
 
 :::
 Contact Us
