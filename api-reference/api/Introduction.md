@@ -1,11 +1,15 @@
 Take a look at our Docs and API Reference to learn how to use DUIX\!
 
-<CardGroup cols={2}>
+<CardGroup cols="2">
   <Card title="Developer Portal" icon="sparkles" color="#f14acc" href="https://platform.duix.com/home">
     The first interface that speaks our language. CVI is multimodal and understands and uses facial expressions, body language, and has natural conversational awareness including interrupts and turn-taking.
   </Card>
-  <Card title="Contact Us" icon="sparkles" color="#eb4ccf" href={<a href='mailto:feedback@duix.com'>feedback@duix.com</a>}>
+  <Card title="Contact Us" icon="sparkles" color="#eb4ccf" href="mailto:feedback@duix.com">
     The world’s fastest interface of its kind, with SLAs as fast as under 1s latency utterance-to-utterance.
+
+      
+
+      
   </Card>
 </CardGroup>
 
