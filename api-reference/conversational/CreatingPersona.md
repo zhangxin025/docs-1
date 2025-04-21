@@ -1,4 +1,3 @@
-
 Personas are the ‘character’ or ‘AI agent personality’ and contain all of the settings and configuration for that character or agent. For example, you can create a persona for ‘Loving girlfriend’ or ‘Dr. Ava’. Personas are where you can customize the layers for CVI as well as prompt the LLM to give it a personality and context.
 
 A persona consists of:
@@ -16,7 +15,7 @@ A persona consists of:
 
 > Dashboard has limited options You cannot currently customize all layers via the dashboard UI
 >
-> Navigate to the [Duix.com](http://Duix.com)[**Platform**](https://platform.duix.com/) . On the sidebar click on Persona Library. Finally, click Create Persona.
+> Navigate to the [Duix.com](http://Duix.com) [**Platform**](https://platform.duix.com/) . On the sidebar click on Conversation Library. Finally, click Create Conversation.
 
 > Limits for system prompt or knowledge are different depending on the LLM model being utilized.
 
