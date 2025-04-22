@@ -10,7 +10,7 @@ CVI provides a complete pipeline to have a conversation while also allowing you 
 
 ## Key Features
 
-<CardGroup cols={2}>
+<CardGroup cols="2">
   <Card title="Face-to-face interactions" icon="sparkles" color="#f14acc">
     The first interface that speaks our language. CVI is multimodal and understands and uses facial expressions, body language, and has natural conversational awareness including interrupts and turn-taking.
   </Card>
@@ -19,7 +19,7 @@ CVI provides a complete pipeline to have a conversation while also allowing you 
   </Card>
 </CardGroup>
 
-<CardGroup cols={2}>
+<CardGroup cols="2">
   <Card title="End-to-end solution" icon="sparkles" color="#e561d1">
     CVI provides a turn-key solution, delivering all the components to easily deploy AI video agents without having to worry about WebRTC, ASR, or anything else.
   </Card>
@@ -48,11 +48,7 @@ Easily create high-quality AI replicas of you or your customers, powered by our 
 
 ### Here's a sample:
 
-<video
-  controls
-  className="w-full aspect-video"
-  src="../assets/conversationdemo.mp4"
-></video>
+<video controls className="w-full aspect-video" src="../assets/conversationdemo.mp4" />
 
 ### Try it out\!
 
