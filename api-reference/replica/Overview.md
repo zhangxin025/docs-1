@@ -10,7 +10,11 @@ It's important to provide a high-quality input video in order to get great outpu
 
 Here's an example of an output from one of our Stock Replicas:
 
-[View attachment "duix.comdemo.mp4"](https://alidocs.dingtalk.com/i/nodes/vy20BglGWOMp71m3UmR2nydqJA7depqY?cid=63008155837&corpId=ding69a3a71350c0486d35c2f4657eb6378f&doc_type=wiki_doc&iframeQuery=anchorId%3DX02m9gqlfoynr0456vn6xs&utm_medium=im_card&utm_scene=person_space&utm_source=im)
+<video
+  controls
+  className="w-full aspect-video"
+  src="../assets/duixcomdemo.mp4"
+></video>
 
 Personal Replicas
 
