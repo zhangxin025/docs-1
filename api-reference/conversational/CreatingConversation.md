@@ -3,7 +3,7 @@
 
 # **How do I create a conversation?**
 
-Once you have a persona you’d like to use or a replica, starting a conversation is easy. You can start a conversation on the developer app by visiting the [**Create Conversation page**](https://platform.duix.com/create).
+Once you have a persona you’d like to use or a replica, starting a conversation is easy. You can start a conversation on the developer app by visiting the [**Create Conversation page**](https://duix.com/platform/create).
 
 # **What does creating a conversation do?**
 

@@ -15,7 +15,7 @@ A persona consists of:
 
 > Dashboard has limited options You cannot currently customize all layers via the dashboard UI
 >
-> Navigate to the [Duix.com](http://Duix.com) [**Platform**](https://platform.duix.com/) . On the sidebar click on Conversation Library. Finally, click Create Conversation.
+> Navigate to the [Duix.com](http://Duix.com) [**Platform**](https://duix.com/platform/cases) . On the sidebar click on Conversation Library. Finally, click Create Conversation.
 
 > Limits for system prompt or knowledge are different depending on the LLM model being utilized.
 

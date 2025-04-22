@@ -52,7 +52,7 @@ Easily create high-quality AI replicas of you or your customers, powered by our 
 
 ### Try it out\!
 
-You can try chatting with Elara on our website to get a taste of what a conversation with CVI looks like.[\*\*Try Out CVI Now\!\*\*Note that Elara can see and hear you.](https://duix.com/home)
+You can try chatting with Elara on our website to get a taste of what a conversation with CVI looks like.[\*\*Try Out CVI Now\!\*\*Note that Elara can see and hear you.](https://duix.com/platform/create)
 
 ## What components does CVI provide, and what can I customize?
 
@@ -77,7 +77,7 @@ You can choose to customize or bring your own layers as well. For example, you c
 
 A conversation is a single 'session' or 'call' with a replica using CVI. When you create a conversation, you receive a Session link URL. This URL provides a full Real-time conversations solution, allowing you to avoid managing WebRTC or websockets. Navigating to this URL lets you chat with your replica.
 
-Learn more about [**creating and customizing conversations**](https://platform.duix.com/create).
+Learn more about [**creating and customizing conversations**](https://duix.com/platform/create).
 
 ### What are personas?
 
@@ -97,6 +97,6 @@ You can easily try out CVI using the template.
 
 ### API Quick Start
 
-Check out the [**Quick Start Guide**](https://docs.duix.com/sections/introduction) to learn how to use the APIs to create a persona and conversation. Be sure to grab an API key first\!
+Check out the [**Quick Start Guide**](https://docs.duix.com/api-reference/api/Introduction) to learn how to use the APIs to create a persona and conversation. Be sure to grab an API key first\!
 
 Visit duix.com for more information.
