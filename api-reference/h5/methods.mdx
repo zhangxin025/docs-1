@@ -16,15 +16,15 @@ description: ''
 | Name| Type |Required | Description | 
 | :-----------------| :-------------- | :----------------------------------------------------------- | :------    | 
 | containerLable   | string   |  Yes |  Digital human container. The digital human will be rendered in this DOM. | 
-| sign | string   |   Yes    |  Authentication string. [How to get sign?](https://duix.guiji.ai/document/server-api/sign.html) |
+| sign | string   |   Yes    |  Authentication string. [How to get sign?](https://guiji.cn/duix-light-document/en/server-api/interface.html) |
 
 #### start(option:object): Promise
 
 Calling the `start` method will begin rendering the digital human and initiate interaction.
-> **Note:** This method needs to be called after the `intialSucccess` event is triggered. The `intialSucccess` event indicates that all resources are prepared. As follows:
+> **Note:** This method needs to be called after the `initialSuccess` event is triggered. The `initialSuccess` event indicates that all resources are prepared. As follows:
 >
 > ```js
-> duix.on('intialSucccess', () => {
+> duix.on('initialSuccess', () => {
 >   duix.start({
 >      conversationId: '',    
 >      muted: true,

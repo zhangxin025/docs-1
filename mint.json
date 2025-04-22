@@ -23,7 +23,7 @@
   ],
   "topbarCtaButton": {
     "name": "Sign up",
-    "url": "https://duix.com/login"
+    "url": "https://duix.com"
   },
   "tabs": [
     {
@@ -43,13 +43,6 @@
         "api-reference/api/getYourAPIKeys",
         "api-reference/api/getToken",
         "api-reference/api/openAPI"
-      ]
-    },
-    {
-      "group": "Replica",
-      "pages": [
-        "api-reference/replica/Overview",
-        "api-reference/replica/ReplicaTraining"
       ]
     },
     {

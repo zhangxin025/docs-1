@@ -48,7 +48,11 @@ Easily create high-quality AI replicas of you or your customers, powered by our 
 
 ### Here's a sample:
 
-[View attachment "conversationdemo.png.mp4"](https://alidocs.dingtalk.com/document/preview?chInfo=im&cid=63008155837&dentryKey=GYja4bXQUWqvXZJ8&docKey=ybEnB54D5WNd3lP1&dontjump=true&iframeQuery=anchorId%3DX02m9ievobkstzq0sv5fr&type=d&utm_medium=im_card&utm_source=im)
+<video
+  controls
+  className="w-full aspect-video"
+  src="https://alidocs.dingtalk.com/document/preview?chInfo=im&cid=63008155837&dentryKey=GYja4bXQUWqvXZJ8&docKey=ybEnB54D5WNd3lP1&dontjump=true&iframeQuery=anchorId%3DX02m9ievobkstzq0sv5fr&type=d&utm_medium=im_card&utm_source=im"
+></video>
 
 ### Try it out\!
 
