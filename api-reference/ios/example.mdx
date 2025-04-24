@@ -10,7 +10,7 @@ See detailed code in the Demo
 #pragma mark -SDK initialization
 [[GJAccess manager] getCamerapermissions:^(bool isPermis) {
     if (isPermis)  {
-        [[DigitalManager manager] initWithAppId:AppId appKey:AppKey conversationId:ConversationId block:^(BOOL isSuccee, NSString *errorMsg) {
+        [[DigitalManager manager] initNewWithAppId:AppId appKey:AppKey conversationId:ConversationId region:REGION block:^(BOOL isSuccee, NSString *errorMsg) {
             if (isSuccee) {
                 [[DigitalManager manager] toStart];
             } else {

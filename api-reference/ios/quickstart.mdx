@@ -7,7 +7,7 @@ Authorize microphone permission before calling
 ```
 - (void)toStart {
 
-    [[DigitalManager manager] initWithAppId:AppId appKey:AppKey conversationId:ConversationId block:^(BOOL isSuccee, NSString *errorMsg) {
+    [[DigitalManager manager] initNewWithAppId:AppId appKey:AppKey conversationId:ConversationId region:REGION block:^(BOOL isSuccee, NSString *errorMsg) {
         if (isSuccee) {
             [[DigitalManager manager] toStart];
         } else {
