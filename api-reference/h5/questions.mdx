@@ -8,3 +8,6 @@ description: ''
 3. If ASR recognition is enabled, user authorization for getUserMedia will be needed. Due to browser restrictions, local debugging requires an HTTPS environment.
 4. For WeChat Mini Program integration, it can be connected through the web-view component.
 5. Some mobile browsers still cannot adapt to the browser's autoplay policy even if start is called by user click. When receiving a 4009 error, you can trigger the resume method through a user event.
+6. If you need to use opening remarks, wake words, interrupt words and other configurations, you can obtain them through the openapi - Get Session Details interface. The SDK itself does not provide business logic.
+7. Some browsers do not support RTC. Currently, it has been verified that Xiaomi Browser does not support it.
+8. Since webrtc does not support the http protocol and ip address access, please use https and domain name access.
