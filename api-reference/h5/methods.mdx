@@ -41,7 +41,6 @@ Calling the `start` method will begin rendering the digital human and initiate i
 
 | key         | Type    | Required | Default | Description                                                  |
 | ----------- | ------- | ---- | ------ | ------------------------------------------------------------ |
-| conversationId| number | Yes | | Platform conversation id|
 | muted       | boolean | No   | false  | Whether to start the digital human video in muted mode.<br/>**Important note:** Due to [autoplay policy](https://developer.mozilla.org/en-US/docs/Web/Media/Autoplay_guide) restrictions, if your webpage has not had any click interaction with the user yet, please set this parameter to `true`, **otherwise it will cause the digital human to fail to load**. If you have such a requirement, it is recommended that you start in mute mode first, and design an interaction in your product, such as a "Start" button to call `duix.setVideoMuted(false)` |
 | openAsr     | boolean | No   | false  | Whether to directly enable real-time recognition. If this is set to true, it is equivalent to calling the `openAsr` method immediately after calling start |
 | wipeGreen   | boolean | No   | false  | Whether to perform green screen removal on the video. *When creating a session on the platform, a pure green background image needs to be uploaded* |
