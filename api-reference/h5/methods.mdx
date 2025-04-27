@@ -7,7 +7,8 @@ description: ''
 > ```js
 > duix.init({
 >   sign: '',
->   containerLable: '.remote-container'   
+>   containerLable: '.remote-container',   
+>   conversationId: '',
 > })
 > ```
 
@@ -17,6 +18,8 @@ description: ''
 | :-----------------| :-------------- | :----------------------------------------------------------- | :------    | 
 | containerLable   | string   |  Yes |  Digital human container. The digital human will be rendered in this DOM. | 
 | sign | string   |   Yes    |  Authentication string. [How to get sign?](../api/openAPI) |
+| conversationId| number | Yes | Platform conversation id|
+| platform| string | No | The platform type is duix.guiji.ai by default. If it is for overseas users to connect, it is duix.com|
 
 #### start(option:object): Promise
 
@@ -26,7 +29,6 @@ Calling the `start` method will begin rendering the digital human and initiate i
 > ```js
 > duix.on('initialSuccess', () => {
 >   duix.start({
->      conversationId: '',    
 >      muted: true,
 >      wipeGreen: false,
 >  }).then(res => {
