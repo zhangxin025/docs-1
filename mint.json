@@ -47,6 +47,13 @@
       ]
     },
     {
+      "group": "Replica",
+      "pages": [
+        "api-reference/replica/Overview",
+        "api-reference/replica/ReplicaTraining"
+      ]
+    },
+    {
       "group": "Conversational Video Interface",
       "pages": [
         "api-reference/conversational/Overview",
