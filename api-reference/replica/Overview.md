@@ -9,7 +9,7 @@ It’s important to provide a high-quality input video in order to get great out
 
 Here’s an example of an output from one of our Stock Replicas:
 
-<video controls className="w-full aspect-video" src="../assets/duixcomdemo.mp4" />
+<video controls className="w-full aspect-video" src="../assets/replicas.mp4" />
 
 Personal Replicas
 
