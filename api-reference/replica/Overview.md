@@ -1,4 +1,3 @@
-# Overview
 
 Overview of Duix’s Replica offerings- Stock Replicas and Personal Replicas, all powered by the AI model. Get tips on how to create the perfect replica, and how to get a high quality output.
 

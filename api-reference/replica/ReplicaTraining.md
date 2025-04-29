@@ -89,7 +89,7 @@ The first 15 seconds of the training video must show the subject in complete sil
 - Minimize body movement, such as hand gestures, head movement, jolts, etc.
 - Close your lips during pauses and at the end of sentences.
 - If you stumble, continue speaking. Perfection is not necessary\!
-- Your training video will be one continuous [video.You](http://video.You) can record your training video in any language you prefer
+- Your training video will be one continuous video.You can record your training video in any language you prefer
 
 #### **Submit your training video**
 
