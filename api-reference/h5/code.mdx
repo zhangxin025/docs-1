@@ -107,7 +107,7 @@ description: ''
       display: none;
     }
   </style>
-  <script src="https://cdn.guiji.ai/duix/sdk/0.0.1/duix.js"></script>
+  <script src="https://cdn.guiji.ai/duix/sdk/0.2.1/duix.js"></script>
 </head>
 
 <body>
@@ -194,6 +194,7 @@ description: ''
         sign,
         containerLable: '.container',
         conversationId: conversationId,
+        platform: 'duix.com'
       }).then(data => {
         console.info('init', data)
       })
