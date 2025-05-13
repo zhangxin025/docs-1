@@ -24,7 +24,7 @@ Your training footage should begin with 5 seconds of silence. Our model uses you
 - Incorporate small (but non-repetitive) head movements
 - Ensure that your lips are closed the entire time
 
-## How do I record 2 minute of talking?
+## How do I record 25 seconds of talking?
 
 We do not require a predefined script. You are welcome to discuss anything that showcases your natural speaking style and expertise.
 
@@ -83,7 +83,7 @@ ensure that you are in a quiet, well-lit area without background movement.
 
 #### **Record training video**
 
-The first 15 seconds of the training video must show the subject in complete silence (no speaking). Natural listening cues like subtle smiles, slow blinking, or slight nodding are allowed to simulate an engaged listening state。Next, read the consent script, followed by 30 seconds of talking
+The first 5 seconds of the training video must show the subject in complete silence (no speaking). Natural listening cues like subtle smiles, slow blinking, or slight nodding are allowed to simulate an engaged listening state。Next, read the consent script, followed by 30 seconds of talking
 
 - Aim for an engaging tone and a relaxed pace, while maintaining continuous eye contact with the camera.
 - Minimize body movement, such as hand gestures, head movement, jolts, etc.
