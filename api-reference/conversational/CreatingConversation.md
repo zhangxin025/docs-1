@@ -1,19 +1,19 @@
 
-> Creating a conversation immediately starts accumulating usage.When you create a conversation CVI immediately starts running and the replica waits in the WebRTC/Daily room listening for your participant to join. Your billing/Duration usage starts as soon as the conversation is creating and runs until the conversation timeout or when you end the conversation. This also uses up one of your concurrency spots.
+> Creating a conversation immediately starts accumulating usage.When you create a conversation CVI immediately starts running and the avatar waits in the WebRTC/Daily room listening for your participant to join. Your billing/Duration usage starts as soon as the conversation is creating and runs until the conversation timeout or when you end the conversation. This also uses up one of your concurrency spots.
 
 # **How do I create a conversation?**
 
-Once you have a persona you’d like to use or a replica, starting a conversation is easy. You can start a conversation on the developer app by visiting the [**Create Conversation page**](https://duix.com/platform/create).
+Once you have a persona you’d like to use or an avatar, starting a conversation is easy. You can start a conversation on the developer app by visiting the [**Create Conversation page**](https://duix.com/platform/create).
 
 # **What does creating a conversation do?**
 
 Creating a conversation is ‘starting the call’. Imagine you create a Video Sessions- that’s what happens when you create a conversation.
 
 1. A WebRTC
-2. The replica joins the Video Sessions
+2. The avatar joins the Video Sessions
 3. Starts the timers on duration/timeouts
 
-In response to creating a conversation, you receive a Sessions URL. You or your participant can directly join this link and Start the conversation where you can immediately start conversing with the replica. **However, you do not have to use this meeting UI.** You can create a completely custom UI or access the raw streams.
+In response to creating a conversation, you receive a Sessions URL. You or your participant can directly join this link and Start the conversation where you can immediately start conversing with the avatar. **However, you do not have to use this meeting UI.** You can create a completely custom UI or access the raw streams.
 
 ### **What is Daily?**
 
@@ -21,13 +21,13 @@ Daily is our WebRTC provider. You do not have to create a Daily account. We have
 
 # **What can I customize per conversation?**
 
-Conversation specific customizations are focused on allowing personalization of a conversation to a specific participant. As an example you might want to have a custom introduction per person, or change the language the replica is listening for and responds in. Meanwhile persona level configurations are settings or defaults applied to all conversations so you do not have to configure them each time, such as setting up your LLM.
+Conversation specific customizations are focused on allowing personalization of a conversation to a specific participant. As an example you might want to have a custom introduction per person, or change the language the avatar is listening for and responds in. Meanwhile persona level configurations are settings or defaults applied to all conversations so you do not have to configure them each time, such as setting up your LLM.
 
 Here are the things you can customize per conversation:
 
-### **Persona / Replica**
+### **Persona / Avatar**
 
-In order to start a conversation you must provide a persona or replica. If you provide a replica with no persona, the default DUIX persona will be used. Providing a persona without a replica will use the default replica attached to the persona if it exists. Providing a replica ID will override the default one associated with the persona.
+In order to start a conversation you must provide a persona or avatar. If you provide an avatar with no persona, the default DUIX persona will be used. Providing a persona without an avatar will use the default avatar attached to the persona if it exists. Providing an avatar ID will override the default one associated with the persona.
 
 ### **Conversation Context**
 
@@ -41,9 +41,9 @@ The conversation context will be appended to the system prompt and the persona c
 
 ### **Custom Greeting**
 
-When a participant joins the replica will say a greeting that you can customize. You can use this to personalize a welcome message for someone or prompt them to start a conversation.
+When a participant joins the avatar will say a greeting that you can customize. You can use this to personalize a welcome message for someone or prompt them to start a conversation.
 
-By default the replica will say “Hey there, how’s it going? What can I do for you today?”.
+By default the avatar will say “Hey there, how’s it going? What can I do for you today?”.
 
 ### **Language**
 

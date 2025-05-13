@@ -2,9 +2,9 @@
 
 ![image.png](../assets/conversation_bg.jpg)
 
-The Conversational Video Interface (CVI) is an end-to-end pipeline for creating real-time multimodal video conversations with a replica that can see, hear, and respond similarly to how a human would. Developers can deploy video AI agents in minutes using CVI.
+The Conversational Video Interface (CVI) is an end-to-end pipeline for creating real-time multimodal video conversations with an avatar that can see, hear, and respond similarly to how a human would. Developers can deploy video AI agents in minutes using CVI.
 
-CVI is the world's fastest interface of its kind, allowing you to put a human face and conversational ability to your AI agent or personality. With CVI, you can achieve utterance-to-utterance latency with SLAs as fast as under 1 second, which is the full roundtrip time for a participant to say something and for the replica to speak back.
+CVI is the world's fastest interface of its kind, allowing you to put a human face and conversational ability to your AI agent or personality. With CVI, you can achieve utterance-to-utterance latency with SLAs as fast as under 1 second, which is the full roundtrip time for a participant to say something and for the avatar to speak back.
 
 CVI provides a complete pipeline to have a conversation while also allowing you to customize and plug in your existing components where necessary.
 
@@ -24,7 +24,7 @@ CVI provides a complete pipeline to have a conversation while also allowing you 
     CVI provides a turn-key solution, delivering all the components to easily deploy AI video agents without having to worry about WebRTC, ASR, or anything else.
   </Card>
   <Card title="Focused on naturalness" icon="sparkles" color="#ef54e7">
-    Easily create high-quality AI replicas of you or your customers, powered by our state-of-the-art replica models.
+    Easily create high-quality AI avatars of you or your customers, powered by our state-of-the-art avatar models.
   </Card>
 </CardGroup>
 
@@ -42,7 +42,7 @@ CVI provides a turn-key solution, delivering all the components to easily deploy
 
 ## Focused on naturalness
 
-Easily create high-quality AI replicas of you or your customers, powered by our state-of-the-art replica models.
+Easily create high-quality AI avatars of you or your customers, powered by our state-of-the-art avatar models.
 
 ## What does a conversation with CVI look like?
 
@@ -68,14 +68,14 @@ You can choose to customize or bring your own layers as well. For example, you c
 - Use OpenAI real-time API or other voice-to-voice models
 - Bring your own LLM/conversation logic or enable function calling for DUIX-optimized LLMs.
 - Customize the TTS or ASR engine, and turn taking settings
-- Use text parrot mode to directly drive a replica video.
+- Use text parrot mode to directly drive an avatar video.
 - Directly access the video streams and create a custom UI.
 
 ## Key Concepts
 
 ### What is a conversation?
 
-A conversation is a single 'session' or 'call' with a replica using CVI. When you create a conversation, you receive a Session link URL. This URL provides a full Real-time conversations solution, allowing you to avoid managing WebRTC or websockets. Navigating to this URL lets you chat with your replica.
+A conversation is a single 'session' or 'call' with an avatar using CVI. When you create a conversation, you receive a Session link URL. This URL provides a full Real-time conversations solution, allowing you to avoid managing WebRTC or websockets. Navigating to this URL lets you chat with your avatar.
 
 Learn more about [**creating and customizing conversations**](https://duix.com/platform/create).
 
@@ -85,9 +85,9 @@ Personas are the 'character' or 'AI agent personality' and contain all the setti
 
 Learn more about [**creating a persona**](https://platform.duix.com/create).
 
-### What are replicas?
+### What are avatars?
 
-A replica is a talking-head/avatar of a human containing a voice and face clone, used as the video output layer for CVI. You can use stock replicas from DUIX or create your own with a few minutes of training data. A replica is key for video generation and CVI.
+An avatar is a talking-head/avatar of a human containing a voice and face clone, used as the video output layer for CVI. You can use stock avatars from DUIX or create your own with a few minutes of training data. An avatar is key for video generation and CVI.
 
 ## Getting Started
 

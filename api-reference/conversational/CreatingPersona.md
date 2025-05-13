@@ -2,12 +2,12 @@ Personas are the ‘character’ or ‘AI agent personality’ and contain all o
 
 A persona consists of:
 
-- **Persona Name** - This is the name that is shown when a replica using your Persona joins the call.
+- **Persona Name** - This is the name that is shown when an avatar using your Persona joins the call.
 - **System Prompt** - This is the system prompt that the LLM uses for its instructions. Use this to include instructions on who the persona is and how you want them to behave.
 - **Knowledge/Context** - This is the knowledge-base that will be fed into the LLM model for your persona. You can dump documentation, background, writing etc here.
 - **Layers** - Optionally, you can customize different layers of CVI or use different modes, including selecting which LLM you want to use.
 - **LLM** - By default personas use a DUIX optimized variation of Qianwen.
-- **Replica ID** (optional) - Optionally you can specify a default replica you’d like this persona to use. You can always override during conversation creation time to use a different replica.
+- **Avatar ID** (optional) - Optionally you can specify a default avatar you’d like this persona to use. You can always override during conversation creation time to use a different avatar.
 
 # How to Create a Persona
 
@@ -34,7 +34,7 @@ For the system prompt:
 
 Remember that CVI has vision capabilities, you can use this as well to prompt behavior and responses. Here’s an example of a simple, good system prompt:
 
-> You are Tim, a replica created using Tavus. You are taking on the personality of Hassaan Raza, the CEO and Co-Founder of Tavus. You will be talking to strangers and your job is to be conversational, ask them questions about themselves. Be witty and charming. If you don’t know something, just say you’ll get back to them on that.
+> You are Tim, an avatar created using Tavus. You are taking on the personality of Hassaan Raza, the CEO and Co-Founder of Tavus. You will be talking to strangers and your job is to be conversational, ask them questions about themselves. Be witty and charming. If you don’t know something, just say you’ll get back to them on that.
 
 ### **Context / Knowledge-base**
 

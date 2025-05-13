@@ -1,27 +1,27 @@
-**Replica Training**
+**Avatar Training**
 
-Learn how to create the best personal replica with a high-quality training video.
+Learn how to create the best personal avatar with a high-quality training video.
 
 ## Training Overview
 
-To clone your personal replica, we first need you to submit a training video. A high-quality training video helps our AI model properly map your face and voice, resulting in a more realistic replica overall. Your training video will be one continuous video, containing the following, in-order:
+To clone your personal avatar, we first need you to submit a training video. A high-quality training video helps our AI model properly map your face and voice, resulting in a more realistic avatar overall. Your training video will be one continuous video, containing the following, in-order:
 
-15 seconds of silence (listening mode)
+5 seconds of silence (listening mode)
 
-2 minute of talking
+25 seconds of talking
 
 You need to upload a 9:16 or 16:9 video clip that meets the cloning training requirements on our platform, based on your personal needs.
 
-Training typically takes around 4-5 hours to complete. You can check the status of your replica training by:
+Training typically takes around 4-5 hours to complete. You can check the status of your avatar training by:
 
-Enable cloned avatar from [[Personal Replicas](https://docs.duix.com/api-reference/replica/Overview)] when creating conversation You can click on [[Create Replica]](https://duix.com/platform/replicas) to create and submit training, and enter [[Personal Replicas](https://duix.com/platform/replicas)] to view the training results
+Enable cloned avatar from [[Personal avatars](https://docs.duix.com/api-reference/avatar/Overview)] when creating conversation You can click on [[Create Avatar]](https://duix.com/platform/replicas) to create and submit training, and enter [[Personal avatars](https://duix.com/platform/replicas)] to view the training results
 
-## How do I record 15 seconds  of silence?
+## How do I record 5 seconds  of silence?
 
-Your training footage should begin with 15 seconds of silence. Our model uses your silent footage to create a natural resting position for your replica’s head and improve its listening behavior. During this period:
+Your training footage should begin with 5 seconds of silence. Our model uses your silent footage to create a natural resting position for your avatar’s head and improve its listening behavior. During this period:
 
 - Pretend that you are “actively listening” to someone
-- Incorporate small (but non-repetitive) head movements throughout the minute
+- Incorporate small (but non-repetitive) head movements
 - Ensure that your lips are closed the entire time
 
 ## How do I record 2 minute of talking?
@@ -30,17 +30,17 @@ We do not require a predefined script. You are welcome to discuss anything that 
 
 ## How do I create a high-quality training video?
 
-To ensure your replica is the best possible quality, follow the guidelines below before recording your training footage.
+To ensure your avatar is the best possible quality, follow the guidelines below before recording your training footage.
 
 ### **✔️Video Material Requirements:**
 
 - **Framing:** The subject must be centered in the video.Both green screen and live-action shooting are acceptable
 - **Hand Movements:** Avoid hand gestures during normal speech segments.
-- **Silent Segment:** First 15 seconds must show completely silent performance (no speaking) with natural listening expressions:
+- **Silent Segment:** First 5 seconds must show completely silent performance (no speaking) with natural listening expressions:
   - Subtle smiling
   - Occasional blinking
   - Slight nodding
-- **Technical Specs:** MP4 format, 2-3 minutes duration
+- **Technical Specs:** MP4 format, 30 seconds to 2 minutes duration
 
 ### ✔️**Shooting Guidelines:**
 
@@ -83,7 +83,7 @@ ensure that you are in a quiet, well-lit area without background movement.
 
 #### **Record training video**
 
-The first 15 seconds of the training video must show the subject in complete silence (no speaking). Natural listening cues like subtle smiles, slow blinking, or slight nodding are allowed to simulate an engaged listening state。Next, read the consent script, followed by 2 minutes of talking
+The first 15 seconds of the training video must show the subject in complete silence (no speaking). Natural listening cues like subtle smiles, slow blinking, or slight nodding are allowed to simulate an engaged listening state。Next, read the consent script, followed by 30 seconds of talking
 
 - Aim for an engaging tone and a relaxed pace, while maintaining continuous eye contact with the camera.
 - Minimize body movement, such as hand gestures, head movement, jolts, etc.
@@ -97,6 +97,6 @@ After ensuring that your training video fits our quality requirements, submit yo
 
 ## **Next Steps after Training**
 
-Upon submission, your replica will immediately begin training in the background. After around 4-6 hours, you can enter [[Personal Replicas](https://duix.com/platform/replicas)] to check your personal replica is ready for use. If you’re not happy with the results, be sure to contact us.
+Upon submission, your avatar will immediately begin training in the background. After around 4-6 hours, you can enter [[Personal Avatars](https://duix.com/platform/replicas)] to check your personal avatar is ready for use. If you’re not happy with the results, be sure to contact us.
 
 Congrats on finishing the training process — now explore generating videos or starting

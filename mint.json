@@ -47,10 +47,10 @@
       ]
     },
     {
-      "group": "Replica",
+      "group": "Avatar",
       "pages": [
-        "api-reference/replica/Overview",
-        "api-reference/replica/ReplicaTraining"
+        "api-reference/avatar/Overview",
+        "api-reference/avatar/AvatarTraining"
       ]
     },
     {
