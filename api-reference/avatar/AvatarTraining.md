@@ -14,7 +14,7 @@ You need to upload a 9:16 or 16:9 video clip that meets the cloning training req
 
 Training typically takes around 4-5 hours to complete. You can check the status of your avatar training by:
 
-Enable cloned avatar from [[Personal avatars](https://docs.duix.com/api-reference/avatar/Overview)] when creating conversation You can click on [[Create Avatar]](https://duix.com/platform/replicas) to create and submit training, and enter [[Personal avatars](https://duix.com/platform/replicas)] to view the training results
+Enable cloned avatar from [[Personal avatars](https://duix.com/platform/avatars)] when creating conversation You can click on [[Create Avatar]](https://duix.com/platform/replicas) to create and submit training, and enter [[Personal avatars](https://duix.com/platform/replicas)] to view the training results
 
 ## How do I record 5 seconds  of silence?
 
