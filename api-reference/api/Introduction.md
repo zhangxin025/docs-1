@@ -19,6 +19,6 @@ In this section, we'll provide a fairly concise overview of how to create our fi
 
 It is worth noting that the website is only the front end of the API. Therefore, if you experience a session demo or call the API directly with code, there should be no difference in quality or output under the same settings. However, it is still non-deterministic, so the delivery of the generated output may vary.
 
-The session duration is required for the API call to connect to the session. Therefore, if you have 25 minutes of conversation duration in your account, and you create a session, you need to consume the corresponding conversation duration when using the API to call the session. For your convenience, you can go first.[Purchase plan](https://duix.com/pricing), or you can use the free quota to verify the process first.
+The session duration is required for the API call to connect to the session. Therefore, if you have 5 minutes of conversation duration in your account, and you create a session, you need to consume the corresponding conversation duration when using the API to call the session. For your convenience, you can go first.[Purchase plan](https://duix.com/pricing), or you can use the free quota to verify the process first.
 
 Given the breadth of APIs and the almost limitless possibilities, we'll do a very quick overview and show some examples so you can get up and running quickly.

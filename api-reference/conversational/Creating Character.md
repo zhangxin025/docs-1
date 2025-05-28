@@ -3,7 +3,7 @@ Personas are the ‘character’ or ‘AI agent personality’ and contain all o
 A persona consists of:
 
 - **Persona Name** - This is the name that is shown when an avatar using your Persona joins the call.
-- **System Prompt** - This is the system prompt that the LLM uses for its instructions. Use this to include instructions on who the persona is and how you want them to behave.
+- **Character Prompt** - This is the character prompt that the LLM uses for its instructions. Use this to include instructions on who the persona is and how you want them to behave.
 - **Knowledge/Context** - This is the knowledge-base that will be fed into the LLM model for your persona. You can dump documentation, background, writing etc here.
 - **Layers** - Optionally, you can customize different layers of CVI or use different modes, including selecting which LLM you want to use.
 - **LLM** - By default personas use a DUIX optimized variation of Qianwen.
@@ -17,22 +17,22 @@ A persona consists of:
 >
 > Navigate to the [Duix.com](http://Duix.com) [**Platform**](https://duix.com/platform/cases) . On the sidebar click on Conversation Library. Finally, click Create Conversation.
 
-> Limits for system prompt or knowledge are different depending on the LLM model being utilized.
+> Limits for character prompt or knowledge are different depending on the LLM model being utilized.
 
-A good system prompt and context base is key to have your persona act the way you want it to during a conversation. Here are some things to keep in mind:
+A good character prompt and context base is key to have your persona act the way you want it to during a conversation. Here are some things to keep in mind:
 
-### **System Prompt**
+### **Character Prompt**
 
-The system prompt should inform who the persona is and how they should act. These are the persona’s ‘instructions’.
+The character prompt should inform who the persona is and how they should act. These are the persona’s ‘instructions’.
 
-For the system prompt:
+For the character prompt:
 
 - Assume a character
 - Provide clear instructions
 - Keep it concise
 - Keep knowledge in the knowledge prompt
 
-Remember that CVI has vision capabilities, you can use this as well to prompt behavior and responses. Here’s an example of a simple, good system prompt:
+Remember that CVI has vision capabilities, you can use this as well to prompt behavior and responses. Here’s an example of a simple, good character prompt:
 
 > You are Tim, an avatar created using Tavus. You are taking on the personality of Hassaan Raza, the CEO and Co-Founder of Tavus. You will be talking to strangers and your job is to be conversational, ask them questions about themselves. Be witty and charming. If you don’t know something, just say you’ll get back to them on that.
 
@@ -42,7 +42,7 @@ The context is the persona’s ‘knowledge base’. This is where you can feed 
 
 For the knowledge/context:
 
-- Make sure not to accidentally override the system prompt with instructions that may be hidden in your context/knowledge
+- Make sure not to accidentally override the character prompt with instructions that may be hidden in your context/knowledge
 - Keep the knowledge-base clean and filtered
 - You do not need to include participant or conversation/specific context, you can pass that in during conversation creation time
 
