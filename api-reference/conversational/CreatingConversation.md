@@ -1,11 +1,11 @@
 
 > Creating a conversation immediately starts accumulating usage.When you create a conversation CVI immediately starts running and the avatar waits in the WebRTC/Daily room listening for your participant to join. Your billing/Duration usage starts as soon as the conversation is creating and runs until the conversation timeout or when you end the conversation. This also uses up one of your concurrency spots.
 
-# How do I create a conversation?
+## How do I create a conversation?
 
 Once you have a persona you’d like to use or an avatar, starting a conversation is easy. You can start a conversation on the developer app by visiting the [**Create Conversation page**](https://duix.com/platform/create).
 
-# What does creating a conversation do?
+## What does creating a conversation do?
 
 Creating a conversation is ‘starting the call’. Imagine you create a Video Sessions- that’s what happens when you create a conversation.
 
@@ -19,7 +19,7 @@ In response to creating a conversation, you receive a Sessions URL. You or your 
 
 Daily is our WebRTC provider. You do not have to create a Daily account. We have partnered with Daily to allow you to get an end to end solution without having to worry about WebRTC. You can build a completely custom application with CVI while accessing the Daily streams like you would with WebRTC.
 
-# What can I customize per conversation?
+## What can I customize per conversation?
 
 Conversation specific customizations are focused on allowing personalization of a conversation to a specific participant. As an example you might want to have a custom introduction per person, or change the language the avatar is listening for and responds in. Meanwhile persona level configurations are settings or defaults applied to all conversations so you do not have to configure them each time, such as setting up your LLM.
 

@@ -2,17 +2,17 @@ Duix offers two types of AI Avatars: **Stock AI Avatars** and **Personal AI Avat
 
 Discover how to get the best results when creating your AI Avatar and learn what makes a high-quality input essential.
 
-# Training Personal AI Avatars with Video
+## Training Personal AI Avatars with Video
 
 To train your avatar using a video, simply upload a 10-second to 1-minute clip that includes **at least 5 seconds of clear audio** for voice cloning. We’ll guide you to select the most natural 5-second segment to help capture your authentic expressions and voice, ensuring a realistic face-to-face feel.
 
-# Training Personal AI Avatars with Photo
+## Training Personal AI Avatars with Photo
 
 Prefer using a photo? No problem. Just upload a **high-resolution image** showing your facial features clearly. For voice cloning, you’ll also need to submit a **5–10 second audio clip** separately.
 
 
 
-# How It Works
+## How It Works
 
 AI Avatars learn how you **look, speak, and move**—capturing your voice, facial expressions, and gestures. The result: hyper-realistic videos that look and sound just like you, even in different languages.
 
@@ -20,7 +20,7 @@ The **quality of your input**—whether it’s a photo or video—plays a major 
 
 
 
-# Fast, Flexible, and Shareable
+## Fast, Flexible, and Shareable
 
 Your Personal AI Avatar takes just **15–20 minutes to train**. Once it's ready, you can reuse it anytime during your subscription period—no need to retrain.
 
