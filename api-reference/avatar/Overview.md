@@ -8,16 +8,18 @@ Discover how to get the best results when creating your AI Avatar an
 
 ## Training Personal AI Avatars with Video
 
-To train your avatar using a video, simply upload a 10-second to 1-minute clip that includes
-**at least 5 seconds of clear audio** for voice cloning. We’ll guide you to select the most
-natural 5-second segment to help capture your authentic expressions and voice, ensuring a realistic face-to-face feel.
+To train your avatar using a video, simply upload a 10-second to 1-minute clip 
+that includes**at least 5 seconds of clear audio** for voice cloning. We’ll
+guide you to select the most natural 5-second segment to help capture your
+authentic expressions and voice,ensuring a realistic face-to-face feel.
 
 ------
 
 ## Training Personal AI Avatars with Photo
 
-Prefer using a photo? No problem. Just upload a **high resolution image** showing your facial features clearly.
-For voice cloning, you’ll also need to submit a **5–10 second audio clip** separately.
+Prefer using a photo? No problem. Just upload a **high resolution image** 
+showing your facial features clearly.For voice cloning, you’ll also need
+to submit a **5–10 second audio clip** separately.
 
 ------
 
