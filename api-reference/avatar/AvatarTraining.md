@@ -1,4 +1,4 @@
-## AI Avatar Training Made Easy
+# AI Avatar Training Made Easy
 
 Create your very own AI Avatar in just minutes—with a simple video or photo. It’s quick, fun, and requires zero tech skills!
 
@@ -12,7 +12,7 @@ Check the status in **[[Avatar Library - Personal](https://duix.com/platform/ava
 
 ------
 
-## How to Record a Short Training Video (10 sec – 1 min)
+# How to Record a Short Training Video (10 sec – 1 min)
 
 Want the most realistic result? A short video is the best way to go.
 
@@ -29,7 +29,7 @@ We’ll help you pick the perfect 5-second snippet for voice cloning and facial 
 
 ------
 
-## How to Submit a Photo (with Voice)
+# How to Submit a Photo (with Voice)
 
 No time for video? A single high-quality photo works too—just pair it with a short voice clip.
 
@@ -44,7 +44,7 @@ No time for video? A single high-quality photo works too—just pair it with a s
 
 ------
 
-##  What Happens Next?
+#  What Happens Next?
 
 Once you upload your file, your Avatar starts training right away. After **15–20 minutes**, check your results under **[[Avatar Library - Personal](https://duix.com/platform/avatars)]**.
 
