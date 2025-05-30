@@ -1,5 +1,3 @@
-## 
-
 ![image.png](../assets/conversation_bg.jpg)
 
 The Conversational Video Interface (CVI) is an end-to-end pipeline for creating real-time multimodal video conversations with an avatar that can see, hear, and respond similarly to how a human would. Developers can deploy video AI agents in minutes using CVI.
