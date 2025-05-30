@@ -18,7 +18,8 @@ realistic face-to-face feel.
 ## Training Personal AI Avatars with Photo
 
 Prefer using a photo? No problem. Just upload a **high resolution image** showing your facial 
-features clearly.For voice cloning, you’ll also need to submit a **5-10 second audio clip** separately.
+features clearly.For voice cloning, you’ll also need to submit a **5-10 second audio clip** 
+separately.
 
 ------
 
