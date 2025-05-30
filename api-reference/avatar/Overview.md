@@ -1,5 +1,5 @@
 
-Duix offers two types of AI Avatars: **Stock AI Avatars** and **Personal AI Avatars** both powered by our advanced AI engine.<br>Personal AI Avatars can be customized using either a photo or a video, making it easy to create a lifelike digital version of yourself in minutes.<br>
+Duix offers two types of AI Avatars: **Stock AI Avatars** and **Personal AI Avatars** -both powered by our advanced AI engine.<br>Personal AI Avatars can be customized using either a photo or a video, making it easy to create a lifelike digital version of yourself in minutes<br>
 
 Discover how to get the best results when creating your AI Avatar and learn what makes a high-quality input essential.<br>  
 
