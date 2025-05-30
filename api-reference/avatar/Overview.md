@@ -46,5 +46,7 @@ speaks on your behalf.
 
 Here’s an example of an output from one of our Stock AI Avatars:
 
+<video controls className="w-full aspect-video" src="../assets/avatardemo.mp4" />
+
 ------
 
