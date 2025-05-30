@@ -40,8 +40,9 @@ Your Personal AI Avatar takes just **15-20 minutes to train**. Once i
 it anytime during your subscription period—no need to retrain.
 
 Easily create a **custom conversation link** to interact with your avatar, and share it with 
-friends, clients, or your audience for an interactive experience. You can also **embed your avatar**
-into your own app or website-giving you a talking, expressive digital twin that speaks on your behalf.
+friends, clients, or your audience for an interactive experience. You can also **embed your 
+avatar** into your own app or website-giving you a talking, expressive digital twin that 
+speaks on your behalf.
 
 Here’s an example of an output from one of our Stock AI Avatars:
 
