@@ -25,22 +25,23 @@ separately.
 
 ## How It Works
 
-AI Avatars learn how you **look, speak, and move**-capturing your voice, facial expressions, and gestures. 
-The result: hyper-realistic videos that look and sound just like you, even in different languages.
+AI Avatars learn how you **look, speak, and move**-capturing your voice, facial expressions,
+and gestures.The result: hyper-realistic videos that look and sound just like you, even in 
+different languages.
 
-The **quality of your input**-whether it’s a photo or video—plays a major role in the final output.
-High-quality inputs lead to more lifelike and accurate results.
+The **quality of your input**-whether it’s a photo or video—plays a major role in the final
+output.High-quality inputs lead to more lifelike and accurate results.
 
 ------
 
 ## Fast, Flexible, and Shareable
 
-Your Personal AI Avatar takes just **15-20 minutes to train**. Once it's ready, you can reuse it anytime
-during your subscription period—no need to retrain.
+Your Personal AI Avatar takes just **15-20 minutes to train**. Once it's ready, you can reuse
+it anytime during your subscription period—no need to retrain.
 
-Easily create a **custom conversation link** to interact with your avatar, and share it with friends, 
-clients, or your audience for an interactive experience. You can also **embed your avatar** into your 
-own app or website-giving you a talking, expressive digital twin that speaks on your behalf.
+Easily create a **custom conversation link** to interact with your avatar, and share it with 
+friends, clients, or your audience for an interactive experience. You can also **embed your avatar**
+into your own app or website-giving you a talking, expressive digital twin that speaks on your behalf.
 
 Here’s an example of an output from one of our Stock AI Avatars:
 
