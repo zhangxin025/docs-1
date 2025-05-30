@@ -1,20 +1,30 @@
+# 
 
-Overview of Duix’s Avatar offerings- Stock Avatars and Personal Avatars, all powered by the AI model. Get tips on how to create the perfect avatar, and how to get a high quality output.
+## Overview
 
-An Avatar is a realistic video model of a human created using the AI Model. The AI model is a fully-synthetic 2D based model that generates realistic avatar videos from just a script, complete with natural face (lip, cheek, nose, chin) movements and expressions synchronized with your script and generated voice. Developed by our team
+Duix offers two types of AI Avatars: **Stock AI Avatars** and **Personal AI Avatars**—both powered by our advanced AI engine. Personal AI Avatars can be customized using either a photo or a video, making it easy to create a lifelike digital version of yourself in minutes.
 
-Avatars are created using just 30 seconds of training data, and are designed to learn how someone speaks and sounds, how they look, and how they move their face while speaking. Using an Avatar you can generate hyper-realistic videos that look and sound just like you
+Discover how to get the best results when creating your AI Avatar and learn what makes a high-quality input essential.
 
-It’s important to provide a high-quality input video in order to get great outputs from an Avatar. Your Avatar will attempt to mimic your gestures and movements, as well as your accent, even if you generate a video in a different language.
+## Training Personal AI Avatars with Video
 
-Here’s an example of an output from one of our Stock Avatars:
+To train your avatar using a video, simply upload a 10-second to 1-minute clip that includes **at least 5 seconds of clear audio** for voice cloning. We’ll guide you to select the most natural 5-second segment to help capture your authentic expressions and voice, ensuring a realistic face-to-face feel.
 
-<video controls className="w-full aspect-video" src="../assets/replicas.mp4" />
+## Training Personal AI Avatars with Photo
 
-Personal Avatars
+Prefer using a photo? No problem. Just upload a **high resolution image** showing your facial features clearly. For voice cloning, you’ll also need to submit a **5–10 second audio clip** separately.
 
-High-quality clone of voice and face of person
+## How It Works
 
-Train once, and re-use endlessly without having to record again
+AI Avatars learn how you **look, speak, and move**—capturing your voice, facial expressions, and gestures. The result: hyper-realistic videos that look and sound just like you, even in different languages.
 
-Personal Avatars allow you to train a new Avatar of a human using the AI model, from just 30 seconds of training data. Personal Avatars take between 4-6 hours to train. You can only train Avatars using training data that has a verbal consent statement. Personal Avatars go through Voice and Face ID checks to ensure consent is present.
+The **quality of your input**—whether it’s a photo or video—plays a major role in the final output. High-quality inputs lead to more lifelike and accurate results.
+
+## Fast, Flexible, and Shareable
+
+Your Personal AI Avatar takes just **15–20 minutes to train**. Once it's ready, you can reuse it anytime during your subscription period—no need to retrain.
+
+Easily create a **custom conversation link** to interact with your avatar, and share it with friends, clients, or your audience for an interactive experience. You can also **embed your avatar** into your own app or website—giving you a talking, expressive digital twin that speaks on your behalf.
+
+Here’s an example of an output from one of our Stock AI Avatars:
+
