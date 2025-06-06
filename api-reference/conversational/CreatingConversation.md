@@ -1,4 +1,3 @@
-
 > Creating a conversation immediately starts accumulating usage.When you create a conversation CVI immediately starts running and the avatar waits in the WebRTC/Daily room listening for your participant to join. Your billing/Duration usage starts as soon as the conversation is creating and runs until the conversation timeout or when you end the conversation. This also uses up one of your concurrency spots.
 
 ## How do I create a conversation?
@@ -25,7 +24,7 @@ Conversation specific customizations are focused on allowing personalization of 
 
 Here are the things you can customize per conversation:
 
-### **Persona / Avatar**
+### **Character / Avatar**
 
 In order to start a conversation you must provide a persona or avatar. If you provide an avatar with no persona, the default DUIX persona will be used. Providing a persona without an avatar will use the default avatar attached to the persona if it exists. Providing an avatar ID will override the default one associated with the persona.
 
