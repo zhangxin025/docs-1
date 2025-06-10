@@ -50,7 +50,8 @@
       "group": "Avatar",
       "pages": [
         "api-reference/avatar/Overview",
-        "api-reference/avatar/AvatarTraining"
+        "api-reference/avatar/AvatarTraining",
+        "api-reference/avatar/FAQ"
       ]
     },
     {
@@ -58,7 +59,7 @@
       "pages": [
         "api-reference/conversational/Overview",
         "api-reference/conversational/CreatingConversation",
-        "api-reference/conversational/CreatingPersona"
+        "api-reference/conversational/CreatingCharacter"
       ]
     },
      {
