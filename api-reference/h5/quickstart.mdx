@@ -20,7 +20,6 @@ const duix = new DUIX()
 duix.on('initialSuccess', () => {
   // start session
   duix.start({
-    conversationId: '',
     openAsr: true
   }).then(res => {
     console.info(res)
@@ -30,7 +29,8 @@ duix.on('initialSuccess', () => {
 // initialization
 duix.init({
   sign: 'xxxx',
-  containerLable: '.remote-container'
+  containerLable: '.remote-container',
+  conversationId: '',
 })
 
 ```
