@@ -4,10 +4,11 @@ A persona consists of:
 
 - **Character  Name** - This is the name that is shown when an avatar using your Persona joins the call.
 - **Character Prompt** - This is the character prompt that the LLM uses for its instructions. Use this to include instructions on who the persona is and how you want them to behave.
-- **Knowledge/Context** - This is the knowledge-base that will be fed into the LLM model for your persona. You can dump documentation, background, writing etc here.
-- **Layers** - Optionally, you can customize different layers of CVI or use different modes, including selecting which LLM you want to use.
-- **LLM** - By default personas use a DUIX optimized variation of Qianwen.
-- **Avatar ID** (optional) - Optionally you can specify a default avatar you’d like this persona to use. You can always override during conversation creation time to use a different avatar.
+- **Conversation Context** - This is the knowledge-base that will be fed into the LLM model for your persona. You can dump documentation, background, writing etc here.
+- ​**Frist message​​** - The first message spoken.​**​​**
+- **Error Message (for LLM & TTS/ASR errors)​**​ - Plays a backup script when errors occur.​​
+- ​**​LLM & TTS/ASR**- **​**​Use the platform’s default configuration or integrate third-party APIs.
+- **Avatar** - Optionally you can specify a default avatar you’d like this persona to use. You can always override during conversation creation time to use a different avatar.
 
 # How to Create a **Character**
 

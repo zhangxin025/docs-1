@@ -77,11 +77,11 @@ A conversation is a single 'session' or 'call' with an avatar using CVI. When yo
 
 Learn more about [**creating and customizing conversations**](https://duix.com/platform/create).
 
-### What are personas?
+### What are character?
 
 Personas are the 'character' or 'AI agent personality' and contain all the settings and configuration for that character or agent. For example, you can create a persona for 'Tim the Sales Agent' or 'Rob the Interviewer'. Personas let you customize CVI's layers and prompt the LLM with personality and context.
 
-Learn more about [**creating a persona**](https://duix.com/platform/create).
+Learn more about [**creating a **](https://duix.com/platform/create)**character**.
 
 ### What are avatars?
 

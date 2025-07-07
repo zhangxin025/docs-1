@@ -43,7 +43,3 @@ The conversation context will be appended to the system prompt and the persona c
 When a participant joins the avatar will say a greeting that you can customize. You can use this to personalize a welcome message for someone or prompt them to start a conversation.
 
 By default the avatar will say “Hey there, how’s it going? What can I do for you today?”.
-
-### **Language**
-
-You can customize what language CVI understands and speaks in. For example you could set the conversation to be in Spanish. Setting the language ensures the layers (ASR/TTS) are configured correctly to handle the language. If you are using your own TTS voice, you’ll need to make ensure it supports the language you specify.
