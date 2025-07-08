@@ -143,6 +143,8 @@ Close all sessions under a specific APP
 |dh-question|String|The content of the question you need to ask the digital human|Y
 |dh-conversation-id|String|Conversation ID, a unique identifier for the conversation|Y
 |dh-context|String|Context information generated during the conversation, this information is a stringified JSON format data.|N
+|dh-context.q.context|String|the question user asked digital human|N
+|dh-context.a.context|String|The answer to the question the user asked the digital human|N
 |uuid|String|Request ID, used to track requests and troubleshoot problems|N
 
 ##### Request Example:
@@ -153,7 +155,12 @@ Close all sessions under a specific APP
   "dh-code": "187265485019156480",
   "dh-question": "who are you?",
   "dh-conversation-id": "0513e935-041f-48e0-9330-652ef4194511",
-  "dh-context": "{}"
+  "dh-context": [
+        {
+        "q": { "context": "user question" },
+        "a": { "context": "answer" }
+      }
+  ]
 }
 ```
 
@@ -183,9 +190,7 @@ Close all sessions under a specific APP
 | conversationId | String | Conversation ID, a unique identifier for the conversation, same as the dh-conversation-id in the request parameter body. | Y        |
 | question       | String | The question asked by the user.                               | N        |
 | answer         | String | The answer to the question the user asked the digital human, this is a stringified JSON object. | Y        |
-| intent         | String | The intent matched by the question on the platform            | N        |
 | errorMsg       | String | Description of the exception or error                         | N        |
-| extra          | String | Additional information, JSON string                           | N        |
 
 ```json
 {
@@ -196,17 +201,9 @@ Close all sessions under a specific APP
     "conversationId": "0513e935-041f-48e0-9330-652ef4194511",
     "question": "who are you?",
     "answer": {
-      "answer": "Welcome to UneeQ, how can I help?",
-      "operations": {
-        "tipPhrases": {
-          "phrases": ["yes", "no"]
-        },
-        "canShowText": 1
-      }
+      "answer": "Welcome to UneeQ, how can I help?"
     },
-    "intent": "introduce",
-    "errorMsg": "",
-    "extra": "{}"
+    "errorMsg": ""
   }
 }
 ```
@@ -231,6 +228,8 @@ Close all sessions under a specific APP
 |dh-question|String|The content of the question you need to ask the digital human|Y
 |dh-conversation-id|String|Conversation ID, a unique identifier for the conversation|Y
 |dh-context|String|Context information generated during the conversation, this information is a stringified JSON format data.|N
+|dh-context.q.context|String|the question user asked digital human|N
+|dh-context.a.context|String|The answer to the question the user asked the digital human|N
 |uuid|String|Request ID, used to track requests and troubleshoot problems|N
 
 ##### Request Example:
@@ -241,7 +240,12 @@ Close all sessions under a specific APP
   "dh-code": "187265485019156480",
   "dh-question": "who are you?",
   "dh-conversation-id": "0513e935-041f-48e0-9330-652ef4194511",
-  "dh-context": "{}"
+  "dh-context": [
+        {
+        "q": { "context": "user question" },
+        "a": { "context": "answer" }
+      }
+  ]
 }
 ```
 
