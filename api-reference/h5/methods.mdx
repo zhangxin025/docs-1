@@ -73,6 +73,21 @@ duix.speak({content: '', audio: 'https://your.website.com/xxx/x.wav'})
 | audio | string   |   No    |  Digital human answer audio address, which can be obtained through `getAnswer` to get the platform-configured answer|
 | interrupt | boolean   |   No    |  Whether to interrupt the previous speech |
 
+#### speakAudioStream(option: Object): Promise
+
+Drive digital humans to speak, supporting the use of streaming audio for driving.
+
+```javascript
+duix.speakAudioStream({audio: 'https://your.website.com/xxx'})
+```
+
+***Parameters***
+
+| Name| Type |Required | Description | 
+| :-----------------| :-------------- | :----------------------------------------------------------- | ------    | 
+| audio | string   |   No    |  The streaming audio address for the digital human's response.|
+| interrupt | boolean   |   No    |  Whether to interrupt the previous speech |
+
 #### answer(option: Object): Promise
 
 Digital human answers a question
