@@ -464,3 +464,60 @@ Query conversation details based on the conversation id created by the duix plat
 	}
 }
 ```
+
+
+### create avatar
+
+##### Interface Address:
+
+/duix-openapi-v2/sdk/v2/createAvatar
+
+##### Request Method: `POST`
+
+**Interface Description**:
+
+Create your AI Avatar with api
+
+##### Parameter Description
+
+| Parameter Name | Type   | Pass Method | Parameter Description |   Required |
+| -------- | ------ | -------- | ----------------- | -----  |
+|customType | Integer | body | valid value: 1:training with a video 2:training with a photo| Y        |
+|avatarName | String | body |  Avatar Name  | Y        |
+|gender | String | body |  valid value: male female other    | N        |
+|profile | String | body |  profile to power your avatar chat. if not empty,  conversation will be automatically created after training| N        |
+|templateVideo | String | body |  the URL of the video. cann't be empty when training with a video | N        |
+|coverUrl   | String | body |  the URL of the photo. cann't be empty when training with a photo| N        |
+|audioUrl   | String | body |  the URL of the audio | N        |
+|ttsSpeaker | String | body |  voice selected by the user| N        |
+|videoStart | float | body |   the start time in seconds of the video for training. default value is 0 seconds | N        |
+|videoEnd   | float | body |   the send time in seconds of the video for training. default value is 5 seconds | N        |
+|audioStart | float | body |   the start time in seconds of the audio for training. default value is 0 seconds | N        |
+|audioEnd   | float | body |   the send time in seconds of the audio for training. default value is 10 seconds | N        |
+
+**Note**:
+1. When training with a photo, photo should be  jpg/png, max size is 10MB  , the recommended resolution is 1080p and the ratio photo should be 9:16  or 16:9.
+
+2. When training with a video, video should be mp4 / MOV, 10s-1mins and maximum  file size is 1GB.
+
+3. The video duration should be 5 seconds and the audio duration should be between 5 seconds and 10 seconds.
+
+4. Audio should be mp3 / wav / flac / m4a, 5s-30mins
+
+**Response Parameters**:
+
+| Parameter Name | Type | Description |
+| -------- | ----- |  ----- |
+|code|String| Return code |
+|data|JSON| Return data|
+|msg| String | Text Prompt |
+|success| boolean | Success Flag |
+```json
+{
+  "code": "200",
+  "msg": "SUCCESS",
+  "success": true,
+  "data": {
+  }
+}
+```
