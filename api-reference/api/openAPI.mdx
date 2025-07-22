@@ -314,7 +314,7 @@ Query conversation details based on the conversation id created by the duix plat
 ```json
 {
 	"success": true,
-	"code": "200",
+	"code": "0",
 	"message": "SUCCESS",
 	"msg": "SUCCESS",
 	"data": {
@@ -488,7 +488,7 @@ Create your AI Avatar with api
 |customType | Integer | body | valid value: 1:training with a video 2:training with a photo| Y        |
 |avatarName | String | body |  Avatar Name  | Y        |
 |gender | String | body |  valid value: male female other    | N        |
-|profile | String | body |  profile to power your avatar chat. if not empty,  conversation will be automatically created after training| N        |
+|profile | String | body |  profile to power your avatar chat. if not empty,  default conversation will be automatically created after training| N        |
 |templateVideo | String | body |  the URL of the video. cann't be empty when training with a video | N        |
 |coverUrl   | String | body |  the URL of the photo. cann't be empty when training with a photo| N        |
 |audioUrl   | String | body |  the URL of the audio | N        |
@@ -499,7 +499,7 @@ Create your AI Avatar with api
 |audioEnd   | float | body |   the send time in seconds of the audio for training. default value is 10 seconds | N        |
 
 **Note**:
-1. When training with a photo, photo should be  jpg/png, max size is 10MB  , the recommended resolution is 1080p and the ratio photo should be 9:16  or 16:9.
+1. When training with a photo, photo should be  jpg/png, max size is 10MB  , the recommended resolution is 1080p and the ratio of photo should be 9:16  or 16:9.
 
 2. When training with a video, video should be mp4 / MOV, 10s-1mins and maximum  file size is 1GB.
 
@@ -513,14 +513,68 @@ Create your AI Avatar with api
 | -------- | ----- |  ----- |
 |code|String| Return code |
 |data|JSON| Return data|
+|data.id|int| Avatar ID. You can query the avatar using this ID. |
 |msg| String | Text Prompt |
 |success| boolean | Success Flag |
+
+**Response Example**:
+
 ```json
 {
-  "code": "200",
+  "code": "0",
   "msg": "SUCCESS",
   "success": true,
   "data": {
+    "id": 1111
+  }
+}
+```
+
+### query avatar
+
+##### Interface Address:
+
+/duix-openapi-v2/sdk/v2/queryAvatar
+
+##### Request Method: `GET`
+
+**Interface Description**:
+
+query your AI Avatar By Avatar id
+
+##### Parameter Description
+
+| Parameter Name | Type   | Pass Method | Parameter Description |   Required |
+| -------- | ------ | -------- | ----------------- | -----  |
+|id | Integer | Query | Avatar id  | Y        |
+
+**Response Parameters**:
+
+| Parameter Name | Type | Description |
+| -------- | ----- |  ----- |
+|code|String| Return code |
+|msg| String | Text Prompt |
+|success| boolean | Success Flag |
+|data|JSON| Return data|
+|data.id|int| Avatar ID. |
+|data.customizedName|String| Avatar name |
+|data.customizedStatus  |int| training status of this avatar. 0:training 1:success 2:failed |
+|data.reason|String | Reason for failure |
+|data.defaultConversationId|String | default conversationId of this avatar|
+
+**Response Example**:
+
+```json
+{
+  "code": "0",
+  "msg": "SUCCESS",
+  "success": true,
+  "data": {
+    "id": 111,
+    "customizedName": "video-11",
+    "customizedStatus": 1,
+    "reason": "xxx",
+    "defaultConversationId": "xxx",
   }
 }
 ```
