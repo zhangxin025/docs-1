@@ -41,8 +41,7 @@
         "api-reference/api/Introduction",
         "api-reference/api/getConversationID",
         "api-reference/api/getYourAPIKeys",
-        "api-reference/api/getToken",
-        "api-reference/api/openAPI"
+        "api-reference/api/getToken"
       ]
     },
     {
