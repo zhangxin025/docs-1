@@ -1,6 +1,6 @@
 ---
 title: "Get Token"
-description: "The access token is the service authentication credential for calling DUIX interactive services. All HTTP call interfaces need to place the Token in the Header."
+description: "The access token is the service authentication credential for calling Duix interactive services. All HTTP call interfaces need to place the Token in the Header."
 ---
 
 ### Method to Get Token
@@ -33,7 +33,7 @@ The following parameters need to be prepared for signature generation
 
 The sample code for the signature is as follows, Java version example
 
-```
+```xml
 Import pom dependency
 
 <dependency>
@@ -43,7 +43,7 @@ Import pom dependency
 </dependency>
 ```
 
-```
+```java
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import java.util.Calendar;
@@ -79,4 +79,4 @@ public class SigUtils {
 
 ### Integration Development
 
-With the AppID, secret key, and Token obtained in the above steps, you can learn in detail from the SDK and API overview how to integrate DUIX into your service on various platforms.
+With the AppID, secret key, and Token obtained in the above steps, you can learn in detail from the SDK and API overview how to integrate Duix into your service on various platforms.

@@ -5,14 +5,14 @@ description: ''
 
 Drag the GJDigitalSDK.framework and WebRTC.framework files to the resource directory of the project:
 In project-General-Frameworks, Libraries, and Embedded Content, change the following `framework`
-```
+```objective-c
 GJDigitalSDK.framework
 WebRTC.framework
 ```
 to ```Embed & Sign```
 
 2. Add recording permission and local network permission in Info.plist file
-```
+```plist
 <key>NSLocalNetworkUsageDescription</key>
 <string>Obtain local network permissions</string>
 <key>NSMicrophoneUsageDescription</key>

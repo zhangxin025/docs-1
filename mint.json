@@ -2,15 +2,15 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Starter Kit",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg",
-    "href": "https://duix.com"
+    "dark": "/logo/dark-logo.svg",
+    "light": "/logo/light-logo.svg",
+    "href": "https://www.duix.com"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "colors": {
-    "primary": "#f230aa",
-    "light": "#F5F5F8",
-    "dark": "#f230aa",
+    "primary": "#934EEF",
+    "light": "#FFFFFF",
+    "dark": "#934EEF",
     "anchors": {
       "from": "#f230aa",
       "to": "#F5F5F8"
@@ -19,12 +19,12 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:james@duix.com"
+      "url": "mailto:support@duix.com"
     }
   ],
   "topbarCtaButton": {
-    "name": "Sign up",
-    "url": "https://duix.com"
+    "name": "Back to Duix",
+    "url": "https://www.duix.com"
   },
   "tabs": [
     {
@@ -33,36 +33,19 @@
     }
   ],
   "anchors": [
-   
   ],
   "navigation": [
     {
       "group": "API Documentation",
       "pages": [
         "api-reference/api/Introduction",
-        "api-reference/api/createYourFirstConvsation",
+        "api-reference/api/getConversationID",
         "api-reference/api/getYourAPIKeys",
         "api-reference/api/getToken",
         "api-reference/api/openAPI"
       ]
     },
     {
-      "group": "Avatar",
-      "pages": [
-        "api-reference/avatar/Overview",
-        "api-reference/avatar/AvatarTraining",
-        "api-reference/avatar/FAQ"
-      ]
-    },
-    {
-      "group": "Conversational Video Interface",
-      "pages": [
-        "api-reference/conversational/Overview",
-        "api-reference/conversational/CreatingConversation",
-        "api-reference/conversational/CreatingCharacter"
-      ]
-    },
-     {
       "group": "iOS SDK",
       "pages": [
         "api-reference/ios/download",
@@ -98,6 +81,6 @@
     }
   ],
   "footerSocials": {
-    "github": "https://github.com/GuijiAI/duix.ai"
+    "github": "https://github.com/duixcom"
   }
 }
