@@ -3,15 +3,15 @@ title: 'SDK Reference'
 description: ''
 ---
 
-Drag the GJDigitalSDK.framework and WebRTC.framework files to the resource directory of the project:
-In project-General-Frameworks, Libraries, and Embedded Content, change the following `framework`
+Drag `GJDigitalSDK.framework` and `WebRTC.framework` into your project resources.
+In Project > General > Frameworks, Libraries, and Embedded Content, change these frameworks to:
 ```objective-c
 GJDigitalSDK.framework
 WebRTC.framework
 ```
-to ```Embed & Sign```
+```Embed & Sign```
 
-2. Add recording permission and local network permission in Info.plist file
+2. Add recording and local network permissions in your `Info.plist`:
 ```plist
 <key>NSLocalNetworkUsageDescription</key>
 <string>Obtain local network permissions</string>

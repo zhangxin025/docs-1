@@ -3,7 +3,7 @@ title: 'Quick Start'
 description: ''
 ---
 
-When integrating the digital human module code in an Activity, please ensure that you have dynamically obtained microphone permission before starting if you need to use the microphone.
+When integrating in an Activity, ensure you request microphone permission dynamically before starting (if needed).
 
 ```kotlin
 class DisplayActivity : BaseActivity() {
@@ -24,11 +24,11 @@ class DisplayActivity : BaseActivity() {
         player = VirtualFactory.getPlayer(mContext, eglBaseContext)
         player?.addCallback(object : Player.Callback {
             override fun onShow() {
-                // can show digital human
+                // Digital human is ready to display
             }
 
             override fun onError(msgType: Int, msgSubType: Int, msg: String?) {
-                // Log.e(TAG, "connect error")
+                // Log the connection error
             }
 
             override fun onAsrResult(text: String?, sentenceEnd: Boolean) {
@@ -39,7 +39,7 @@ class DisplayActivity : BaseActivity() {
                 track: VideoTrack,
             ) {
                 runOnUiThread {
-                    // Add source for digital human view
+                    // Bind track to the digital human view
                     track.addSink(binding.render)
                 }
             }
@@ -49,7 +49,7 @@ class DisplayActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        // Release resources 
+        // Release resources
         player?.release()
         binding.render.release()
     }

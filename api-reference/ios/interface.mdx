@@ -16,17 +16,17 @@ description: ''
 - (void)initWithAppId:(NSString *)appId appKey:(NSString *)appKey conversationId:(NSString *)conversationId block:(void (^)(BOOL isSuccee, NSString *errorMsg))block;
 
 /**
- * Start communication
+ * Start session
  */
 - (void)toStart;
 
 /**
- * End communication
+ * End session
  */
 - (void)toStop;
 
 /**
- * Text-driven digital human
+ * Speak with text
  *
  * - Parameters:
  *   - text: Text content
@@ -35,7 +35,7 @@ description: ''
 - (void)commandEventWithText:(NSString *)text interrupt:(BOOL)interrupt;
 
 /**
- * Audio-driven digital human
+ * Speak with audio URL
  *
  * - Parameters:
  *   - audioUrl: Audio URL
@@ -44,7 +44,7 @@ description: ''
 - (void)commandEventWithAudioUrl:(NSString *)audioUrl interrupt:(BOOL)interrupt;
 
 /**
- * Text question and answer
+ * Ask a question (text)
  *
  * - Parameters:
  *   - text: Text content
@@ -53,26 +53,26 @@ description: ''
 - (void)commandAskWithText:(NSString *)text interrupt:(BOOL)interrupt;
 
 /**
- * Interrupt digital human broadcasting
+ * Interrupt speaking
  */
 - (void)toBreakDigital;
 
 /**
- * Microphone sound pickup
+ * Microphone capture
  *
  * - Parameter isEnabled: YES indicates sound pickup, NO indicates mute
  */
 - (void)setMute:(BOOL)isEnabled;
 
 /**
- * Mute digital human
+ * Mute digital human audio
  *
  * - Parameter enable: YES indicates mute, NO indicates sound pickup
  */
 - (void)toSpeakerMute:(BOOL)enable;
 
 ```
-SDK Delegate
+SDK delegate
 ```objective-c
 @protocol DigitalViewDelegate <NSObject>
 
@@ -86,7 +86,7 @@ SDK Delegate
 - (void)onVideoShow:(BOOL)isSuccess progress:(float)progress;
 
 /**
- * Exception callback
+ * Error callback
  *
  * - Parameters:
  *   - errorCode: Error code
@@ -97,12 +97,12 @@ SDK Delegate
 @optional
 
 /**
- * ASR (Automatic Speech Recognition) start recognition
+ * ASR start
  */
 - (void)toWebrtcAsrStart;
 
 /**
- * ASR recognition
+ * ASR result
  *
  * - Parameters:
  *   - asrText: Recognized text
@@ -111,42 +111,42 @@ SDK Delegate
 - (void)toWebrtcAsrText:(NSString *)asrText isFinish:(BOOL)isFinish;
 
 /**
- * Start speaking
+ * Speak start
  *
  * - Parameter dict: Dictionary information for starting to speak
  */
 - (void)toSpeakStart:(NSDictionary *)dict;
 
 /**
- * Speak Text
+ * Speak text
  *
  * - Parameter dict: Dictionary information for speak text
  */
 - (void)toSpeakText:(NSDictionary *)dict;
 
 /**
- * Stop speaking
+ * Speak stop
  *
  * - Parameter dict: Dictionary information for stopping to speak
  */
 - (void)toSpeakStop:(NSDictionary *)dict;
 
 /**
- * Audio version start speaking
+ * TTS speak start
  *
  * - Parameter dict: Dictionary information for starting to speak
  */
 - (void)toTTSSpeakStart:(NSDictionary *)dict;
 
 /**
- * Audio version stop speaking
+ * TTS speak stop
  *
  * - Parameter dict: Dictionary information for stopping to speak
  */
 - (void)toTTSSpeakStop:(NSDictionary *)dict;
 
 /**
- * Central control ends the call and sends a bye event
+ * Controller ends the call and sends a bye event
  */
 - (void)onByeBye;
 
@@ -156,7 +156,7 @@ SDK Delegate
 - (void)onRTCReomteSuccess;
 
 /**
- * Whether audio loading was successful
+ * Audio load result
  *
  * - Parameter isSuccess: Whether it was successful
  */
@@ -170,7 +170,7 @@ SDK Delegate
 - (void)didIceConnectionChange:(RTCIceConnectionState)state;
 
 /**
- * Central control notifies the client after obtaining rendering endpoint information
+ * Controller notifies the client after obtaining rendering endpoint information
  *
  * - Parameters:
  *   - ID: id
@@ -179,7 +179,7 @@ SDK Delegate
 - (void)onRender:(NSString *)ID name:(NSString *)name;
 
 /**
- * Get the local video's video stream
+ * Get local video stream
  *
  * - Parameters:
  *   - capturer: Capturer

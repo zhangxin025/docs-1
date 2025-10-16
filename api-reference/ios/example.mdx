@@ -2,12 +2,12 @@
 title: 'Code Example'
 description: ''
 ---
-See detailed code in the Demo
+See detailed code in the demo project.
 ```objective-c
 /// Set a custom View
 [DigitalManager manager].remote_view = self.customView;
 
-#pragma mark -SDK initialization
+#pragma mark - SDK initialization
 [[GJAccess manager] getCamerapermissions:^(bool isPermis) {
     if (isPermis)  {
         [[DigitalManager manager] initNewWithAppId:AppId appKey:AppKey conversationId:ConversationId region:REGION block:^(BOOL isSuccee, NSString *errorMsg) {
@@ -20,14 +20,14 @@ See detailed code in the Demo
     }
 }];
 
-#pragma mark - End Conversation
+#pragma mark - End conversation
 - (void)toStop {
     self.digitalShow = NO; // Hide digital display
     [[DigitalManager manager] toStop]; // Stop the session
 }
 
-#pragma mark -SDK Delegate DigitalViewDelegate
-#pragma mark -Video Load Completion
+#pragma mark - SDK Delegate DigitalViewDelegate
+#pragma mark - Video load completion
 - (void)onVideoShow:(BOOL)isSuccess progress:(float)progress {
     if (isSuccess) {
         self.digitalShow = YES;
@@ -37,7 +37,7 @@ See detailed code in the Demo
     }
 }
 
-#pragma mark - Error Handling
+#pragma mark - Error handling
 - (void)onError:(NSInteger)error_code errorMsg:(NSString *)errorMsg {
     // Handle different error codes
     switch (error_code) {

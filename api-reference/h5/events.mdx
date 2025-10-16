@@ -3,20 +3,20 @@ title: 'Events'
 description: ''
 ---
 
-| Name           | Description                                                  |
-| :------------- | :----------------------------------------------------------- |
-| error       | Triggered when there is an uncaught error. |
-| bye           | Triggered when the session ends.                                |
-| initialSuccess          | Digital human initialization successful. You can call the `start` method in the callback of this event |
-| show         | Digital human has been displayed. |
-| progress         | Digital human loading progress. |
-| speakSection         | Current audio and text segment of the digital human speaking (the answer method will get results in streaming mode, if calling speak separately, this event is consistent with speakStart) |
-| speakStart         | There is a slight delay between driving the digital human to speak and the actual speaking, this event indicates that the digital human has actually started speaking |
-| speakEnd         | Digital human has finished speaking |
-| asrStart | Single sentence speech recognition started |
-| asrData | Single sentence real-time speech recognition results |
-| asrStop | Single sentence speech recognition ended |
-| report | Reports RTC network/picture quality and other information every second |
+| Name           | Description |
+| :------------- | :---------- |
+| error       | Uncaught error occurred |
+| bye           | Session ended |
+| initialSuccess          | Initialization successful. Safe to call `start` |
+| show         | Digital human is displayed |
+| progress         | Loading progress (0–100) |
+| speakSection         | Current audio/text segment while speaking. With `answer`, events stream incrementally; with `speak`, this aligns with `speakStart` |
+| speakStart         | Actual speech started |
+| speakEnd         | Speech ended |
+| asrStart | Single-sentence ASR started |
+| asrData | Single-sentence ASR interim results |
+| asrStop | Single-sentence ASR ended |
+| report | Periodic RTC/network/video quality report |
 
 ### error
 
@@ -29,21 +29,21 @@ description: ''
 
 ```
 
-***error code***
+***Error codes***
 
 
 | Name           | Description   | data |
 | :------------- | :----------| :---------- |
-| 3001 | RIC connection failed| |
+| 3001 | RTC connection failed| |
 | 4001 | Failed to start session | |
 | 4005 | Authentication failed | |
 | 4007 | Server session abnormally ended | code: 100305 Model file not found|
 | 4008 | Failed to get microphone stream | |
-| 4009 | Browser cannot autoplay based on playback policy | Please consider muted playback or user operation to call the start method|
+| 4009 | Browser blocked autoplay | Start muted or require user action; then unmute/resume |
 
 ### progress 
 
-Progress of type number, 0-100
+Number from 0 to 100
 
 ### speakSection 
 
@@ -79,7 +79,7 @@ Progress of type number, 0-100
 ```
 
 ### asrData
-The recognition of each text segment starts with an asrStart and ends with an asrStop, with one or more asrData (incremental push) in between. You can get speech recognition results in the asrData event for display.
+Each recognition segment starts with `asrStart` and ends with `asrStop`, with one or more `asrData` events in between. Use `asrData` for incremental display.
 ```javascript
 
 {
@@ -111,4 +111,4 @@ The recognition of each text segment starts with an asrStart and ends with an as
     }
 }
 ```
-**Note:** Event parameters not listed in detail above are empty
+**Note:** Event parameters not listed above are empty.

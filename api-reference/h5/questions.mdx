@@ -3,11 +3,11 @@ title: 'Frequently Asked Questions'
 description: ''
 ---
 
-1. Some browsers, especially mobile browsers, require user interaction to play digital human videos. It is recommended that the start event be triggered by user clicks, even if muted is a silent state, otherwise some browsers may not display the digital human.
-2. Some WeChat browsers on iOS systems require calling navigator.mediaDevices.getUserMedia for authorization before playing remote streams.
-3. If ASR recognition is enabled, user authorization for getUserMedia will be needed. Due to browser restrictions, local debugging requires an HTTPS environment.
-4. For WeChat Mini Program integration, it can be connected through the web-view component.
-5. Some mobile browsers still cannot adapt to the browser's autoplay policy even if start is called by user click. When receiving a 4009 error, you can trigger the resume method through a user event.
-6. If you need to use opening remarks, wake words, interrupt words and other configurations, you can obtain them through the openapi - Get Session Details interface. The SDK itself does not provide business logic.
-7. Some browsers do not support RTC. Currently, it has been verified that Xiaomi Browser does not support it.
-8. Since webrtc does not support the http protocol and ip address access, please use https and domain name access.
+1. Some browsers (especially mobile) require a user gesture to play media. Trigger `start` from a click handler. Even if muted, some browsers won’t display the digital human without a click.
+2. On some iOS WeChat browsers, call `navigator.mediaDevices.getUserMedia` to authorize before playing remote streams.
+3. If ASR is enabled, `getUserMedia` permission is required. Browsers typically require HTTPS for local debugging.
+4. For WeChat Mini Program integration, use a `web-view` component.
+5. Some mobile browsers still block autoplay even after a click. On error `4009`, call `resume` in response to a user action.
+6. For opening lines, wake words, and interruption phrases, fetch them via OpenAPI (Get Session Details). The SDK does not provide business logic.
+7. Some browsers do not support RTC (e.g., Xiaomi Browser).
+8. WebRTC does not support HTTP or raw IP access. Use HTTPS and a domain name.

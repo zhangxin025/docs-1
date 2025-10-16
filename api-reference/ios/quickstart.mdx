@@ -3,7 +3,7 @@ title: 'Quick Start'
 description: ''
 ---
 
-Authorize microphone permission before calling
+Authorize microphone access before starting:
 ```objective-c
 - (void)toStart {
 
@@ -11,7 +11,7 @@ Authorize microphone permission before calling
         if (isSuccee) {
             [[DigitalManager manager] toStart];
         } else {
-            NSLog(@"GJDigitalDemo==errorMsg==%@",errorMsg);
+            NSLog(@"GJDigitalDemo error: %@", errorMsg);
         }
     }];
 }

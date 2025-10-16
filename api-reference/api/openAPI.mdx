@@ -3,45 +3,45 @@ title: 'Open API'
 description: 'Management Interfaces'
 ---
 
-# OpenAPI Integration
+# OpenAPI integration
 
-The domain name used to call the OpenAPI is `https://app.duix.ai/`
+Base URL: `https://app.duix.ai/`
 
 ## Prerequisites
-### Construct Signature to Get Token
+### Construct signature to get token
 
-When integrating with the duix-openapi-v2 platform, you need to integrate code to generate tokens in your own platform. The method for generating tokens can be referenced in the following code:
+When integrating with the duix-openapi-v2 platform, generate tokens in your own backend. Refer to the token guide:
 
-[How to Get Token](./getToken)
+[How to get token](./getToken)
 
 ## Management Interfaces
 
-Management-type HTTP requests have a common convention that requires passing a token in the request header.
+Management endpoints require a token in the request header.
 
 
 ### Interaction Process
 
 <img src="../assets/img.png" alt="image.png"/>
 
-### Get APP Real-time Concurrent Number
+### Get app real-time concurrency
 
-##### Interface Address:
+##### Endpoint
 
 /duix-openapi-v2/sdk/v2/getconcurrentNumber
 
 ##### Request Method: `GET`
 
-**Interface Description**:
+**Description**
 
-Query the concurrent number under a specific APP
+Query real-time concurrency for an app.
 
-##### Parameter Description
+##### Parameters
 
 | Parameter Name | Type   | Pass Method | Parameter Description |
 | -------- | ------ | -------- | ----------------- |
 | appId    | String | Query    | APPID created from the platform |
 
-**Response Parameters**:
+**Response**
 
 | Parameter Name | Type |
 | -------- | ----- |
@@ -53,7 +53,7 @@ Query the concurrent number under a specific APP
 |message|String|
 |success|boolean|
 
-**Response Example**:
+**Example**
 
 ```json
 {
@@ -68,43 +68,43 @@ Query the concurrent number under a specific APP
 }
 ```
 
-### Get APP Real-time Sessions
+### Get app real-time sessions
 
-##### Interface Address:
+##### Endpoint
 
 /duix-openapi-v2/sdk/v2/getconcurrentList
 
 ##### Request Method: `GET`
 
-##### Interface Description:
+**Description**
 
-Query the list of "in call" sessions under a specific APP.
+List active (in-call) sessions for an app.
 
-##### Parameter Description
+##### Parameters
 
 | Parameter Name | Type   | Pass Method | Parameter Description |
 | -------- | ------ | -------- | ----------------- |
 | appId    | String | Query    | APPID created from the platform |
 
-### Close All Sessions of an APP
+### Close all sessions for an app
 
-##### Interface Address:
+##### Endpoint
 
 /duix-openapi-v2/sdk/v2/distroyCallSessionsByAppId
 
 ##### Request Method: `GET`
 
-##### Interface Description:
+**Description**
 
-Close all sessions under a specific APP
+Close all sessions for an app.
 
-##### Parameter Description
+##### Parameters
 
 | Parameter Name | Type   | Pass Method | Parameter Description |
 | -------- | ------ | -------- | ----------------- |
 | appId    | String | Query    | APPID created from the platform |
 
-##### Response Example:
+##### Example
 
 ```json
 {
@@ -115,30 +115,30 @@ Close all sessions under a specific APP
 }
 ```
 
-### Close Specified Session
+### Close a specific session
 
-##### Interface Address:
+##### Endpoint
 /duix-openapi-v2/sdk/v2/sessionStop
 
 ##### Request Method: `GET`
 
-##### Parameter Description
+##### Parameters
 | Parameter Name | Type | Pass Method | Parameter Description |
 | -------- | -------- | ----- | -------- |
 |uuid|String|Query|sessionId field returned by the `start-complete` event|
 
 
-### Third-party Dialog Integration (Non-streaming)
+### Third‑party dialog integration (non‑streaming)
 
-##### Other Session Integration: Other session platforms can be provided for digital humans to use in the following way. The Duix platform can, through your digital human, use the POST method to request a remote URL you define to get answers to questions.
+Other session platforms can be integrated as follows. Through your digital human, the Duix platform will POST to your defined remote URL to obtain answers.
 
 <img src="../assets/_tmp_dingtalkgov_qt_clipbord_pic_5.png" alt="image.png"/>
 
-##### Session Platform Integration Example: You can refer to this example of session platform integration. This open-source application implements a dialogue platform integration, which implements casual conversation functionality.
+Example: Refer to this open-source demo for a simple dialog integration.
 
-##### Request Specification: The Duix platform will send question requests (questions customers ask your digital human) in the following format via POST to your remote URL.
+Request: The Duix platform will send question requests (the user’s question) via POST to your remote URL in the format below.
 
-##### Parameter Description
+##### Parameters
 | Field | Type | Description | Required |
 | -------- | ------ | ----- | -------- |
 |sid|String|Your user ID, generated when creating a user. Can be viewed in account information.|Y
@@ -150,7 +150,7 @@ Close all sessions under a specific APP
 |dh-context.a.context|String|The answer to the question the user asked the digital human|N
 |uuid|String|Request ID, used to track requests and troubleshoot problems|N
 
-##### Request Example:
+##### Example request
 
 ```json
 {
@@ -167,7 +167,7 @@ Close all sessions under a specific APP
 }
 ```
 
-**Response Specification**: When you receive a question request, you need to respond in the following format.
+Response: Reply using the format below.
 
 | Field    | Type    | Required | Remarks          |
 |---------| ------- | -------- |-----------------|
@@ -176,7 +176,7 @@ Close all sessions under a specific APP
 | data    | object  | N        | Specific content returned |
 | success | Boolean | Y        | Whether successful |
 
-**Valid Response Types**:
+Valid response codes
 
 | Code | Status       | Response                         |
 | ---- | ------------ | -------------------------------- |
@@ -186,7 +186,7 @@ Close all sessions under a specific APP
 | 403  | Forbidden    | Authentication failed |
 | 500  | Server Error | Service exception |
 
-**Response Body Specification**:
+Response body
 
 | Field          | Type   | Description                                                  | Required |
 | -------------- | ------ | ------------------------------------------------------------ | -------- |
@@ -211,19 +211,19 @@ Close all sessions under a specific APP
 }
 ```
 
-**Expected Response Time**: The interaction with digital humans is sensitive to latency due to their real-time nature. Therefore, response time is an important factor to consider when processing requests from the Duix platform. These services should respond within 95% of the time within 20 seconds. If the response time exceeds 20s, the request will report a timeout error, but the digital human will continue to respond.
+Expected response time: Digital human interactions are latency‑sensitive. 95% of requests should complete within 20 seconds. If the response exceeds 20s, a timeout is reported, but the digital human will continue to respond.
 
-### Third-party Dialog Integration (Streaming)
+### Third‑party dialog integration (streaming)
 
-##### Other Session Integration: Other session platforms can be provided for digital humans to use in the following way. The Duix platform can, through your digital human, use the POST method to request a remote URL you define to get answers to questions.
+Other session platforms can be integrated as follows. Through your digital human, the Duix platform will POST to your defined remote URL to obtain answers.
 
 <img src="../assets/_tmp_dingtalkgov_qt_clipbord_pic_5.png" alt="image.png"/>
 
-##### Session Platform Integration Example: You can refer to this example of session platform integration. This open-source application implements a dialogue platform integration, which implements casual conversation functionality.
+Example: Refer to this open-source demo for a simple dialog integration.
 
-##### Request Specification: The Duix platform will send question requests (questions customers ask your digital human) in the following format via POST to your remote URL.
+Request: The Duix platform will send question requests (the user’s question) via POST to your remote URL in the format below.
 
-##### Parameter Description
+##### Parameters
 | Field | Type | Description | Required |
 | -------- | ------ | ----- | -------- |
 |sid|String|Your user ID, generated when creating a user. Can be viewed in account information.|Y
@@ -235,7 +235,7 @@ Close all sessions under a specific APP
 |dh-context.a.context|String|The answer to the question the user asked the digital human|N
 |uuid|String|Request ID, used to track requests and troubleshoot problems|N
 
-##### Request Example:
+##### Example request
 
 ```json
 {
@@ -253,7 +253,7 @@ Close all sessions under a specific APP
 ```
 
 
-**Response Body Specification**:
+Response body
 
 | Field  | Type   | Description | Required |
 | ------ | ------ | ----------- | -------- |
@@ -267,28 +267,28 @@ Close all sessions under a specific APP
 }
 ```
 
-**Expected Response Time**: The interaction with digital humans is sensitive to latency due to their real-time nature. Therefore, response time is an important factor to consider when processing requests from the Duix platform. These services should respond within 95% of the time within 20 seconds. If the response time exceeds 20s, the request will report a timeout error, but the digital human will continue to respond.
+Expected response time: Digital human interactions are latency‑sensitive. 95% of requests should complete within 20 seconds. If the response exceeds 20s, a timeout is reported, but the digital human will continue to respond.
 
 
-### Get Conversation Details
+### Get conversation details
 
-##### Interface Address:
+##### Endpoint
 
 /duix-openapi-v2/sdk/getConversationById?conversationId=[duix platform conversation id]
 
 ##### Request Method: `GET`
 
-**Interface Description**:
+**Description**
 
-Query conversation details based on the conversation id created by the duix platform
+Query conversation details by Duix conversation ID.
 
-##### Parameter Description
+##### Parameters
 
 | Parameter Name | Type   | Pass Method | Parameter Description |
 | -------- | ------ | -------- | ----------------- |
 | conversationId    | String | Query    | conversationId created by the platform |
 
-**Response Parameters**:
+**Response**
 
 | Parameter Name | Type | Description |
 | -------- | ----- |  ----- |
@@ -309,7 +309,7 @@ Query conversation details based on the conversation id created by the duix plat
 |message| String | Text Prompt |
 |success| boolean | Success Flag |
 
-**Response Example**:
+**Example**
 
 ```json
 {
@@ -469,19 +469,19 @@ Query conversation details based on the conversation id created by the duix plat
 ```
 
 
-### create avatar
+### Create avatar
 
-##### Interface Address:
+##### Endpoint
 
 /duix-openapi-v2/sdk/v2/createAvatar
 
 ##### Request Method: `POST`
 
-**Interface Description**:
+**Description**
 
-Create your AI Avatar with api
+Create an AI avatar via API.
 
-##### Parameter Description
+##### Parameters
 
 | Parameter Name | Type   | Pass Method | Parameter Description |   Required |
 | -------- | ------ | -------- | ----------------- | -----  |
@@ -507,7 +507,7 @@ Create your AI Avatar with api
 
 4. Audio should be mp3 / wav / flac / m4a, 5s-30mins
 
-**Response Parameters**:
+**Response**
 
 | Parameter Name | Type | Description |
 | -------- | ----- |  ----- |
@@ -517,7 +517,7 @@ Create your AI Avatar with api
 |msg| String | Text Prompt |
 |success| boolean | Success Flag |
 
-**Response Example**:
+**Example**
 
 ```json
 {
@@ -530,25 +530,25 @@ Create your AI Avatar with api
 }
 ```
 
-### query avatar
+### Query avatar
 
-##### Interface Address:
+##### Endpoint
 
 /duix-openapi-v2/sdk/v2/queryAvatar
 
 ##### Request Method: `GET`
 
-**Interface Description**:
+**Description**
 
-query your AI Avatar By Avatar id
+Query your AI avatar by avatar ID.
 
-##### Parameter Description
+##### Parameters
 
 | Parameter Name | Type   | Pass Method | Parameter Description |   Required |
 | -------- | ------ | -------- | ----------------- | -----  |
 |id | Integer | Query | Avatar id  | Y        |
 
-**Response Parameters**:
+**Response**
 
 | Parameter Name | Type | Description |
 | -------- | ----- |  ----- |
@@ -562,7 +562,7 @@ query your AI Avatar By Avatar id
 |data.reason|String | Reason for failure |
 |data.defaultConversationId|String | default conversationId of this avatar|
 
-**Response Example**:
+**Example**
 
 ```json
 {
