@@ -1,60 +1,74 @@
 ---
-title: "Create Your First Conversation"
-description: "Start generating your first conversation with the Duix API"
+title: 'Create Your First Conversation'
+description: 'Start generating your first conversation with the Duix API.'
 ---
 
-### Create an Account
+## Overview
 
-In order to use our API, first you need to create a [Duix](http://www.duix.com) account, click here[Go to create](https://duix.com/login).
+This guide walks you through creating your first **conversation** using the **Duix Platform** and preparing it for SDK or API integration.
 
-![Login Pn](/images/login.png)
+---
 
-### Login to the Duix Workspace
+## Step 1: Create an Account
 
-After logging in successfully, click the "My duix" icon in the upper right corner.
+To use the Duix API, first create a [**Duix**](https://duix.com) account.  
+Click [**Go to create**](https://duix.com/login) to register and sign in.
 
-### Create a Conversation​
+![Login Page](/images/login.png)
 
-You can either click **"Create Conversation"**directly or create a conversation by referencing a provided template:
+---
 
-> **Pick a Template Character：​​**
+## Step 2: Access the Duix Workspace
+
+After logging in, click the **My Duix** icon in the upper-right corner of the page to open your **workspace**.
+
+---
+
+## Step 3: Create a Conversation
+
+You can create a new conversation manually or by using a **predefined template**.
+
+> ### **Template Character**
+> 
+> - **LLM & TTS/ASR** — Use Duix’s default configuration or connect your own third-party API keys.  
+> - **Character Name** — The display name shown when the avatar joins the conversation.  
+> - **Conversation Context** — Provide personality traits, background stories, or any relevant text materials.  
+> - **Avatar** — Assign a default virtual avatar to represent the character.
+
+> ### **Custom Character**
 >
-> ​- **​LLM & TTS/ASR​**​:Use the platform’s default configuration or integrate third-party APIs.​**​**
->
-> ​- **​Character Role**:The name displayed when the avatar joins the call.​ **​**
->
-> ​- **​Conversation Context​**​:Input role documentation, background stories, text materials, etc.​**​**
->
-> ​- **​Avatar​**​:Set a default virtual avatar for the role.
+> - **LLM & TTS/ASR** — Configure the platform defaults or integrate third-party services.  
+> - **Character Prompt** — Define the character’s personality, tone, and behavior style.  
+> - **Conversation Context** — Supply narrative context or detailed background information.  
+> - **First Message** — The opening line spoken by the character.  
+> - **Error Message** — The fallback response used when LLM or TTS/ASR processing fails.  
+> - **Avatar** — Assign a specific avatar for the character.
 
-> **Custom Character：​​**
->
-> ​**​**​- **​LLM & TTS/ASR​**​:Use the platform’s default configuration or integrate third-party APIs.​**​**
->
-> ​- **​Character Prompt​**​:Define the role’s identity traits and behavioral guidelines.​**​**
->
-> ​- **​Conversation Context​**​:Input role documentation, background stories, text materials, etc.​**​**
->
-> ​- **​Frist message​​:**The first message spoken.​**​​**
->
-> ​- **​Error Message (for LLM & TTS/ASR errors)​**​:Plays a backup script when errors occur.​​**​**
->
-> ​- **​Avatar​**​:Set a default virtual avatar for the role.
+![Template Example](/images/tele.png)  
+![Create Conversation Page](/images/createconversation.png)
 
-![Tele Pn](/images/tele.png)
+---
 
-![Createconversation Pn](/images/createconversation.png)
+## Step 4: Retrieve Your Credentials
 
-### Start Conversation
+After creating a conversation, copy the following information from your **dashboard**:
 
-If you want to connect directly to your application, you can copy it directly.`app id`And`app key`And`conversation id`, click the "copy" icon to paste after successful copying.
+- **App ID**  
+- **App Key**  
+- **Conversation ID**
 
-Don't show your`app key`To others. If someone gains access to you`app key`, they can use your account as if they were using your password.
+Click the **Copy** icon next to each field to copy it to your clipboard, then paste it into your project configuration.
 
-![Startconverstion Pn](/images/startconverstion.png)
+> ⚠️ **Security Notice:**  
+> Do **not share your App Key**. It grants full access to your account and should be kept confidential.
 
-### Start Integration
+![Start Conversation](/images/startconverstion.png)
 
-Finally, after the session is successfully created, you can start to run the docking API to view the effect, you can refer [API Docs](https//docs.duix.com/).
+---
 
-![Docs Pn](/images/docs.png)
+## Step 5: Begin Integration
+
+Once your conversation is created, you can begin testing with the **Duix SDK** or **API** to complete the full workflow.  
+Refer to the [**API Documentation**](https://docs.duix.com/) for detailed integration guides.
+
+![API Documentation](/images/docs.png)

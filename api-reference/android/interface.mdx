@@ -3,39 +3,41 @@ title: 'Key Interfaces'
 description: ''
 ---
 
+# Key Interfaces
 
-### 1. Initialization
+### 1). Initialization
 
-Initialize the module with the appId and appSecret provided in your platform account and get the Play object
-```
+Initialize the SDK with your `appId` and `appSecret`, then obtain a `Player` instance:
+
+```kotlin
 VirtualFactory.init("your appId", "your appSecret")
 player = VirtualFactory.getPlayer(mContext, eglBaseContext)
 ```
 
 
-### 2. Connect to Digital Human
+### 2) Connect to the digital human
 
-Connect to the digital human using the conversationId provided by your platform account
+Connect using your platform `conversationId`:
 
 ```
     player?.addCallback(callback)
     player?.connect("your conversation id")
 ```
 
-The callback contains the following callbacks
+The player exposes the following callbacks:
 
-#### ```onShow``` Digital human is ready to display
+#### `onShow` — Digital human is ready to display
 ```
 void onShow();
 ```
 
-#### ```onError``` Exception occurred when connecting to digital human
+#### `onError` — Error occurred during connection
 
 ```
 void onError(int msgType, int msgSubType, String msg);
 ```
 
-Parameter description:
+Parameters:
 
 | Parameter Name   | Type     | Description      |
 |----------------|--------|---------|
@@ -43,7 +45,7 @@ Parameter description:
 | msgSubType     | int    | Sub-error type   |
 | msg            | String | Exception message    |
 
-Values of msgType:
+Possible `msgType` values:
 
 | Value     | Description       |     | 
 |--------|----------|-----|
@@ -58,9 +60,9 @@ Values of msgType:
 | 1050   | RTC connection lost  |     | 
 
 
-#### ```onVideoTrack``` RTC media channel created successfully
+#### `onVideoTrack` — RTC media channel created successfully
 
-Bind the digital human widget to the track in this callback
+Bind your digital human view to the track in this callback
 
 ```
 void onVideoTrack(VideoTrack track);
@@ -68,62 +70,61 @@ void onVideoTrack(VideoTrack track);
 
 | Parameter Name   | Type              | Description         |
 |----------------|-----------------|------------|
-| track          | VideoTrack      | Video media channel     |
+| track          | VideoTrack      | Video media track  |
 
-#### ```onAudioSamples``` Local audio sampling data callback
+#### `onAudioSamples` — Local audio sampling data callback
 
-You can implement audio visualization and other operations in this callback
-
+Use this callback for audio visualization or processing.
 ```
 default void onAudioSamples(int audioFormat, int channelCount, int sampleRat, byte[] data){}
 ```
 
-#### ```onTtsSpeakStart``` Digital human starts playing TTS synthesized audio
+#### `onTtsSpeakStart` — TTS playback started
 
 ```
 default void onTtsSpeakStart(){}
 ```
 
-#### ```onTtsSpeakText``` Text content of TTS played by digital human
+#### `onTtsSpeakText` — TTS text content
 
 ```
 default void onTtsSpeakText(String text){}
 ```
 
-#### ```onTtsSpeakStop``` TTS text playback completed
+#### `onTtsSpeakStop` — TTS playback completed
 
 ```
 default void onTtsSpeakStop(){}
 ```
 
-#### ```onSpeakStart``` Digital human starts speaking
+#### `onSpeakStart` — Speaking started
 
 ```
 default void onSpeakStart(){}
 ```
 
-#### ```onSpeakText``` Text content spoken by digital human
+#### `onSpeakText` — Spoken text content
 
 ```
 default void onSpeakText(String text){}
 ```
 
-#### ```onSpeakStop``` Digital human finished speaking
+#### `onSpeakStop` — Speaking completed
 
 ```
 default void onSpeakStop(){}
 ```
 
-#### ```onAsrResult``` ASR recognition content callback
+#### `onAsrResult` — ASR recognition result
 
 ```
 default void onAsrResult(String text, boolean sentenceEnd){}
 ```
 
 
-### 3. Drive Digital Human to Speak with Audio URL
+### 3) Drive the digital human to speak with an audio URL
 
-Use a WAV audio URL with 16kHz sampling rate, 16bit, mono channel to drive the digital human to speak
+Use a WAV audio URL with 16 kHz sample rate, 16‑bit, mono channel to drive speech
 
 ```kotlin
 player?.speakWithWav(wavUrl, true)
@@ -131,13 +132,13 @@ player?.speakWithWav(wavUrl, true)
 
 | Parameter Name          | Type      | Description         |
 |-----------------------|---------|------------|
-| wavUrl                | String  | Network address of WAV audio |
+| wavUrl                | String  | URL of the WAV audio file |
 | interrupt             | boolean | Whether to interrupt the current speaking state |
 
 
-### 4. Drive Digital Human to Speak with Text
+### 4) Drive the digital human to speak with text
 
-Input the text that you want the digital human to say, and the digital human will say the corresponding content according to the voice configured in the session.
+Provide text input. The digital human will speak using the session’s configured voice.
 
 ```kotlin
 player?.speakWithTxt(text, true)
@@ -145,13 +146,13 @@ player?.speakWithTxt(text, true)
 
 | Parameter Name          | Type      | Description          |
 |-----------------------|---------|-------------|
-| text                  | String  | Text content for the digital human to say |
+| text                  | String  | Text for the digital human to speak |
 | interrupt             | boolean | Whether to interrupt the current speaking state  |
 
 
-### 5. Digital Human Q&A
+### 5) Q&A Interaction
 
-Let the digital human answer your questions.
+Ask a question and receive a response from the digital human.
 
 ```kotlin
 player?.speakWithQuestion(text, true)
@@ -162,9 +163,9 @@ player?.speakWithQuestion(text, true)
 | text                  | String  | Express your question to the digital human |
 | interrupt             | boolean | Whether to interrupt the current speaking state |
 
-### 6. Interrupt Digital Human Speaking
+### 6) Interrupt speaking
 
-Make the digital human stop talking
+Stop the current speech immediately.
 
 ```kotlin
 player?.stopAudio()

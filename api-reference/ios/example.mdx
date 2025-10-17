@@ -1,20 +1,35 @@
 ---
-title: 'Code Example'
-description: ''
+title: 'Code Example (iOS)'
+description: 'Objective-C code example demonstrating how to initialize, start, and handle errors using the Duix iOS SDK.'
 ---
-See detailed code in the Demo
+
+## Overview
+
+The following Objective-C example demonstrates the basic workflow for integrating the **Duix iOS SDK**,  
+including initialization, session management, view setup, and error handling.  
+For the complete implementation, see the full demo project:  
+👉 [**duix-cloud-demo-ios_1.2.6.zip**](https://duix-sgp.obs.ap-southeast-3.myhuaweicloud.com/duix/sdk/duix-cloud-demo-ios_1.2.6.zip)
+
+---
+
+## Full Example
+
 ```objective-c
-/// Set a custom View
+/// Assign a custom view for digital human rendering
 [DigitalManager manager].remote_view = self.customView;
 
-#pragma mark -SDK initialization
+#pragma mark - SDK Initialization
 [[GJAccess manager] getCamerapermissions:^(bool isPermis) {
     if (isPermis)  {
-        [[DigitalManager manager] initNewWithAppId:AppId appKey:AppKey conversationId:ConversationId region:REGION block:^(BOOL isSuccee, NSString *errorMsg) {
+        [[DigitalManager manager] initNewWithAppId:AppId
+                                             appKey:AppKey
+                                      conversationId:ConversationId
+                                              region:REGION
+                                               block:^(BOOL isSuccee, NSString *errorMsg) {
             if (isSuccee) {
-                [[DigitalManager manager] toStart];
+                [[DigitalManager manager] toStart];  // Start digital human session
             } else {
-                NSLog(@"GJDigitalDemo==errorMsg==%@",errorMsg);
+                NSLog(@"GJDigitalDemo==errorMsg==%@", errorMsg);
             }
         }];
     }
@@ -22,24 +37,24 @@ See detailed code in the Demo
 
 #pragma mark - End Conversation
 - (void)toStop {
-    self.digitalShow = NO; // Hide digital display
-    [[DigitalManager manager] toStop]; // Stop the session
+    self.digitalShow = NO;                      // Hide the digital human
+    [[DigitalManager manager] toStop];          // Stop the active session
 }
 
-#pragma mark -SDK Delegate DigitalViewDelegate
-#pragma mark -Video Load Completion
+#pragma mark - SDK Delegate (DigitalViewDelegate)
+#pragma mark - Video Load Completion
 - (void)onVideoShow:(BOOL)isSuccess progress:(float)progress {
     if (isSuccess) {
         self.digitalShow = YES;
         NSLog(@"GJDigitalDemo==Load Complete");
     } else {
-        NSLog(@"GJDigitalDemo==Loading - %lf", progress); // Log loading progress
+        NSLog(@"GJDigitalDemo==Loading Progress: %lf", progress);
     }
 }
 
 #pragma mark - Error Handling
 - (void)onError:(NSInteger)error_code errorMsg:(NSString *)errorMsg {
-    // Handle different error codes
+    // Handle specific error codes
     switch (error_code) {
         case -1:
         case -2:
@@ -49,28 +64,29 @@ See detailed code in the Demo
             // Invalid or empty AppId
             break;
         case 50002:
-            // Resource check failed, contact admin
+            // Resource check failed (contact administrator)
             break;
         case 50003:
-            // Resource occupied, check and try again
+            // Resource occupied; please check and retry
             break;
         case 50004:
             // Human request timeout
             break;
         case 50005:
-            // Exception retrieving resources from group
+            // Error retrieving resources from group
             break;
         case 50006:
-            // Signature failure
+            // Signature verification failed
             break;
         case 50007:
-            // Insufficient total concurrency of resources, please check and try again
+            // Insufficient total concurrency of resources
             break;
         case 50009:
             // Resource timeout or not configured
             break;
+        default:
+            // Unknown error
+            break;
     }
     NSLog(@"GJDigitalDemo==errorMsg==%@", errorMsg);
 }
-
-```

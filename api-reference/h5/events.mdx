@@ -1,114 +1,183 @@
 ---
 title: 'Events'
-description: ''
+description: 'List of all Duix SDK events and their corresponding payload structures.'
 ---
 
-| Name           | Description                                                  |
-| :------------- | :----------------------------------------------------------- |
-| error       | Triggered when there is an uncaught error. |
-| bye           | Triggered when the session ends.                                |
-| initialSuccess          | Digital human initialization successful. You can call the `start` method in the callback of this event |
-| show         | Digital human has been displayed. |
-| progress         | Digital human loading progress. |
-| speakSection         | Current audio and text segment of the digital human speaking (the answer method will get results in streaming mode, if calling speak separately, this event is consistent with speakStart) |
-| speakStart         | There is a slight delay between driving the digital human to speak and the actual speaking, this event indicates that the digital human has actually started speaking |
-| speakEnd         | Digital human has finished speaking |
-| asrStart | Single sentence speech recognition started |
-| asrData | Single sentence real-time speech recognition results |
-| asrStop | Single sentence speech recognition ended |
-| report | Reports RTC network/picture quality and other information every second |
+## Overview
 
-### error
+The Duix SDK emits various **events** throughout the session lifecycle.  
+Developers can listen to these events using the `duix.on(eventName, callback)` method  
+to handle errors, progress updates, speech synchronization, and RTC quality monitoring.
 
+---
+
+## Event Summary
+
+| Event Name | Description |
+|-------------|--------------|
+| **error** | Uncaught error occurred |
+| **bye** | Session ended |
+| **initialSuccess** | Initialization successful — safe to call `start()` |
+| **show** | Digital human is displayed |
+| **progress** | Loading progress (0–100) |
+| **speakSection** | Current incremental audio/text segment while speaking |
+| **speakStart** | Speech playback started |
+| **speakEnd** | Speech playback ended |
+| **asrStart** | Single-sentence ASR started |
+| **asrData** | Single-sentence ASR interim result |
+| **asrStop** | Single-sentence ASR ended |
+| **report** | Periodic RTC/network/video quality report |
+
+---
+
+## Event Details
+
+### 1. `error`
+
+Triggered when an unexpected error occurs.
+
+**Payload**
 ```javascript
 {
-  code: '', // error code 
-  message: '', // error message 
-  data: {} // error data
+  code: "",      // Error code
+  message: "",   // Error message
+  data: {}       // Additional error data
 }
 
 ```
 
-***error code***
+***Error codes***
 
 
 | Name           | Description   | data |
 | :------------- | :----------| :---------- |
-| 3001 | RIC connection failed| |
+| 3001 | RTC connection failed| |
 | 4001 | Failed to start session | |
 | 4005 | Authentication failed | |
 | 4007 | Server session abnormally ended | code: 100305 Model file not found|
 | 4008 | Failed to get microphone stream | |
-| 4009 | Browser cannot autoplay based on playback policy | Please consider muted playback or user operation to call the start method|
+| 4009 | Browser blocked autoplay | Start muted or require user action; then unmute/resume |
 
 ### progress 
 
-Progress of type number, 0-100
+Indicates the current loading progress of the digital human and its resources.
+Returns a numeric value between 0 and 100.
+
+Payload: number
+
+Example
+```js
+duix.on('progress', (value) => {
+  console.log(`Loading progress: ${value}%`);
+});
+```
 
 ### speakSection 
+Emitted for each incremental speech segment — typically used for real-time subtitles or streaming speech visualization.
+When answer() is used, this event streams continuously; for speak(), it aligns with speakStart.
 
-```javascript
-
+Payload
+```js
 {
-  audio: '', // audio src
-  content: '', // audio content
+  "audio": "string",   // Audio stream URL
+  "content": "string"  // Partial text content currently being spoken
 }
+```
 
+Example
+```js
+duix.on('speakSection', (data) => {
+  console.log('Current segment:', data.content);
+});
 ```
 
 ### speakStart 
+Triggered when the avatar begins speech playback.
 
-```javascript
-
+Payload
+```js
 {
-  audio: '',
-  content: '',
+  "audio": "string",   // Audio stream URL
+  "content": "string"  // Text content being spoken
 }
+```
 
+Example
+```js
+duix.on('speakStart', (data) => {
+  console.log('Speech started:', data.content);
+});
 ```
 
 ### speakEnd 
+Triggered when the avatar completes speech playback.
+Useful for synchronizing UI transitions or logic after speech completion.
 
-```javascript
-
+Payload
+```js
 {
-  audio: '',
-  content: '',
+  "audio": "string",
+  "content": "string"
 }
+```
 
+Example
+```js
+duix.on('speakEnd', () => {
+  console.log('Speech ended.');
+});
 ```
 
 ### asrData
-The recognition of each text segment starts with an asrStart and ends with an asrStop, with one or more asrData (incremental push) in between. You can get speech recognition results in the asrData event for display.
-```javascript
+Triggered during active speech recognition (ASR).
+Each ASR cycle starts with asrStart and ends with asrStop.
+Use this event to display incremental transcription results.
 
+Payload
+```js
 {
-  content: '',
+  "content": "string" // Recognized text fragment
 }
+```
 
+Example
+```js
+duix.on('asrData', (data) => {
+  console.log('Recognized:', data.content);
+});
 ```
 
 ### report 
+Delivers a detailed periodic (once per second) network and video quality report.
+This event helps developers monitor RTC connection quality and performance metrics in real time.
 
-```javascript
+Payload
+```js
 {
-    "video": { // Video related information
-        "download": {
-            "frameWidth": 1920, // width
-            "frameHeight": 1080,// height
-            "framesPerSecond": 24,// frame rate
-            "packetsLost": 0, // Total number of lost packets
-            "packetsLostPerSecond": 0 // Total loss rate
-        }
-    },
-    "connection": { // connection information
-        "bytesSent": 206482, // Total number of bytes sent
-        "bytesReceived": 79179770, // Total bytes received
-        "currentRoundTripTime": 3, // Packet round trip time (milliseconds), the larger the time, the more delayed the screen
-        "timestamp": 1688043940523,
-        "receivedBitsPerSecond": 2978472, // Receive bit rate (number of bits received per second, 1Mb = 1024^2 bits)
-        "sentBitsPerSecond": 7920 // Send bit rate (number of bits sent per second, 1Mb = 1024^2 bits)
+  "video": {
+    "download": {
+      "frameWidth": 1920,          // Video width
+      "frameHeight": 1080,         // Video height
+      "framesPerSecond": 24,       // Frame rate
+      "packetsLost": 0,            // Total lost packets
+      "packetsLostPerSecond": 0    // Packet loss rate per second
     }
+  },
+  "connection": {
+    "bytesSent": 206482,           // Total bytes sent
+    "bytesReceived": 79179770,     // Total bytes received
+    "currentRoundTripTime": 3,     // Round-trip latency (ms)
+    "timestamp": 1688043940523,    // UNIX timestamp
+    "receivedBitsPerSecond": 2978472, // Download bitrate (bits/s)
+    "sentBitsPerSecond": 7920         // Upload bitrate (bits/s)
+  }
 }
 ```
-**Note:** Event parameters not listed in detail above are empty
+Example
+```js
+duix.on('report', (stats) => {
+  console.log('Network report:', stats.connection);
+});
+```
+
+**Note:** Event payloads not explicitly documented above will return empty objects. Register all event listeners before invoking `duix.start()`.

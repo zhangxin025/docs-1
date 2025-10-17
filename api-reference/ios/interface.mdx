@@ -1,152 +1,163 @@
 ---
 title: 'Key Interfaces'
-description: ''
+description: 'Core Objective-C interfaces and delegate callbacks provided by the Duix iOS SDK.'
 ---
+
+## Overview
+
+This section lists the **primary interfaces** and **delegate callbacks**  
+used to integrate and control the **Duix iOS SDK**.  
+These APIs cover initialization, session control, speech interaction,  
+and real-time audio-video event handling.
+
+---
+
+## SDK Core Interfaces
 
 ```objective-c
 /**
  * SDK initialization
  *
- * - Parameters:
- *   - appId: App ID
- *   - appKey: App key
- *   - conversationId: Session ID
- *   - block: Callback
+ * @param appId          Application ID
+ * @param appKey         Application key
+ * @param conversationId Session ID
+ * @param block          Initialization callback
  */
-- (void)initWithAppId:(NSString *)appId appKey:(NSString *)appKey conversationId:(NSString *)conversationId block:(void (^)(BOOL isSuccee, NSString *errorMsg))block;
+- (void)initWithAppId:(NSString *)appId
+               appKey:(NSString *)appKey
+        conversationId:(NSString *)conversationId
+                block:(void (^)(BOOL isSuccee, NSString *errorMsg))block;
 
 /**
- * Start communication
+ * Start session
  */
 - (void)toStart;
 
 /**
- * End communication
+ * End session
  */
 - (void)toStop;
 
 /**
- * Text-driven digital human
+ * Speak with text
  *
- * - Parameters:
- *   - text: Text content
- *   - interrupt: Whether to interrupt the previous speech
+ * @param text      Text content
+ * @param interrupt Whether to interrupt the previous speech
  */
 - (void)commandEventWithText:(NSString *)text interrupt:(BOOL)interrupt;
 
 /**
- * Audio-driven digital human
+ * Speak with audio URL
  *
- * - Parameters:
- *   - audioUrl: Audio URL
- *   - interrupt: Whether to interrupt the previous speech
+ * @param audioUrl  Audio URL
+ * @param interrupt Whether to interrupt the previous speech
  */
 - (void)commandEventWithAudioUrl:(NSString *)audioUrl interrupt:(BOOL)interrupt;
 
 /**
- * Text question and answer
+ * Ask a question (text)
  *
- * - Parameters:
- *   - text: Text content
- *   - interrupt: Whether to interrupt the previous speech
+ * @param text      Text content
+ * @param interrupt Whether to interrupt the previous speech
  */
 - (void)commandAskWithText:(NSString *)text interrupt:(BOOL)interrupt;
 
 /**
- * Interrupt digital human broadcasting
+ * Interrupt current speech
  */
 - (void)toBreakDigital;
 
 /**
- * Microphone sound pickup
+ * Microphone capture control
  *
- * - Parameter isEnabled: YES indicates sound pickup, NO indicates mute
+ * @param isEnabled YES to enable microphone pickup, NO to mute
  */
 - (void)setMute:(BOOL)isEnabled;
 
 /**
- * Mute digital human
+ * Mute or unmute digital human audio
  *
- * - Parameter enable: YES indicates mute, NO indicates sound pickup
+ * @param enable YES to mute, NO to unmute
  */
 - (void)toSpeakerMute:(BOOL)enable;
 
+
 ```
-SDK Delegate
+SDK Delegate: DigitalViewDelegate
+The delegate provides callbacks for SDK events such as loading progress,
+speech recognition, playback status, and WebRTC connection changes.
+
 ```objective-c
 @protocol DigitalViewDelegate <NSObject>
 
 /**
  * Load digital human resources
  *
- * - Parameters:
- *   - isSuccess: Whether the loading was successful
- *   - progress: Loading progress
+ * @param isSuccess Whether loading succeeded
+ * @param progress  Loading progress
  */
 - (void)onVideoShow:(BOOL)isSuccess progress:(float)progress;
 
 /**
- * Exception callback
+ * Error callback
  *
- * - Parameters:
- *   - errorCode: Error code
- *   - errorMsg: Error message
+ * @param errorCode Error code
+ * @param errorMsg  Error message
  */
 - (void)onError:(NSInteger)errorCode errorMsg:(NSString *)errorMsg;
 
 @optional
 
 /**
- * ASR (Automatic Speech Recognition) start recognition
+ * ASR start
  */
 - (void)toWebrtcAsrStart;
 
 /**
- * ASR recognition
+ * ASR result
  *
- * - Parameters:
- *   - asrText: Recognized text
- *   - isFinish: Whether it has finished
+ * @param asrText  Recognized text
+ * @param isFinish Whether recognition has finished
  */
 - (void)toWebrtcAsrText:(NSString *)asrText isFinish:(BOOL)isFinish;
 
 /**
- * Start speaking
+ * Speak start
  *
- * - Parameter dict: Dictionary information for starting to speak
+ * @param dict Dictionary containing speech start info
  */
 - (void)toSpeakStart:(NSDictionary *)dict;
 
 /**
- * Speak Text
+ * Speak text
  *
- * - Parameter dict: Dictionary information for speak text
+ * @param dict Dictionary containing speech text info
  */
 - (void)toSpeakText:(NSDictionary *)dict;
 
 /**
- * Stop speaking
+ * Speak stop
  *
- * - Parameter dict: Dictionary information for stopping to speak
+ * @param dict Dictionary containing speech stop info
  */
 - (void)toSpeakStop:(NSDictionary *)dict;
 
 /**
- * Audio version start speaking
+ * TTS speak start
  *
- * - Parameter dict: Dictionary information for starting to speak
+ * @param dict Dictionary containing TTS start info
  */
 - (void)toTTSSpeakStart:(NSDictionary *)dict;
 
 /**
- * Audio version stop speaking
+ * TTS speak stop
  *
- * - Parameter dict: Dictionary information for stopping to speak
+ * @param dict Dictionary containing TTS stop info
  */
 - (void)toTTSSpeakStop:(NSDictionary *)dict;
 
 /**
- * Central control ends the call and sends a bye event
+ * Controller ends the call and sends a bye event
  */
 - (void)onByeBye;
 
@@ -156,44 +167,40 @@ SDK Delegate
 - (void)onRTCReomteSuccess;
 
 /**
- * Whether audio loading was successful
+ * Audio load result
  *
- * - Parameter isSuccess: Whether it was successful
+ * @param isSuccess Whether loading succeeded
  */
 - (void)onAudioShow:(BOOL)isSuccess;
 
 /**
- * WebRTC connection status callback
+ * WebRTC connection state changed
  *
- * - Parameter state: RTCIceConnectionState
+ * @param state RTCIceConnectionState
  */
 - (void)didIceConnectionChange:(RTCIceConnectionState)state;
 
 /**
- * Central control notifies the client after obtaining rendering endpoint information
+ * Rendering endpoint information retrieved
  *
- * - Parameters:
- *   - ID: id
- *   - name: name
+ * @param ID   Identifier
+ * @param name Name
  */
 - (void)onRender:(NSString *)ID name:(NSString *)name;
 
 /**
- * Get the local video's video stream
+ * Local video stream capture
  *
- * - Parameters:
- *   - capturer: Capturer
- *   - frame: Video frame
+ * @param capturer Video capturer
+ * @param frame    Captured frame
  */
 - (void)capturer:(RTCVideoCapturer *)capturer didCaptureVideoFrame:(RTCVideoFrame *)frame;
 
 /**
- * Get remote audio stream
+ * Remote audio stream buffer
  *
- * - Parameter sampleBuffer: Buffer
+ * @param sampleBuffer Audio buffer reference
  */
 - (void)onRemoteAudioBuffer:(CMSampleBufferRef)sampleBuffer;
 
-
 @end
-```
