@@ -28,9 +28,9 @@ duix.init({
 | Name| Type |Required | Description | 
 | :-----------------| :-------------- | :------ | :----------------------------------------------------------- |
 | containerLable   | string   |  Yes |  Container selector. The digital human will be rendered in this DOM. |
-| sign | string   |   Yes    |  Authentication signature. [How to get `sign`](../api/openAPI) |
+| sign | string   |   Yes    |  Authentication signature. [How to get sign?](../api/openAPI) |
 | conversationId| string | Yes | Platform conversation ID |
-| platform| string | Yes | Platform domain, e.g., `duix.com` |
+| platform| string | Yes | Platform domain, use duix.com |
 
 #### start(options: object): Promise
 
@@ -128,7 +128,7 @@ duix.getAnswer({ question: 'what is your name?' })
 Start recording.
 ```js
 await duix.startRecord();
-
+```
 
 #### stopRecord(): Promise
 
@@ -136,21 +136,21 @@ Stops recording and returns a Promise resolving with the speech recognition resu
 ```js
 const result = await duix.stopRecord();
 console.log('Recognized text:', result);
-
+```
 #### openAsr(): Promise
 
 Enables real-time automatic speech recognition (ASR).
 Should be called after the show event.
 ```js
 duix.openAsr();
-
+```
 
 #### closeAsr(): Promise
 
 Disables real-time speech recognition.
 ```js
 duix.closeAsr();
-
+```
 #### stop()
 
 Terminates the current session and releases all resources.
