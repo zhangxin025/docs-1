@@ -161,20 +161,20 @@ window.addEventListener('beforeunload', () => {
   if (duix) duix.stop();
 });
 
-````
+```
 
 #### getLocalStream()
 
 Returns the local audio stream (useful for visualizations or waveform analysis).
 ```js
 const stream = duix.getLocalStream();
-
+```
 #### getRemoteStream()
 
 Returns the remote audio and video stream (for custom rendering or media processing).
 ```js
 const remote = duix.getRemoteStream();
-
+```
 #### resume()
 
 Resumes playback.
@@ -182,7 +182,7 @@ Useful for mobile browsers that may block autoplay even after user interaction.
 Call this in response to error code 4009.
 ```js
 duix.resume();
-
+```
 #### on(eventName, callback)
 
 Registers an event listener for SDK events.
@@ -190,7 +190,7 @@ Registers an event listener for SDK events.
 duix.on('speakStart', (data) => {
   console.log('Speech started:', data.content);
 });
-
+```
 ##### Parameters
 | Name| Type | Description |
 | :-----------------| :-------------- | :----------------------------------------------------------- |
