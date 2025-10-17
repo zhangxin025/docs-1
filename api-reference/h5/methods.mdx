@@ -1,16 +1,26 @@
 ---
 title: 'Methods'
-description: ''
+description: 'Full list of available methods in the Duix H5 SDK, including initialization, playback control, speech interaction, ASR, and session management.'
 ---
 
-#### init(options: object): Promise
-> ```js
-> duix.init({
->   sign: '',
->   containerLable: '.remote-container',   
->   conversationId: '',
->   platform: 'duix.com'
-> })
+## Overview
+
+The Duix SDK exposes a set of core methods for initializing, controlling, and interacting with the real-time digital human.  
+All asynchronous methods return a **Promise** resolving to `{ err, data }`.
+
+---
+
+### `init(options: object): Promise`
+
+Initializes the SDK with configuration parameters and prepares the rendering environment.
+
+```js
+duix.init({
+  sign: '',
+  containerLable: '.remote-container',
+  conversationId: '',
+  platform: 'duix.com'
+});
 > ```
 
 ***Parameters***
@@ -24,18 +34,19 @@ description: ''
 
 #### start(options: object): Promise
 
-Calling the `start` method will begin rendering the digital human and initiate interaction.
-> **Note:** Call this after the `initialSuccess` event (all resources ready):
+Begins rendering the digital human and starts the real-time interaction.
+> **Note:** Always call start() after the initialSuccess event to ensure all resources are ready.:
 >
 > ```js
 > duix.on('initialSuccess', () => {
->   duix.start({
->      muted: true,
->      wipeGreen: false,
->  }).then(res => {
->     console.log('res', res)
->  })
-> })
+  duix.start({
+    muted: true,
+    wipeGreen: false,
+  }).then(res => {
+    console.log('Session started:', res);
+  });
+});
+
 > ```
 
 ***Parameters***
@@ -52,15 +63,16 @@ Calling the `start` method will begin rendering the digital human and initiate i
 
 #### setVideoMuted(flag: boolean)
 
-Mute/unmute the digital human video. `true` = muted, `false` = unmuted.
+Toggles video playback mute state.
+true = muted, false = unmuted.
 
 #### break()
 
-Interrupt current speech.
+Immediately interrupts the current speech or response playback.
 
 #### speak(options: object): Promise
 
-Drive speech with text or an audio URL.
+Drives the digital human to speak using text or an audio URL.
 
 ```javascript
 duix.speak({content: '', audio: 'https://your.website.com/xxx/x.wav'})
@@ -71,12 +83,12 @@ duix.speak({content: '', audio: 'https://your.website.com/xxx/x.wav'})
 | Name| Type |Required | Description |
 | :-----------------| :-------------- | :------ | :----------------------------------------------------------- |
 | content   | string   |  Yes |  Text to speak |
-| audio | string   |   No    |  Audio URL to speak (you can obtain a platform-configured answer via `getAnswer`) |
-| interrupt | boolean   |   No    |  Interrupt previous speech |
+| audio | string   |   No    |  Audio URL to play. Can also use getAnswer() to obtain platform-configured responses. |
+| interrupt | boolean   |   No    |  If true, interrupts any ongoing speech before playback.|
 
 #### answer(options: object): Promise
 
-Answer a question.
+Asks a question and drives the digital human to respond with speech.
 
 ```javascript
 duix.answer({question: 'xxx'})
@@ -87,11 +99,11 @@ duix.answer({question: 'xxx'})
 | Name| Type |Required | Description |
 | :-----------------| :-------------- | :------ | :----------------------------------------------------------- |
 | question   | string   |  Yes |  Question text |
-| interrupt | boolean   |   No    |  Interrupt previous speech |
+| interrupt | boolean   |   No    |  If true, interrupts previous speech before answering. |
 
 #### getAnswer(options: object): Promise
 
-Fetch a platform-generated answer to a question.
+Fetches a platform-generated response to a question without directly playing it.
 
 ```javascript
 duix.getAnswer({ question: 'what is your name?' })
@@ -115,56 +127,84 @@ duix.getAnswer({ question: 'what is your name?' })
 #### startRecord(): Promise
 
 Start recording.
+```js
+await duix.startRecord();
+
 
 #### stopRecord(): Promise
 
-Stop recording. Returns a Promise that resolves with the speech recognition result (text).
+Stops recording and returns a Promise resolving with the speech recognition result.
+```js
+const result = await duix.stopRecord();
+console.log('Recognized text:', result);
 
 #### openAsr(): Promise
 
-Enable real-time speech recognition (call after the `show` event). Listen to the `asrResult` event for recognition results.
+Enables real-time automatic speech recognition (ASR).
+Should be called after the show event.
+```js
+duix.openAsr();
+
 
 #### closeAsr(): Promise
 
-Disable real-time speech recognition.
+Disables real-time speech recognition.
+```js
+duix.closeAsr();
 
 #### stop()
 
-Stop the current session. Call this on page unload to ensure resources are released when the page refreshes or closes.
+Terminates the current session and releases all resources.
+Call this during page unload or refresh to avoid lingering RTC connections.
 
 ```js
-window.addEventListener('beforeunload', function(event) {
-  if (duix) {
-    duix.stop()
-  }
+window.addEventListener('beforeunload', () => {
+  if (duix) duix.stop();
 });
+
 ````
 
 #### getLocalStream()
 
-Get the local audio stream (for visualization, etc.).
+Returns the local audio stream (useful for visualizations or waveform analysis).
+```js
+const stream = duix.getLocalStream();
 
 #### getRemoteStream()
 
-Get the remote audio and video stream (for custom rendering).
+Returns the remote audio and video stream (for custom rendering or media processing).
+```js
+const remote = duix.getRemoteStream();
 
 #### resume()
 
-Resume playback. For some mobile browsers that still fail to autoplay even after user interaction, call this in response to error `4009`.
+Resumes playback.
+Useful for mobile browsers that may block autoplay even after user interaction.
+Call this in response to error code 4009.
+```js
+duix.resume();
 
 #### on(eventName, callback)
 
-Listen for events.
+Registers an event listener for SDK events.
+```js
+duix.on('speakStart', (data) => {
+  console.log('Speech started:', data.content);
+});
 
 ##### Parameters
+| Name| Type | Description |
+| :-----------------| :-------------- | :----------------------------------------------------------- |
+| answereventName   | string   | Name of the event to listen for. See the table below.|  
+| callback | function   | Callback function invoked with event data. |
 
-###### eventName
-
-Event name. See the table below.
-
-###### callback
-
-Callback function.
 
 ## Return format
-For Promise-returning methods, results resolve to `{ err, data }`. If `err` is present, the call failed.
+All Promise-based methods resolve to a unified object format:
+```json
+{
+  "err": null,
+  "data": {}
+}
+If err is non-null, the call failed.
+Use console.error(err) for diagnostic details.

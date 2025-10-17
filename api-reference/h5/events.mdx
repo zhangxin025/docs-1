@@ -1,30 +1,47 @@
 ---
 title: 'Events'
-description: ''
+description: 'List of all Duix SDK events and their corresponding payload structures.'
 ---
 
-| Name           | Description |
-| :------------- | :---------- |
-| error       | Uncaught error occurred |
-| bye           | Session ended |
-| initialSuccess          | Initialization successful. Safe to call `start` |
-| show         | Digital human is displayed |
-| progress         | Loading progress (0–100) |
-| speakSection         | Current audio/text segment while speaking. With `answer`, events stream incrementally; with `speak`, this aligns with `speakStart` |
-| speakStart         | Actual speech started |
-| speakEnd         | Speech ended |
-| asrStart | Single-sentence ASR started |
-| asrData | Single-sentence ASR interim results |
-| asrStop | Single-sentence ASR ended |
-| report | Periodic RTC/network/video quality report |
+## Overview
 
-### error
+The Duix SDK emits various **events** throughout the session lifecycle.  
+Developers can listen to these events using the `duix.on(eventName, callback)` method  
+to handle errors, progress updates, speech synchronization, and RTC quality monitoring.
 
+---
+
+## Event Summary
+
+| Event Name | Description |
+|-------------|--------------|
+| **error** | Uncaught error occurred |
+| **bye** | Session ended |
+| **initialSuccess** | Initialization successful — safe to call `start()` |
+| **show** | Digital human is displayed |
+| **progress** | Loading progress (0–100) |
+| **speakSection** | Current incremental audio/text segment while speaking |
+| **speakStart** | Speech playback started |
+| **speakEnd** | Speech playback ended |
+| **asrStart** | Single-sentence ASR started |
+| **asrData** | Single-sentence ASR interim result |
+| **asrStop** | Single-sentence ASR ended |
+| **report** | Periodic RTC/network/video quality report |
+
+---
+
+## Event Details
+
+### 1. `error`
+
+Triggered when an unexpected error occurs.
+
+**Payload**
 ```javascript
 {
-  code: '', // error code 
-  message: '', // error message 
-  data: {} // error data
+  code: "",      // Error code
+  message: "",   // Error message
+  data: {}       // Additional error data
 }
 
 ```
@@ -43,72 +60,123 @@ description: ''
 
 ### progress 
 
-Number from 0 to 100
+Indicates the current loading progress of the digital human and its resources.
+Returns a numeric value between 0 and 100.
 
-### speakSection 
-
-```javascript
+Payload
 
 {
-  audio: '', // audio src
-  content: '', // audio content
+  "value": 0 // number, percentage (0–100)
 }
+
+Example
+duix.on('progress', (value) => {
+  console.log(`Loading progress: ${value}%`);
+});
+
+### speakSection 
+Emitted for each incremental speech segment — typically used for real-time subtitles or streaming speech visualization.
+When answer() is used, this event streams continuously; for speak(), it aligns with speakStart.
+
+Payload
+{
+  "audio": "string",   // Audio stream URL
+  "content": "string"  // Partial text content currently being spoken
+}
+
+Example
+duix.on('speakSection', (data) => {
+  console.log('Current segment:', data.content);
+});
+
+
 
 ```
 
 ### speakStart 
+Triggered when the avatar begins speech playback.
 
-```javascript
-
+Payload
 {
-  audio: '',
-  content: '',
+  "audio": "string",   // Audio stream URL
+  "content": "string"  // Text content being spoken
 }
+
+Example
+duix.on('speakStart', (data) => {
+  console.log('Speech started:', data.content);
+});
+
+
 
 ```
 
 ### speakEnd 
+Triggered when the avatar completes speech playback.
+Useful for synchronizing UI transitions or logic after speech completion.
 
-```javascript
-
+Payload
 {
-  audio: '',
-  content: '',
+  "audio": "string",
+  "content": "string"
 }
+
+Example
+duix.on('speakEnd', () => {
+  console.log('Speech ended.');
+});
+
 
 ```
 
 ### asrData
-Each recognition segment starts with `asrStart` and ends with `asrStop`, with one or more `asrData` events in between. Use `asrData` for incremental display.
-```javascript
+Triggered during active speech recognition (ASR).
+Each ASR cycle starts with asrStart and ends with asrStop.
+Use this event to display incremental transcription results.
 
+Payload
 {
-  content: '',
+  "content": "string" // Recognized text fragment
 }
+
+Example
+duix.on('asrData', (data) => {
+  console.log('Recognized:', data.content);
+});
+
 
 ```
 
 ### report 
+Delivers a detailed periodic (once per second) network and video quality report.
+This event helps developers monitor RTC connection quality and performance metrics in real time.
 
-```javascript
+Payload
+
 {
-    "video": { // Video related information
-        "download": {
-            "frameWidth": 1920, // width
-            "frameHeight": 1080,// height
-            "framesPerSecond": 24,// frame rate
-            "packetsLost": 0, // Total number of lost packets
-            "packetsLostPerSecond": 0 // Total loss rate
-        }
-    },
-    "connection": { // connection information
-        "bytesSent": 206482, // Total number of bytes sent
-        "bytesReceived": 79179770, // Total bytes received
-        "currentRoundTripTime": 3, // Packet round trip time (milliseconds), the larger the time, the more delayed the screen
-        "timestamp": 1688043940523,
-        "receivedBitsPerSecond": 2978472, // Receive bit rate (number of bits received per second, 1Mb = 1024^2 bits)
-        "sentBitsPerSecond": 7920 // Send bit rate (number of bits sent per second, 1Mb = 1024^2 bits)
+  "video": {
+    "download": {
+      "frameWidth": 1920,          // Video width
+      "frameHeight": 1080,         // Video height
+      "framesPerSecond": 24,       // Frame rate
+      "packetsLost": 0,            // Total lost packets
+      "packetsLostPerSecond": 0    // Packet loss rate per second
     }
+  },
+  "connection": {
+    "bytesSent": 206482,           // Total bytes sent
+    "bytesReceived": 79179770,     // Total bytes received
+    "currentRoundTripTime": 3,     // Round-trip latency (ms)
+    "timestamp": 1688043940523,    // UNIX timestamp
+    "receivedBitsPerSecond": 2978472, // Download bitrate (bits/s)
+    "sentBitsPerSecond": 7920         // Upload bitrate (bits/s)
+  }
 }
+Example
+duix.on('report', (stats) => {
+  console.log('Network report:', stats.connection);
+});
+
 ```
-**Note:** Event parameters not listed above are empty.
+**Note:Event payloads not explicitly documented above will return empty objects.
+To ensure reliable capture, register all event listeners before invoking duix.start().

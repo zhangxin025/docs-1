@@ -1,45 +1,61 @@
 ---
 title: "Get Token"
-description: "The access token is the service authentication credential for calling Duix interactive services. All HTTP call interfaces need to place the Token in the Header."
+description: "The access token authenticates API requests to Duix interactive services. Include the token in the HTTP header for all API calls."
 ---
 
-### How to get a token
+# Get Token
 
-Use the steps below to generate an access token.
+## Overview
+
+The **access token** serves as the authentication credential for all Duix interactive service APIs.  
+Each HTTP request must include the token in the **Authorization Header**.
+
+---
+
+## How to Generate an Access Token
 
 ### Prerequisites
 
-You have the `appKey` and `appId` from your API keys.
+Before generating a token, ensure you have the following:
 
-1. Generate a signature using `appKey` and `appId`.
-2. Pass the signature to the H5 SDK `init` method.
+- **appId** — The unique identifier of your application.  
+- **appKey** — The secret key associated with your application.
 
-### Signature generation
+---
 
-The signature uses JWT. Use the following example to implement signature generation.
+### Steps to Generate a Token
+
+1. Generate a **JWT signature** using your `appId` and `appKey`.  
+2. Pass the generated signature to the H5 SDK `init` method.
+
+---
+
+## Signature Generation
+
+The signature is implemented using **JWT (JSON Web Token)**.  
+Use the following parameters and example code to generate a valid signature.
 
 ### Parameters
 
-Prepare the following parameters for signature generation:
+| Name   | Type    | Description                                          | Example |
+|--------|---------|------------------------------------------------------|----------|
+| appId  | string  | Application identifier obtained after registration   | `xxxxxxx` |
+| appKey | string  | Application secret key obtained after registration   | `xxxxxxx` |
+| sigExp | integer | Signature validity period (in seconds)               | `1800`   |
 
-| Name   | Type    | Description                                                    | Example |
-| ------ | ------- | -------------------------------------------------------------- | ------- |
-| appId  | string  | Session identifier, obtained after successful session creation | xxxxxxx |
-| appKey | string  | Session key, obtained after successful session creation        | xxxxxxx |
-| sigExp | Integer | Signature validity time, in seconds                            | 1800    |
+---
 
-### Example code (Java)
+## Example: Java Implementation
 
-Sample signature generation in Java:
+### Add Maven Dependency
 
 ```xml
-Add Maven dependency
-
 <dependency>
     <groupId>com.auth0</groupId>
     <artifactId>java-jwt</artifactId>
     <version>3.8.3</version>
 </dependency>
+
 ```
 
 ```java
@@ -50,32 +66,33 @@ import java.util.Date;
 
 public class SigUtils {
     /**
-     * Create Signature
+     * Create JWT Signature
      *
-     * @param appId  Session Identifier
-     * @param appKey Session Key
-     * @param sigExp Signature validity time: in seconds
-     * @return
+     * @param appId  Application ID
+     * @param appKey Application Secret Key
+     * @param sigExp Signature validity duration (seconds)
+     * @return JWT signature string
      */
     public static String createSig(String appId, String appKey, int sigExp) {
         Calendar nowTime = Calendar.getInstance();
         nowTime.add(Calendar.SECOND, sigExp);
         Date expiresDate = nowTime.getTime();
+
         return JWT.create()
-                //Release date
+                // Issued time
                 .withIssuedAt(new Date())
-                //effective time
+                // Expiration time
                 .withExpiresAt(expiresDate)
-                //load
+                // Payload data
                 .withClaim("appId", appId)
-                //encryption
+                // Sign using HMAC256 with appKey
                 .sign(Algorithm.HMAC256(appKey));
     }
 }
-```
+
 
 Note: This token is the H5 SDK signature value (`sign`).
 
 ### Integration
 
-With your AppID, secret key, and token, follow the SDK and API guides to integrate Duix into your application.
+Once you have your appId, appKey, and generated token, follow the SDK and API guides to connect Duix to your application.

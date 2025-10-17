@@ -3,57 +3,57 @@ title: 'Open API'
 description: 'Management Interfaces'
 ---
 
-# OpenAPI integration
+# OpenAPI Integration
 
-Base URL: `https://app.duix.ai/`
+**Base URL:** `https://app.duix.ai/`
 
-## Prerequisites
-### Construct signature to get token
+---
 
-When integrating with the duix-openapi-v2 platform, generate tokens in your own backend. Refer to the token guide:
+## 1. Prerequisites
 
-[How to get token](./getToken)
+### Generate Signature and Obtain Token
 
-## Management Interfaces
+When integrating with the **duix-openapi-v2** platform, you must generate access tokens in your own backend.  
+Refer to the token guide for implementation details:  
+[How to Get Token](./getToken)
 
-Management endpoints require a token in the request header.
+---
 
+## 2. Management Interfaces
 
-### Interaction Process
+All management endpoints require a valid **token** in the HTTP request header.
 
-<img src="../assets/img.png" alt="image.png"/>
+### Interaction Flow
 
-### Get app real-time concurrency
+<img src="../assets/img.png" alt="Interaction Flow"/>
 
-##### Endpoint
+---
 
-/duix-openapi-v2/sdk/v2/getconcurrentNumber
+### 2.1 Get App Real-Time Concurrency
 
-##### Request Method: `GET`
+**Endpoint:** `/duix-openapi-v2/sdk/v2/getconcurrentNumber`  
+**Method:** `GET`  
+**Description:** Retrieve the real-time concurrency status of an application.
 
-**Description**
+#### Parameters
 
-Query real-time concurrency for an app.
+| Name | Type | Location | Description |
+|------|------|-----------|-------------|
+| appId | String | Query | Application ID created on the Duix platform |
 
-##### Parameters
+#### Response
 
-| Parameter Name | Type   | Pass Method | Parameter Description |
-| -------- | ------ | -------- | ----------------- |
-| appId    | String | Query    | APPID created from the platform |
+| Name | Type | Description |
+|------|------|-------------|
+| code | String | Response code |
+| data | ConcurrentStatus | Concurrency details |
+| cropId | String | Corporate ID |
+| totalConcurrentNumber | integer | Total concurrent sessions |
+| userConcurrentNumber | integer | User-specific concurrent sessions |
+| message | String | Response message |
+| success | boolean | Request status |
 
-**Response**
-
-| Parameter Name | Type |
-| -------- | ----- |
-|code|String|
-|data|ConcurrentStatus|
-|cropId|String|
-|totalConcurrentNumber|integer(int32)|
-|userConcurrentNumber|integer(int32)|
-|message|String|
-|success|boolean|
-
-**Example**
+#### Example Response
 
 ```json
 {
@@ -66,6 +66,7 @@ Query real-time concurrency for an app.
   "message": "",
   "success": true
 }
+
 ```
 
 ### Get app real-time sessions
@@ -78,13 +79,13 @@ Query real-time concurrency for an app.
 
 **Description**
 
-List active (in-call) sessions for an app.
+Retrieve a list of all active (in-call) sessions for an app.
 
 ##### Parameters
 
 | Parameter Name | Type   | Pass Method | Parameter Description |
 | -------- | ------ | -------- | ----------------- |
-| appId    | String | Query    | APPID created from the platform |
+| appId    | String | Query    | APPID created on the Duix platform |
 
 ### Close all sessions for an app
 
@@ -96,15 +97,15 @@ List active (in-call) sessions for an app.
 
 **Description**
 
-Close all sessions for an app.
+Terminate all active sessions for a specific app.
 
 ##### Parameters
 
 | Parameter Name | Type   | Pass Method | Parameter Description |
 | -------- | ------ | -------- | ----------------- |
-| appId    | String | Query    | APPID created from the platform |
+| appId    | String | Query    | APPID created on the Duix platform |
 
-##### Example
+##### Example Response
 
 ```json
 {
@@ -125,64 +126,72 @@ Close all sessions for an app.
 ##### Parameters
 | Parameter Name | Type | Pass Method | Parameter Description |
 | -------- | -------- | ----- | -------- |
-|uuid|String|Query|sessionId field returned by the `start-complete` event|
+|uuid|String|Query|sessionId returned in the start-complete event|
 
 
-### Third‑party dialog integration (non‑streaming)
+### Third-Party Dialog Integration (Non-Streaming)
 
-Other session platforms can be integrated as follows. Through your digital human, the Duix platform will POST to your defined remote URL to obtain answers.
+Integrate your own dialog system with Duix using a **webhook-based POST** approach.  
+The Duix platform will send user questions to your defined remote URL and expect a structured **JSON response**.
 
-<img src="../assets/_tmp_dingtalkgov_qt_clipbord_pic_5.png" alt="image.png"/>
+<img src="../assets/_tmp_dingtalkgov_qt_clipbord_pic_5.png" alt="Integration diagram"/>
 
-Example: Refer to this open-source demo for a simple dialog integration.
+> **Example:**  
+> Refer to the open-source demo for a simple integration reference.
 
-Request: The Duix platform will send question requests (the user’s question) via POST to your remote URL in the format below.
+---
 
-##### Parameters
+#### Request
+
+The Duix platform sends each **user question** as a `POST` request to your remote endpoint using the format below.
+
+##### Request Parameters
+
 | Field | Type | Description | Required |
-| -------- | ------ | ----- | -------- |
-|sid|String|Your user ID, generated when creating a user. Can be viewed in account information.|Y
-|dh-code|String|Digital human code, generated when each digital human is created, can be viewed in the digital human overview.|Y
-|dh-question|String|The content of the question you need to ask the digital human|Y
-|dh-conversation-id|String|Conversation ID, a unique identifier for the conversation|Y
-|dh-context|String|Context information generated during the conversation, this information is a stringified JSON format data.|N
-|dh-context.q.context|String|the question user asked digital human|N
-|dh-context.a.context|String|The answer to the question the user asked the digital human|N
-|uuid|String|Request ID, used to track requests and troubleshoot problems|N
+|--------|------|-------------|-----------|
+| sid | String | User ID generated during account creation (visible in account info). | Y |
+| dh-code | String | Digital human code, unique per digital human (viewable in the avatar overview). | Y |
+| dh-question | String | The user’s question text. | Y |
+| dh-conversation-id | String | Conversation ID — unique identifier for the session. | Y |
+| dh-context | String | Conversation context, formatted as a stringified JSON object. | N |
+| dh-context.q.context | String | Previous user question text (context). | N |
+| dh-context.a.context | String | Previous digital human answer text (context). | N |
+| uuid | String | Request ID used for tracking and troubleshooting. | N |
 
-##### Example request
+##### Example Request
 
 ```json
 {
   "sid": "100003",
   "dh-code": "187265485019156480",
-  "dh-question": "who are you?",
+  "dh-question": "Who are you?",
   "dh-conversation-id": "0513e935-041f-48e0-9330-652ef4194511",
   "dh-context": [
-        {
-        "q": { "context": "user question" },
-        "a": { "context": "answer" }
-      }
+    {
+      "q": { "context": "user question" },
+      "a": { "context": "answer" }
+    }
   ]
 }
+
 ```
 
 Response: Reply using the format below.
 
-| Field    | Type    | Required | Remarks          |
+| Field    | Type    | Required | Description         |
 |---------| ------- | -------- |-----------------|
-| code    | String  | Y        | Status code returned |
-| msg     | String  | N        | Success/error description message |
-| data    | object  | N        | Specific content returned |
-| success | Boolean | Y        | Whether successful |
+| code    | String  | Y        | Response status code|
+| msg     | String  | N        | Optional success or error message|
+| data    | object  | N        | Data payload (see below)|
+| success | Boolean | Y        | Whether the request succeeded|
 
 Valid response codes
 
 | Code | Status       | Response                         |
 | ---- | ------------ | -------------------------------- |
-| 200  | OK           | Response body according to the specification below |
-| 400  | Bad Request  | Request body/headers are invalid |
-| 401  | Unauthorized | Authentication information is invalid |
+| 200  | OK           | Successful response |
+| 400  | Bad Request  | Invalid body or headers |
+| 401  | Unauthorized | Invalid authentication token |
 | 403  | Forbidden    | Authentication failed |
 | 500  | Server Error | Service exception |
 
@@ -190,10 +199,12 @@ Response body
 
 | Field          | Type   | Description                                                  | Required |
 | -------------- | ------ | ------------------------------------------------------------ | -------- |
-| conversationId | String | Conversation ID, a unique identifier for the conversation, same as the dh-conversation-id in the request parameter body. | Y        |
-| question       | String | The question asked by the user.                               | N        |
-| answer         | String | The answer to the question the user asked the digital human, this is a stringified JSON object. | Y        |
-| errorMsg       | String | Description of the exception or error                         | N        |
+| conversationId | String | Conversation ID (matches the dh-conversation-id in the request). | Y        |
+| question       | String | The user’s question.                               | N        |
+| answer         | String | The digital human’s response, as a stringified JSON object. | Y        |
+| errorMsg       | String | Description of any exception or error                         | N        |
+
+Example Response
 
 ```json
 {
@@ -211,54 +222,63 @@ Response body
 }
 ```
 
-Expected response time: Digital human interactions are latency‑sensitive. 95% of requests should complete within 20 seconds. If the response exceeds 20s, a timeout is reported, but the digital human will continue to respond.
+Expected response time: Digital human interactions are latency‑sensitive. 95% of requests should complete within 20 seconds. If the response exceeds 20s, a timeout is reported, but the digital human will continue processing and respond once available.
 
-### Third‑party dialog integration (streaming)
+### Third-Party Dialog Integration (Streaming)
 
-Other session platforms can be integrated as follows. Through your digital human, the Duix platform will POST to your defined remote URL to obtain answers.
+In streaming mode, Duix delivers **incremental responses** to your remote endpoint in real time as the digital human speaks.  
+This allows you to display or process partial answers before the full response completes.
 
-<img src="../assets/_tmp_dingtalkgov_qt_clipbord_pic_5.png" alt="image.png"/>
+<img src="../assets/_tmp_dingtalkgov_qt_clipbord_pic_5.png" alt="Streaming integration diagram"/>
 
-Example: Refer to this open-source demo for a simple dialog integration.
+> **Example:**  
+> Refer to the open-source demo for a simple streaming integration example.
 
-Request: The Duix platform will send question requests (the user’s question) via POST to your remote URL in the format below.
+---
+
+#### Request
+
+The Duix platform sends each user question to your remote URL via an HTTP `POST` request in the following format.
 
 ##### Parameters
-| Field | Type | Description | Required |
-| -------- | ------ | ----- | -------- |
-|sid|String|Your user ID, generated when creating a user. Can be viewed in account information.|Y
-|dh-code|String|Digital human code, generated when each digital human is created, can be viewed in the digital human overview.|Y
-|dh-question|String|The content of the question you need to ask the digital human|Y
-|dh-conversation-id|String|Conversation ID, a unique identifier for the conversation|Y
-|dh-context|String|Context information generated during the conversation, this information is a stringified JSON format data.|N
-|dh-context.q.context|String|the question user asked digital human|N
-|dh-context.a.context|String|The answer to the question the user asked the digital human|N
-|uuid|String|Request ID, used to track requests and troubleshoot problems|N
 
-##### Example request
+| Field | Type | Description | Required |
+|--------|------|-------------|-----------|
+| sid | String | User ID generated during user creation (visible in account information). | Y |
+| dh-code | String | Digital human code, unique per digital human (viewable in the avatar overview). | Y |
+| dh-question | String | The question text sent by the user. | Y |
+| dh-conversation-id | String | Unique identifier for the conversation. | Y |
+| dh-context | String | Conversation context as a stringified JSON object. | N |
+| dh-context.q.context | String | Previous question text in the conversation context. | N |
+| dh-context.a.context | String | Previous answer text in the conversation context. | N |
+| uuid | String | Request ID for tracking and debugging purposes. | N |
+
+##### Example Request
 
 ```json
 {
   "sid": "100003",
   "dh-code": "187265485019156480",
-  "dh-question": "who are you?",
+  "dh-question": "Who are you?",
   "dh-conversation-id": "0513e935-041f-48e0-9330-652ef4194511",
   "dh-context": [
-        {
-        "q": { "context": "user question" },
-        "a": { "context": "answer" }
-      }
+    {
+      "q": { "context": "user question" },
+      "a": { "context": "answer" }
+    }
   ]
 }
-```
+
 
 
 Response body
 
 | Field  | Type   | Description | Required |
 | ------ | ------ | ----------- | -------- |
-| answer | String | Return answer | Y        |
-| isEnd  | boolean | Whether to end | Y        |
+| answer | String | Partial or complete answer returned by the digital human | Y        |
+| isEnd  | boolean | Indicates whether the current response is the final one | Y        |
+
+Example Response
 
 ```json
 {
@@ -270,46 +290,57 @@ Response body
 Expected response time: Digital human interactions are latency‑sensitive. 95% of requests should complete within 20 seconds. If the response exceeds 20s, a timeout is reported, but the digital human will continue to respond.
 
 
-### Get conversation details
+### Get Conversation Details
 
-##### Endpoint
+Retrieve detailed configuration and metadata for a specific conversation on the Duix platform.
 
-/duix-openapi-v2/sdk/getConversationById?conversationId=[duix platform conversation id]
+---
 
-##### Request Method: `GET`
+#### Endpoint
 
-**Description**
+`/duix-openapi-v2/sdk/getConversationById?conversationId=[conversation_id]`
 
-Query conversation details by Duix conversation ID.
+#### Method
 
-##### Parameters
+`GET`
 
-| Parameter Name | Type   | Pass Method | Parameter Description |
-| -------- | ------ | -------- | ----------------- |
-| conversationId    | String | Query    | conversationId created by the platform |
+#### Description
 
-**Response**
+Query conversation details by providing the **conversation ID** obtained from the Duix platform.
 
-| Parameter Name | Type | Description |
-| -------- | ----- |  ----- |
-|code|String| Return code |
-|data|JSON| Return data|
-|detailDto| JSON | Conversation resource details (including model, background, tts) |
-|detailDto.backgroundDto| JSON | Conversation resource details (background) |
-|detailDto.modelId| String | Model ID |
-|detailDto.modelName| String | Model Name |
-|detailDto.modelIdType| String | Model Type (0: Cloud Digital Human, 1: Local Digital Human) |
-|detailDto.localModelInfo| JSON | Local Digital Human Information |
-|detailDto.backgroundDto| JSON | Conversation resource details (background) |
-|detailDto.backgroundDto.backgroundUrl| String | Background Address |
-|scriptDtoList| JSON | Frontend Dialog Details |
-|scriptDtoList.scriptType| String | 0 Wake-up Word, 1 Opening Line, 2 Waiting Phrase, 3 Unknown Question, 4 Farewell Phrase, 5 Interruption Phrase, 6 Interruption Sentence, 7 Guiding Phrase) |
-|scriptDtoList.scriptContent| String | Frontend Dialog Text |
-|scriptDtoList.ttsContent| String| Frontend Dialog Audio |
-|message| String | Text Prompt |
-|success| boolean | Success Flag |
+---
 
-**Example**
+#### Parameters
+
+| Name | Type | Location | Description |
+|------|------|-----------|-------------|
+| conversationId | String | Query | Unique conversation ID generated by the Duix platform |
+
+---
+
+#### Response
+
+| Field | Type | Description |
+|--------|------|-------------|
+| code | String | Response code |
+| data | JSON | Main conversation data |
+| detailDto | JSON | Conversation resource details (includes model, background, and TTS configuration) |
+| detailDto.backgroundDto | JSON | Background resource details |
+| detailDto.modelId | String | Model ID |
+| detailDto.modelName | String | Model name |
+| detailDto.modelIdType | String | Model type (0 = Cloud Digital Human, 1 = Local Digital Human) |
+| detailDto.localModelInfo | JSON | Local digital human information |
+| detailDto.backgroundDto.backgroundUrl | String | Background image or video URL |
+| scriptDtoList | JSON | Predefined dialog scripts |
+| scriptDtoList.scriptType | String | Script type (0: Wake-up Word, 1: Opening Line, 2: Waiting Phrase, 3: Unknown Question, 4: Farewell, 5: Interruption, 6: Interruption Sentence, 7: Guiding Phrase) |
+| scriptDtoList.scriptContent | String | Script text |
+| scriptDtoList.ttsContent | String | Script audio file URL |
+| message | String | Text message returned by the API |
+| success | Boolean | Request success flag |
+
+---
+
+#### Example Response
 
 ```json
 {
@@ -469,55 +500,83 @@ Query conversation details by Duix conversation ID.
 ```
 
 
-### Create avatar
+### Create Avatar
 
-##### Endpoint
+Create a new **AI avatar** programmatically through the Duix OpenAPI.
 
-/duix-openapi-v2/sdk/v2/createAvatar
+---
 
-##### Request Method: `POST`
+#### Endpoint
 
-**Description**
+`/duix-openapi-v2/sdk/v2/createAvatar`
 
-Create an AI avatar via API.
+#### Method
 
-##### Parameters
+`POST`
 
-| Parameter Name | Type   | Pass Method | Parameter Description |   Required |
-| -------- | ------ | -------- | ----------------- | -----  |
-|customType | Integer | body | valid value: 1:training with a video 2:training with a photo| Y        |
-|avatarName | String | body |  Avatar Name  | Y        |
-|gender | String | body |  valid value: male female other    | N        |
-|profile | String | body |  profile to power your avatar chat. if not empty,  default conversation will be automatically created after training| N        |
-|templateVideo | String | body |  the URL of the video. cann't be empty when training with a video | N        |
-|coverUrl   | String | body |  the URL of the photo. cann't be empty when training with a photo| N        |
-|audioUrl   | String | body |  the URL of the audio | N        |
-|ttsSpeaker | String | body |  voice selected by the user| N        |
-|videoStart | float | body |   the start time in seconds of the video for training. default value is 0 seconds | N        |
-|videoEnd   | float | body |   the send time in seconds of the video for training. default value is 5 seconds | N        |
-|audioStart | float | body |   the start time in seconds of the audio for training. default value is 0 seconds | N        |
-|audioEnd   | float | body |   the send time in seconds of the audio for training. default value is 10 seconds | N        |
+---
 
-**Note**:
-1. When training with a photo, photo should be  jpg/png, max size is 10MB  , the recommended resolution is 1080p and the ratio of photo should be 9:16  or 16:9.
+#### Description
 
-2. When training with a video, video should be mp4 / MOV, 10s-1mins and maximum  file size is 1GB.
+This endpoint allows you to create an AI avatar by training with either a **video** or a **photo**.  
+If a `profile` is provided, a default conversation will be automatically created after the training completes.
 
-3. The video duration should be 5 seconds and the audio duration should be between 5 seconds and 10 seconds.
+---
 
-4. Audio should be mp3 / wav / flac / m4a, 5s-30mins
+#### Parameters
 
-**Response**
+| Name | Type | Location | Description | Required |
+|------|------|-----------|-------------|-----------|
+| customType | Integer | Body | Training method: `1` = train with video, `2` = train with photo. | Y |
+| avatarName | String | Body | Name of the avatar. | Y |
+| gender | String | Body | Avatar gender (`male`, `female`, `other`). | N |
+| profile | String | Body | Text profile used to power avatar conversations. If provided, a default conversation is created automatically. | N |
+| templateVideo | String | Body | URL of the training video. Required when training with video. | N |
+| coverUrl | String | Body | URL of the training photo. Required when training with photo. | N |
+| audioUrl | String | Body | URL of the training audio file. | N |
+| ttsSpeaker | String | Body | Voice selection for TTS output. | N |
+| videoStart | float | Body | Video start time (in seconds). Default: `0`. | N |
+| videoEnd | float | Body | Video end time (in seconds). Default: `5`. | N |
+| audioStart | float | Body | Audio start time (in seconds). Default: `0`. | N |
+| audioEnd | float | Body | Audio end time (in seconds). Default: `10`. | N |
 
-| Parameter Name | Type | Description |
-| -------- | ----- |  ----- |
-|code|String| Return code |
-|data|JSON| Return data|
-|data.id|int| Avatar ID. You can query the avatar using this ID. |
-|msg| String | Text Prompt |
-|success| boolean | Success Flag |
+---
 
-**Example**
+#### File Requirements
+
+> **Photo training**
+> - Format: JPG or PNG  
+> - Max size: **10 MB**  
+> - Recommended resolution: **1080p**  
+> - Aspect ratio: **9:16** or **16:9**
+
+> **Video training**
+> - Format: MP4 or MOV  
+> - Duration: **10 s – 1 min**  
+> - Max size: **1 GB**
+
+> **Audio**
+> - Format: MP3 / WAV / FLAC / M4A  
+> - Duration: **5 s – 30 min**
+
+> **Note:**  
+> For best results, ensure video duration is at least **5 seconds** and audio duration is between **5 – 10 seconds**.
+
+---
+
+#### Response
+
+| Field | Type | Description |
+|--------|------|-------------|
+| code | String | Response code |
+| data | JSON | Response payload |
+| data.id | Integer | Avatar ID (use this to query avatar details) |
+| msg | String | Response message |
+| success | Boolean | Indicates whether the request succeeded |
+
+---
+
+#### Example Response
 
 ```json
 {
@@ -528,41 +587,54 @@ Create an AI avatar via API.
     "id": 1111
   }
 }
-```
 
-### Query avatar
+### Query Avatar
 
-##### Endpoint
+Retrieve information about an existing AI avatar using its unique **avatar ID**.
 
-/duix-openapi-v2/sdk/v2/queryAvatar
+---
 
-##### Request Method: `GET`
+#### Endpoint
 
-**Description**
+`/duix-openapi-v2/sdk/v2/queryAvatar`
 
-Query your AI avatar by avatar ID.
+#### Method
 
-##### Parameters
+`GET`
 
-| Parameter Name | Type   | Pass Method | Parameter Description |   Required |
-| -------- | ------ | -------- | ----------------- | -----  |
-|id | Integer | Query | Avatar id  | Y        |
+---
 
-**Response**
+#### Description
 
-| Parameter Name | Type | Description |
-| -------- | ----- |  ----- |
-|code|String| Return code |
-|msg| String | Text Prompt |
-|success| boolean | Success Flag |
-|data|JSON| Return data|
-|data.id|int| Avatar ID. |
-|data.customizedName|String| Avatar name |
-|data.customizedStatus  |int| training status of this avatar. 0:training 1:success 2:failed |
-|data.reason|String | Reason for failure |
-|data.defaultConversationId|String | default conversationId of this avatar|
+This endpoint returns metadata and training status for an AI avatar previously created through the API.
 
-**Example**
+---
+
+#### Parameters
+
+| Name | Type | Location | Description | Required |
+|------|------|-----------|-------------|-----------|
+| id | Integer | Query | Unique avatar ID returned by the `createAvatar` API. | Y |
+
+---
+
+#### Response
+
+| Field | Type | Description |
+|--------|------|-------------|
+| code | String | Response code. |
+| msg | String | Response message. |
+| success | Boolean | Indicates whether the request succeeded. |
+| data | JSON | Response payload containing avatar details. |
+| data.id | Integer | Avatar ID. |
+| data.customizedName | String | Avatar name. |
+| data.customizedStatus | Integer | Avatar training status (`0`: training, `1`: success, `2`: failed). |
+| data.reason | String | Failure reason, if training failed. |
+| data.defaultConversationId | String | Default conversation ID associated with this avatar. |
+
+---
+
+#### Example Response
 
 ```json
 {
@@ -573,8 +645,7 @@ Query your AI avatar by avatar ID.
     "id": 111,
     "customizedName": "video-11",
     "customizedStatus": 1,
-    "reason": "xxx",
-    "defaultConversationId": "xxx",
+    "reason": "",
+    "defaultConversationId": "7f82f1c2-a6e4-4dc2-94d2-124c41ef8a1c"
   }
 }
-```

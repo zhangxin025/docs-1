@@ -1,7 +1,45 @@
 ---
 title: 'Precautions'
-description: ''
+description: 'Important considerations for using the Duix Android SDK, including microphone permissions and audio format requirements.'
 ---
 
-1. The RTC module requires microphone access. Request permission dynamically.
-2. To drive with audio, use WAV files at 16,000 Hz, mono, 16‑bit.
+## Overview
+
+Before running the **Duix Android SDK**, please review the following important notes.  
+Failure to meet these requirements may cause initialization or audio transmission failures.
+
+---
+
+## 1. Microphone Permission
+
+The **RTC (Real-Time Communication)** module requires access to the device’s microphone.  
+You must request and obtain this permission **dynamically at runtime** before initializing or using any real-time interaction feature.
+
+```java
+if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+        != PackageManager.PERMISSION_GRANTED) {
+    ActivityCompat.requestPermissions(this,
+            new String[]{Manifest.permission.RECORD_AUDIO}, 1);
+}
+> **Tip:**  
+> Without microphone authorization, real-time audio input (ASR or conversation features) will not function properly.
+
+2. **Audio Format**  
+   When providing audio input, use **WAV files** with the following specifications:  
+   - **Sample rate:** 16,000 Hz  
+   - **Channel:** Mono  
+   - **Bit depth:** 16-bit
+> **Tip:**  
+> Non-standard formats (e.g., **stereo**, **MP3**, **AAC**) may cause recognition errors or playback issues.  
+> If needed, you can convert audio using **ffmpeg**:
+>
+> ```bash
+> ffmpeg -i input.mp3 -ar 16000 -ac 1 -sample_fmt s16 output.wav
+> ```
+
+## Best Practices
+
+- Always check for both **microphone** and **network** permissions before session initialization.  
+- If microphone access is denied, gracefully prompt the user to enable it in **system settings**.  
+- For testing environments, use **real devices** instead of emulators to verify microphone behavior.  
+- Ensure all audio assets match the above specifications before sending them to the **SDK**.

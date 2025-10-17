@@ -3,14 +3,16 @@ title: 'Key Interfaces'
 description: ''
 ---
 
+# Key Interfaces
 
-### 1) Initialization
+## 1. Initialization
 
-Initialize the module with your `appId` and `appSecret`, then obtain the `Player` object:
-```
+Initialize the SDK with your `appId` and `appSecret`, then obtain a `Player` instance:
+
+```kotlin
 VirtualFactory.init("your appId", "your appSecret")
 player = VirtualFactory.getPlayer(mContext, eglBaseContext)
-```
+
 
 
 ### 2) Connect to the digital human
@@ -29,7 +31,7 @@ The player exposes the following callbacks:
 void onShow();
 ```
 
-#### `onError` — Exception occurred when connecting to the digital human
+#### `onError` — Error occurred during connection
 
 ```
 void onError(int msgType, int msgSubType, String msg);
@@ -43,7 +45,7 @@ Parameters:
 | msgSubType     | int    | Sub-error type   |
 | msg            | String | Exception message    |
 
-Values of `msgType`:
+Possible `msgType` values:
 
 | Value     | Description       |     | 
 |--------|----------|-----|
@@ -68,12 +70,11 @@ void onVideoTrack(VideoTrack track);
 
 | Parameter Name   | Type              | Description         |
 |----------------|-----------------|------------|
-| track          | VideoTrack      | Video media channel     |
+| track          | VideoTrack      | Video media track  |
 
 #### `onAudioSamples` — Local audio sampling data callback
 
-Use this for audio visualization or related processing
-
+Use this callback for audio visualization or processing.
 ```
 default void onAudioSamples(int audioFormat, int channelCount, int sampleRat, byte[] data){}
 ```
@@ -131,13 +132,13 @@ player?.speakWithWav(wavUrl, true)
 
 | Parameter Name          | Type      | Description         |
 |-----------------------|---------|------------|
-| wavUrl                | String  | Network address of WAV audio |
+| wavUrl                | String  | URL of the WAV audio file |
 | interrupt             | boolean | Whether to interrupt the current speaking state |
 
 
 ### 4) Drive the digital human to speak with text
 
-Provide the desired text. The digital human will speak using the session’s configured voice.
+Provide text input. The digital human will speak using the session’s configured voice.
 
 ```kotlin
 player?.speakWithTxt(text, true)
@@ -145,13 +146,13 @@ player?.speakWithTxt(text, true)
 
 | Parameter Name          | Type      | Description          |
 |-----------------------|---------|-------------|
-| text                  | String  | Text content for the digital human to say |
+| text                  | String  | Text for the digital human to speak |
 | interrupt             | boolean | Whether to interrupt the current speaking state  |
 
 
-### 5) Q&A
+### 5) Q&A Interaction
 
-Ask a question and receive an answer.
+Ask a question and receive a response from the digital human.
 
 ```kotlin
 player?.speakWithQuestion(text, true)
@@ -164,7 +165,7 @@ player?.speakWithQuestion(text, true)
 
 ### 6) Interrupt speaking
 
-Stop the current speech.
+Stop the current speech immediately.
 
 ```kotlin
 player?.stopAudio()
