@@ -21,7 +21,7 @@ duix.init({
   conversationId: '',
   platform: 'duix.com'
 });
-> ```
+```
 
 ***Parameters***
 
@@ -35,18 +35,17 @@ duix.init({
 #### start(options: object): Promise
 
 Begins rendering the digital human and starts the real-time interaction.
-> **Note:** Always call start() after the initialSuccess event to ensure all resources are ready.:
+> **Note:** Always call `start()` after the `initialSuccess` event to ensure all resources are ready:
 >
 > ```js
 > duix.on('initialSuccess', () => {
-  duix.start({
-    muted: true,
-    wipeGreen: false,
-  }).then(res => {
-    console.log('Session started:', res);
-  });
-});
-
+>   duix.start({
+>     muted: true,
+>     wipeGreen: false,
+>   }).then(res => {
+>     console.log('Session started:', res);
+>   });
+> });
 > ```
 
 ***Parameters***
@@ -64,7 +63,7 @@ Begins rendering the digital human and starts the real-time interaction.
 #### setVideoMuted(flag: boolean)
 
 Toggles video playback mute state.
-true = muted, false = unmuted.
+`true` = muted, `false` = unmuted.
 
 #### break()
 
@@ -195,7 +194,7 @@ duix.on('speakStart', (data) => {
 ##### Parameters
 | Name| Type | Description |
 | :-----------------| :-------------- | :----------------------------------------------------------- |
-| answereventName   | string   | Name of the event to listen for. See the table below.|  
+| eventName   | string   | Name of the event to listen for. See the table below.|  
 | callback | function   | Callback function invoked with event data. |
 
 
@@ -206,5 +205,6 @@ All Promise-based methods resolve to a unified object format:
   "err": null,
   "data": {}
 }
+```
 If err is non-null, the call failed.
 Use console.error(err) for diagnostic details.

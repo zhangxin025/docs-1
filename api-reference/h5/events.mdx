@@ -63,52 +63,50 @@ Triggered when an unexpected error occurs.
 Indicates the current loading progress of the digital human and its resources.
 Returns a numeric value between 0 and 100.
 
-Payload
-
-{
-  "value": 0 // number, percentage (0–100)
-}
+Payload: number
 
 Example
+```js
 duix.on('progress', (value) => {
   console.log(`Loading progress: ${value}%`);
 });
+```
 
 ### speakSection 
 Emitted for each incremental speech segment — typically used for real-time subtitles or streaming speech visualization.
 When answer() is used, this event streams continuously; for speak(), it aligns with speakStart.
 
 Payload
+```js
 {
   "audio": "string",   // Audio stream URL
   "content": "string"  // Partial text content currently being spoken
 }
+```
 
 Example
+```js
 duix.on('speakSection', (data) => {
   console.log('Current segment:', data.content);
 });
-
-
-
 ```
 
 ### speakStart 
 Triggered when the avatar begins speech playback.
 
 Payload
+```js
 {
   "audio": "string",   // Audio stream URL
   "content": "string"  // Text content being spoken
 }
+```
 
 Example
+```js
 duix.on('speakStart', (data) => {
   console.log('Speech started:', data.content);
 });
-
-
-
 ```
 
 ### speakEnd 
@@ -116,17 +114,18 @@ Triggered when the avatar completes speech playback.
 Useful for synchronizing UI transitions or logic after speech completion.
 
 Payload
+```js
 {
   "audio": "string",
   "content": "string"
 }
+```
 
 Example
+```js
 duix.on('speakEnd', () => {
   console.log('Speech ended.');
 });
-
-
 ```
 
 ### asrData
@@ -135,16 +134,17 @@ Each ASR cycle starts with asrStart and ends with asrStop.
 Use this event to display incremental transcription results.
 
 Payload
+```js
 {
   "content": "string" // Recognized text fragment
 }
+```
 
 Example
+```js
 duix.on('asrData', (data) => {
   console.log('Recognized:', data.content);
 });
-
-
 ```
 
 ### report 
@@ -152,7 +152,7 @@ Delivers a detailed periodic (once per second) network and video quality report.
 This event helps developers monitor RTC connection quality and performance metrics in real time.
 
 Payload
-
+```js
 {
   "video": {
     "download": {
@@ -172,11 +172,12 @@ Payload
     "sentBitsPerSecond": 7920         // Upload bitrate (bits/s)
   }
 }
+```
 Example
+```js
 duix.on('report', (stats) => {
   console.log('Network report:', stats.connection);
 });
-
 ```
-**Note:Event payloads not explicitly documented above will return empty objects.
-To ensure reliable capture, register all event listeners before invoking duix.start().
+
+**Note:** Event payloads not explicitly documented above will return empty objects. Register all event listeners before invoking `duix.start()`.
