@@ -498,9 +498,70 @@ Query conversation details by providing the **conversation ID** obtained from th
 	}
 }
 ```
+### Create Avatar
+
+Create an AI avatar
+
+---
+
+#### Endpoint
+
+`/duix-openapi-v2/sdk/v2/createAvatar`
+
+#### Method
+
+`POST`
+
+---
+
+#### Description
+
+This endpoint create an AI avatar.
+
+---
+
+#### Parameters
+
+| Name | Type | Location | Description | Required |
+|------|------|-----------|-------------|-----------|
+| ttsName | String | Body | TTS name, select the public TTS voice. See at Settings -> Avatar creator -> Select voice | Y |
+| conversationId | String | Body | The conversation ID. Value is required when using public AI avatar [Get Conversation ID](https://docs.duix.com/api-reference/api/getConversationID) | N |
+| coverImage | String | Body | A value is needed if you are using images to customize your AI avatar. Base64 format, example：data:image/png;base64,iVBORw0KGgoAAAANSUhEUgA....... | N |
+| defaultSpeakingLanguage | String | Body | Default speaking language. default English | N |
+| greetings | String | Body | Enter a greeting for your AI avatar’s first words, If not, the system will generate it randomly | N |
+| name | String | Body | The name of AI avatar. If not, the system will generate it randomly | N |
+| profile | String | Body | Enter a description of personality and preferences you’d love your AI avatar to have.. If not, the system will generate it randomly | N |
+
+---
+
+#### Response
+
+| Field | Type | Description |
+|--------|------|-------------|
+| code | String | Response code. |
+| msg | String | Response message. |
+| success | Boolean | Indicates whether the request succeeded. |
+| data | JSON | Response payload containing avatar details. |
+| data.taskId | String | The task ID of create AI avatar. |
+
+---
+
+#### Example Response
+
+```json
+{
+  "code": "0",
+  "msg": "SUCCESS",
+  "success": true,
+  "data": {
+      "taskId": "00000184-1934-0eef-2f5e-c58ab9e3406c"
+  }
+}
+
+```
 ### Query Avatar
 
-Retrieve information about an existing AI avatar using its unique **avatar ID**.
+Retrieve information about the creation of an AI avatar using its unique **taskId**.
 
 ---
 
@@ -524,7 +585,7 @@ This endpoint returns metadata and training status for an AI avatar previously c
 
 | Name | Type | Location | Description | Required |
 |------|------|-----------|-------------|-----------|
-| id | Integer | Query | Unique avatar ID returned by the `createAvatar` API. | Y |
+| taskId | Integer | Query | Unique task ID returned by the `createAvatar` API. | Y |
 
 ---
 
@@ -536,11 +597,12 @@ This endpoint returns metadata and training status for an AI avatar previously c
 | msg | String | Response message. |
 | success | Boolean | Indicates whether the request succeeded. |
 | data | JSON | Response payload containing avatar details. |
-| data.id | Integer | Avatar ID. |
-| data.customizedName | String | Avatar name. |
-| data.customizedStatus | Integer | Avatar training status (`0`: training, `1`: success, `2`: failed). |
-| data.reason | String | Failure reason, if training failed. |
-| data.defaultConversationId | String | Default conversation ID associated with this avatar. |
+| data.name | String | Avatar name. |
+| data.modelSceneId | String | The avatar model scene ID. |
+| data.conversationId | String | Conversation ID associated with this avatar. |
+| data.coverImage | String | The avatar cover image|
+| data.status | Integer | Avatar training status (`0`: training, `1`: failed, `2`: success). |
+| data.processingStep | String | Training progress(preparing, processing, after_processing, done) |
 
 ---
 
@@ -552,10 +614,11 @@ This endpoint returns metadata and training status for an AI avatar previously c
   "msg": "SUCCESS",
   "success": true,
   "data": {
-    "id": 111,
-    "customizedName": "video-11",
-    "customizedStatus": 1,
-    "reason": "",
-    "defaultConversationId": "7f82f1c2-a6e4-4dc2-94d2-124c41ef8a1c"
+      "name": "Khalid Hassan",
+      "modelSceneId": "735917732520006",
+      "conversationId": "1983775419508027393",
+      "coverImage": "https://xxx.xxx.xxx/image/img_3076d14.png",
+      "status": 2,
+      "processingStep": "done"
   }
 }
