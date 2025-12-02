@@ -129,17 +129,7 @@ Terminate all active sessions for a specific app.
 |uuid|String|Query|sessionId returned in the start-complete event|
 
 
-### Third-Party Dialog Integration (Non-Streaming)
 
-Integrate your own dialog system with Duix using a **webhook-based POST** approach.  
-The Duix platform will send user questions to your defined remote URL and expect a structured **JSON response**.
-
-<img src="../assets/_tmp_dingtalkgov_qt_clipbord_pic_5.png" alt="Integration diagram"/>
-
-> **Example:**  
-> Refer to the open-source demo for a simple integration reference.
-
----
 
 #### Request
 
@@ -223,18 +213,6 @@ Example Response
 ```
 
 Expected response time: Digital human interactions are latency‑sensitive. 95% of requests should complete within 20 seconds. If the response exceeds 20s, a timeout is reported, but the digital human will continue processing and respond once available.
-
-### Third-Party Dialog Integration (Streaming)
-
-In streaming mode, Duix delivers **incremental responses** to your remote endpoint in real time as the digital human speaks.  
-This allows you to display or process partial answers before the full response completes.
-
-<img src="../assets/_tmp_dingtalkgov_qt_clipbord_pic_5.png" alt="Streaming integration diagram"/>
-
-> **Example:**  
-> Refer to the open-source demo for a simple streaming integration example.
-
----
 
 #### Request
 
