@@ -1,0 +1,39 @@
+### Get App Real-Time Concurrency
+
+**Endpoint:** `/duix-openapi-v2/sdk/v2/getconcurrentNumber`  
+**Method:** `GET`  
+**Description:** Retrieve the real-time concurrency status of an application.
+
+#### Parameters
+
+| Name | Type | Location | Description |
+|------|------|-----------|-------------|
+| appId | String | Query | Application ID created on the Duix platform |
+
+#### Response
+
+| Name | Type | Description |
+|------|------|-------------|
+| code | String | Response code |
+| data | ConcurrentStatus | Concurrency details |
+| cropId | String | Corporate ID |
+| totalConcurrentNumber | integer | Total concurrent sessions |
+| userConcurrentNumber | integer | User-specific concurrent sessions |
+| message | String | Response message |
+| success | boolean | Request status |
+
+#### Example Response
+
+```json
+{
+  "code": "",
+  "data": {
+    "cropId": "",
+    "totalConcurrentNumber": 0,
+    "userConcurrentNumber": 0
+  },
+  "message": "",
+  "success": true
+}
+
+```

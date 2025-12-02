@@ -28,59 +28,81 @@
   },
   "tabs": [
     {
+      "name": "Documentation",
+      "url": "documentation"
+    },
+    {
       "name": "API Reference",
       "url": "api-reference"
+    },
+    {
+      "name": "SDKs",
+      "url": "sdks"
     }
   ],
-  "anchors": [
-  ],
+  "anchors": [],
   "navigation": [
     {
-      "group": "API Documentation",
+      "group": "开始",
+      "pages": ["documentation/api/Introduction"]
+    },
+    {
+      "group": "Developer guide",
       "pages": [
-        "api-reference/api/Introduction",
-        "api-reference/api/getConversationID",
-        "api-reference/api/getYourAPIKeys",
-        "api-reference/api/getToken",
-        "api-reference/api/openAPI"
+        "documentation/api/getConversationID",
+        "documentation/api/getYourAPIKeys",
+        "documentation/api/getToken"
       ]
     },
     {
-      "group": "iOS SDK",
+      "group": "API Integration",
+      "pages": ["api-reference/api/openApiIntegration"]
+    },
+    {
+      "group": "Get App",
+      "pages": ["api-reference/api/realTimeConcurrency"]
+    },
+    {
+      "group": "H5 SDK",
       "pages": [
-        "api-reference/ios/download",
-        "api-reference/ios/sdkreference",
-        "api-reference/ios/quickstart",
-        "api-reference/ios/interface",
-        "api-reference/ios/example",
-        "api-reference/ios/error"
+        "sdks/h5/quickstart",
+        "sdks/h5/process",
+        "sdks/h5/methods",
+        "sdks/h5/events",
+        "sdks/h5/code",
+        "sdks/h5/questions",
+        "sdks/h5/versions"
       ]
     },
     {
       "group": "Android SDK",
       "pages": [
-        "api-reference/android/download",
-        "api-reference/android/dependent",
-        "api-reference/android/proguard",
-        "api-reference/android/quickstart",
-        "api-reference/android/interface",
-        "api-reference/android/be_careful"
+        "sdks/android/download",
+        "sdks/android/dependent",
+        "sdks/android/proguard",
+        "sdks/android/quickstart",
+        "sdks/android/interface",
+        "sdks/android/be_careful"
       ]
     },
     {
-      "group": "H5 SDK",
+      "group": "iOS SDK",
       "pages": [
-        "api-reference/h5/quickstart",
-        "api-reference/h5/process",
-        "api-reference/h5/methods",
-        "api-reference/h5/events",
-        "api-reference/h5/code",
-        "api-reference/h5/questions",
-        "api-reference/h5/versions"
+        "sdks/ios/download",
+        "sdks/ios/sdkreference",
+        "sdks/ios/quickstart",
+        "sdks/ios/interface",
+        "sdks/ios/example",
+        "sdks/ios/error"
       ]
     }
   ],
   "footerSocials": {
     "github": "https://github.com/duixcom"
+  },
+  "css": "/custom-navigation.css",
+  "js": ["/custom-navigation.js", "/google-analytics.js"],
+  "analytics": {
+    "gtm": "G-XKHVFX7R8L"
   }
 }
