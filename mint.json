@@ -101,8 +101,5 @@
     "github": "https://github.com/duixcom"
   },
   "css": "/custom-navigation.css",
-  "js": ["/custom-navigation.js", "/google-analytics.js"],
-  "analytics": {
-    "gtm": "G-XKHVFX7R8L"
-  }
+  "js": ["/custom-navigation.js", "/google-analytics.js"]
 }
