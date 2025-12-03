@@ -64,6 +64,9 @@
     // 监听页面变化
     setupPageClickHandlerChange();
     linkUrlChange();
+    
+    // 监听路由变化
+    setupRouteChangeListener();
   }
 
   /**
@@ -288,6 +291,59 @@
         sidebar.classList.toggle("mobile-open");
       });
     }
+  }
+
+  /**
+   * 监听路由变化
+   */
+  function setupRouteChangeListener() {
+    let lastUrl = location.href;
+    
+    // 监听 popstate 事件（浏览器前进后退）
+    window.addEventListener("popstate", function () {
+      onRouteChange();
+    });
+
+    // 监听 hashchange 事件（hash 路由）
+    window.addEventListener("hashchange", function () {
+      onRouteChange();
+    });
+
+    // 使用 MutationObserver 监听 URL 变化（适配客户端路由）
+    const observer = new MutationObserver(function () {
+      if (location.href !== lastUrl) {
+        lastUrl = location.href;
+        onRouteChange();
+      }
+    });
+
+    observer.observe(document, { subtree: true, childList: true });
+  }
+
+  /**
+   * 路由变化处理函数
+   */
+  function onRouteChange() {
+    const currentUrl = location.href;
+    const currentPath = location.pathname;
+
+    const eventData = {
+      event: "route_change",
+      url: currentUrl,
+      path: currentPath,
+      timestamp: new Date().toISOString(),
+    };
+
+    console.log("[Navigation] Route Changed:", eventData);
+
+    // 如果有全局的埋点函数，则调用
+    if (window.MintlifyTracking && window.MintlifyTracking.sendCustomEvent) {
+      window.MintlifyTracking.sendCustomEvent(eventData);
+    }
+
+    // 重新应用 URL 映射
+    linkUrlChange();
+    addIconsToMenuItems();
   }
 
   /**
