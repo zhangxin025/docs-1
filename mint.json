@@ -43,7 +43,7 @@
   "anchors": [],
   "navigation": [
     {
-      "group": "开始",
+      "group": "Get started",
       "pages": ["documentation/api/Introduction"]
     },
     {
@@ -71,7 +71,7 @@
       ]
     },
     {
-      "group": "H5 SDK",
+      "group": "Javascript SDK",
       "pages": [
         "sdks/h5/quickstart",
         "sdks/h5/process",
