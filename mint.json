@@ -55,6 +55,10 @@
       ]
     },
     {
+      "group": "Sample code",
+      "pages": ["documentation/api/JavaScript SDK demo"]
+    },
+    {
       "group": "API Integration",
       "pages": ["api-reference/api/openApiIntegration"]
     },

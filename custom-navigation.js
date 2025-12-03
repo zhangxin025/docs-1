@@ -40,6 +40,12 @@
       title: "QueryAvatar",
     },
   ];
+  const linkUrlChangeList = [
+    {
+      title: "JavaScript SDK demo",
+      url: "https://github.com/duixcom/duix-sdk-react-code-sample",
+    },
+  ];
   const CONFIG = {
     storageKey: "mintlify-nav-state",
     animationDuration: 300,
@@ -57,6 +63,7 @@
 
     // 监听页面变化
     setupPageClickHandlerChange();
+    linkUrlChange();
   }
 
   /**
@@ -100,6 +107,23 @@
           item.addEventListener("mouseleave", function () {
             icon.style.opacity = "0.7";
           });
+        }
+      }
+    });
+  }
+
+  /**
+   *  自定义修改<a>的链接
+   */
+  function linkUrlChange() {
+    linkUrlChangeList.forEach((item) => {
+      const liElement = document.querySelector(`li[data-title="${item.title}"]`);
+      if (liElement) {
+        const aElement = liElement.querySelector("a");
+        if (aElement) {
+          aElement.href = item.url;
+          aElement.target = "_blank";
+          aElement.rel = "noopener noreferrer";
         }
       }
     });
@@ -165,6 +189,7 @@
   function setupPageClickHandlerChange() {
     const observer = new MutationObserver(function () {
       addIconsToMenuItems();
+      linkUrlChange();
     });
     observer.observe(document.body, { childList: true, subtree: true });
   }
