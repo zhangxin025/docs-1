@@ -5,8 +5,8 @@ description: 'List of all Duix SDK events and their corresponding payload struct
 
 ## Overview
 
-The Duix SDK emits various **events** throughout the session lifecycle.  
-Developers can listen to these events using the `duix.on(eventName, callback)` method  
+The Duix SDK emits various **events** throughout the session lifecycle.
+Developers can listen to these events using the `duix.on(eventName, callback)` method
 to handle errors, progress updates, speech synchronization, and RTC quality monitoring.
 
 ---
@@ -27,6 +27,7 @@ to handle errors, progress updates, speech synchronization, and RTC quality moni
 | **asrData** | Single-sentence ASR interim result |
 | **asrStop** | Single-sentence ASR ended |
 | **report** | Periodic RTC/network/video quality report |
+| **cameraChange** | Camera current status |
 
 ---
 
@@ -58,7 +59,7 @@ Triggered when an unexpected error occurs.
 | 4008 | Failed to get microphone stream | |
 | 4009 | Browser blocked autoplay | Start muted or require user action; then unmute/resume |
 
-### progress 
+### progress
 
 Indicates the current loading progress of the digital human and its resources.
 Returns a numeric value between 0 and 100.
@@ -72,7 +73,7 @@ duix.on('progress', (value) => {
 });
 ```
 
-### speakSection 
+### speakSection
 Emitted for each incremental speech segment — typically used for real-time subtitles or streaming speech visualization.
 When answer() is used, this event streams continuously; for speak(), it aligns with speakStart.
 
@@ -91,7 +92,7 @@ duix.on('speakSection', (data) => {
 });
 ```
 
-### speakStart 
+### speakStart
 Triggered when the avatar begins speech playback.
 
 Payload
@@ -109,7 +110,7 @@ duix.on('speakStart', (data) => {
 });
 ```
 
-### speakEnd 
+### speakEnd
 Triggered when the avatar completes speech playback.
 Useful for synchronizing UI transitions or logic after speech completion.
 
@@ -147,7 +148,7 @@ duix.on('asrData', (data) => {
 });
 ```
 
-### report 
+### report
 Delivers a detailed periodic (once per second) network and video quality report.
 This event helps developers monitor RTC connection quality and performance metrics in real time.
 
@@ -177,6 +178,21 @@ Example
 ```js
 duix.on('report', (stats) => {
   console.log('Network report:', stats.connection);
+});
+```
+
+### cameraChange
+Payload
+```javascript
+{
+  status: 'show', // camera status, show/hidden
+}
+```
+
+Example
+```js
+duix.on('cameraChange', (data) => {
+  console.log('cameraChange:', data.status);
 });
 ```
 

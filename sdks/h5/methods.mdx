@@ -5,7 +5,7 @@ description: 'Full list of available methods in the Duix H5 SDK, including initi
 
 ## Overview
 
-The Duix SDK exposes a set of core methods for initializing, controlling, and interacting with the real-time digital human.  
+The Duix SDK exposes a set of core methods for initializing, controlling, and interacting with the real-time digital human.
 All asynchronous methods return a **Promise** resolving to `{ err, data }`.
 
 ---
@@ -25,7 +25,7 @@ duix.init({
 
 ***Parameters***
 
-| Name| Type |Required | Description | 
+| Name| Type |Required | Description |
 | :-----------------| :-------------- | :------ | :----------------------------------------------------------- |
 | containerLable   | string   |  Yes |  Container selector. The digital human will be rendered in this DOM. |
 | sign | string   |   Yes    |  Authentication signature. [How to get sign?](../api/openAPI) |
@@ -120,7 +120,7 @@ duix.getAnswer({ question: 'what is your name?' })
 
 | Name| Type | Description |
 | :-----------------| :-------------- | :----------------------------------------------------------- |
-| answer   | string   | Answer text |  
+| answer   | string   | Answer text |
 | audio | string   | Answer audio URL |
 
 #### startRecord(): Promise
@@ -151,6 +151,21 @@ Disables real-time speech recognition.
 ```js
 duix.closeAsr();
 ```
+
+#### createCamera():Promise
+
+Turn on the camera.
+```js
+duix.createCamera();
+```
+
+#### destroyCamera():Promise
+
+Turn off the camera and release occupied resources.
+```js
+duix.destroyCamera();
+```
+
 #### stop()
 
 Terminates the current session and releases all resources.
@@ -194,7 +209,7 @@ duix.on('speakStart', (data) => {
 ##### Parameters
 | Name| Type | Description |
 | :-----------------| :-------------- | :----------------------------------------------------------- |
-| eventName   | string   | Name of the event to listen for. See the table below.|  
+| eventName   | string   | Name of the event to listen for. See the table below.|
 | callback | function   | Callback function invoked with event data. |
 
 
