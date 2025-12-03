@@ -1,0 +1,63 @@
+### Query Avatar
+
+Retrieve information about the creation of an AI avatar using its unique **taskId**.
+
+---
+
+#### Endpoint
+
+`/duix-openapi-v2/sdk/v2/queryAvatar`
+
+#### Method
+
+`GET`
+
+---
+
+#### Description
+
+This endpoint returns metadata and training status for an AI avatar previously created through the API.
+
+---
+
+#### Parameters
+
+| Name | Type | Location | Description | Required |
+|------|------|-----------|-------------|-----------|
+| taskId | Integer | Query | Unique task ID returned by the `createAvatar` API. | Y |
+
+---
+
+#### Response
+
+| Field | Type | Description |
+|--------|------|-------------|
+| code | String | Response code. |
+| msg | String | Response message. |
+| success | Boolean | Indicates whether the request succeeded. |
+| data | JSON | Response payload containing avatar details. |
+| data.name | String | Avatar name. |
+| data.modelSceneId | String | The avatar model scene ID. |
+| data.conversationId | String | Conversation ID associated with this avatar. |
+| data.coverImage | String | The avatar cover image|
+| data.status | Integer | Avatar training status (`0`: training, `1`: failed, `2`: success). |
+| data.processingStep | String | Training progress(preparing, processing, after_processing, done) |
+
+---
+
+#### Example Response
+
+```json
+{
+  "code": "0",
+  "msg": "SUCCESS",
+  "success": true,
+  "data": {
+      "name": "Khalid Hassan",
+      "modelSceneId": "735917732520006",
+      "conversationId": "1983775419508027393",
+      "coverImage": "https://xxx.xxx.xxx/image/img_3076d14.png",
+      "status": 2,
+      "processingStep": "done"
+  }
+}

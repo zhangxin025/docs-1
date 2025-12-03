@@ -60,7 +60,15 @@
     },
     {
       "group": "Get App",
-      "pages": ["api-reference/api/realTimeConcurrency"]
+      "pages": [
+        "api-reference/api/realTimeConcurrency",
+        "api-reference/api/realTimeSessions",
+        "api-reference/api/closeAllSessionsApp",
+        "api-reference/api/CloseSpecificSession",
+        "api-reference/api/getConversationDetails",
+        "api-reference/api/createAvatar",
+        "api-reference/api/queryAvatar"
+      ]
     },
     {
       "group": "H5 SDK",

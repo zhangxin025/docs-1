@@ -1,0 +1,61 @@
+### Create Avatar
+
+Create an AI avatar
+
+---
+
+#### Endpoint
+
+`/duix-openapi-v2/sdk/v2/createAvatar`
+
+#### Method
+
+`POST`
+
+---
+
+#### Description
+
+This endpoint create an AI avatar.
+
+---
+
+#### Parameters
+
+| Name | Type | Location | Description | Required |
+|------|------|-----------|-------------|-----------|
+| ttsName | String | Body | TTS name, select the public TTS voice. See at Settings -> Avatar creator -> Select voice | Y |
+| conversationId | String | Body | The conversation ID. Value is required when using public AI avatar [Get Conversation ID](https://docs.duix.com/api-reference/api/getConversationID) | N |
+| coverImage | String | Body | A value is needed if you are using images to customize your AI avatar. Base64 format, example：data:image/png;base64,iVBORw0KGgoAAAANSUhEUgA....... | N |
+| defaultSpeakingLanguage | String | Body | Default speaking language. default English | N |
+| greetings | String | Body | Enter a greeting for your AI avatar’s first words, If not, the system will generate it randomly | N |
+| name | String | Body | The name of AI avatar. If not, the system will generate it randomly | N |
+| profile | String | Body | Enter a description of personality and preferences you’d love your AI avatar to have.. If not, the system will generate it randomly | N |
+
+---
+
+#### Response
+
+| Field | Type | Description |
+|--------|------|-------------|
+| code | String | Response code. |
+| msg | String | Response message. |
+| success | Boolean | Indicates whether the request succeeded. |
+| data | JSON | Response payload containing avatar details. |
+| data.taskId | String | The task ID of create AI avatar. |
+
+---
+
+#### Example Response
+
+```json
+{
+  "code": "0",
+  "msg": "SUCCESS",
+  "success": true,
+  "data": {
+      "taskId": "00000184-1934-0eef-2f5e-c58ab9e3406c"
+  }
+}
+
+```

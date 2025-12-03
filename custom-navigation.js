@@ -14,6 +14,31 @@
       doc: '<span class="method-nav-pill flex items-center w-8"><span class="px-1 py-0.5 rounded-md text-[0.55rem] leading-tight font-bold bg-green-400/20 dark:bg-green-400/20 text-green-700 dark:text-green-400">GET</span></span>',
       title: "RealTimeConcurrency",
     },
+    {
+      doc: '<span class="method-nav-pill flex items-center w-8"><span class="px-1 py-0.5 rounded-md text-[0.55rem] leading-tight font-bold bg-green-400/20 dark:bg-green-400/20 text-green-700 dark:text-green-400">GET</span></span>',
+      title: "RealTimeSessions",
+    },
+    {
+      doc: '<span class="method-nav-pill flex items-center w-8"><span class="px-1 py-0.5 rounded-md text-[0.55rem] leading-tight font-bold bg-green-400/20 dark:bg-green-400/20 text-green-700 dark:text-green-400">GET</span></span>',
+      title: "CloseAllSessionsApp",
+    },
+    {
+      doc: '<span class="method-nav-pill flex items-center w-8"><span class="px-1 py-0.5 rounded-md text-[0.55rem] leading-tight font-bold bg-green-400/20 dark:bg-green-400/20 text-green-700 dark:text-green-400">GET</span></span>',
+      title: "CloseSpecificSession",
+    },
+    {
+      doc: '<span class="method-nav-pill flex items-center w-8"><span class="px-1 py-0.5 rounded-md text-[0.55rem] leading-tight font-bold bg-green-400/20 dark:bg-green-400/20 text-green-700 dark:text-green-400">GET</span></span>',
+      title: "GetConversationDetails",
+    },
+    {
+      doc: '<span class="method-nav-pill flex items-center w-8"><span class="px-1 py-0.5 rounded-md text-[0.55rem] leading-tight font-bold bg-[#3064E3] text-[#FFFFFF]">POST</span></span>',
+      title: "CreateAvatar",
+    },
+
+    {
+      doc: '<span class="method-nav-pill flex items-center w-8"><span class="px-1 py-0.5 rounded-md text-[0.55rem] leading-tight font-bold bg-green-400/20 dark:bg-green-400/20 text-green-700 dark:text-green-400">GET</span></span>',
+      title: "QueryAvatar",
+    },
   ];
   const CONFIG = {
     storageKey: "mintlify-nav-state",
@@ -26,6 +51,12 @@
   function initNavigation() {
     // 添加图标到菜单项
     addIconsToMenuItems();
+
+    // 为分组标题添加点击事件
+    setupGroupClickHandlers();
+
+    // 监听页面变化
+    setupPageClickHandlerChange();
   }
 
   /**
@@ -46,7 +77,7 @@
               doc = items.doc;
             }
           });
-          if (!doc) return
+          if (!doc) return;
           const icon = document.createElement("span");
           icon.className = "nav-item-icon";
           icon.innerHTML = doc;
@@ -55,7 +86,7 @@
 
           // 在链接的第一个子元素前插入图标
           const flexContainer = link.querySelector(".flex-1");
-          if (flexContainer ) {
+          if (flexContainer) {
             flexContainer.insertBefore(icon, flexContainer.firstChild);
           } else {
             link.insertBefore(icon, link.firstChild);
@@ -72,36 +103,6 @@
         }
       }
     });
-  }
-
-  /**
-   * 恢复导航状态
-   */
-  function restoreNavState() {
-    try {
-      const saved = localStorage.getItem(CONFIG.storageKey);
-      if (saved) {
-        const state = JSON.parse(saved);
-
-        document.querySelectorAll(".sidebar-nav-group").forEach((group) => {
-          const title = group.querySelector(".sidebar-nav-group-title");
-          if (title) {
-            const groupName = title.textContent.trim();
-            if (state[groupName] !== undefined) {
-              if (state[groupName]) {
-                group.classList.remove("collapsed");
-                group.classList.add("expanded");
-              } else {
-                group.classList.add("collapsed");
-                group.classList.remove("expanded");
-              }
-            }
-          }
-        });
-      }
-    } catch (e) {
-      console.warn("[Navigation] Failed to restore state:", e);
-    }
   }
 
   /**
@@ -159,59 +160,13 @@
   }
 
   /**
-   * 设置页面链接点击事件
+   * 监听页面变化
    */
-  function setupPageClickHandlers() {
-    document.querySelectorAll(".sidebar-nav-item").forEach((item) => {
-      item.addEventListener("click", function (e) {
-        // 移除其他活跃状态
-        document.querySelectorAll(".sidebar-nav-item.active").forEach((el) => {
-          el.classList.remove("active");
-        });
-
-        // 添加活跃状态到当前项
-        this.classList.add("active");
-
-        // 埋点追踪
-        trackPageClick(this.textContent.trim());
-      });
-
-      // 监听鼠标悬停
-      item.addEventListener("mouseenter", function () {
-        // 可以在这里添加预加载逻辑
-      });
+  function setupPageClickHandlerChange() {
+    const observer = new MutationObserver(function () {
+      addIconsToMenuItems();
     });
-  }
-
-  /**
-   * 观察页面变化（MutationObserver）
-   */
-  function observePageChanges() {
-    const observer = new MutationObserver(function (mutations) {
-      mutations.forEach(function (mutation) {
-        if (mutation.type === "childList" || mutation.type === "attributes") {
-          // 重新添加图标
-          addIconsToMenuItems();
-
-          // 重新设置事件处理器
-          setupGroupClickHandlers();
-          setupPageClickHandlers();
-        }
-      });
-    });
-
-    const config = {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ["class"],
-      attributeOldValue: false,
-    };
-
-    const sidebar = document.querySelector(".sidebar");
-    if (sidebar) {
-      observer.observe(sidebar, config);
-    }
+    observer.observe(document.body, { childList: true, subtree: true });
   }
 
   /**

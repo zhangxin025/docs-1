@@ -1,0 +1,151 @@
+### Close a specific session
+
+##### Endpoint
+/duix-openapi-v2/sdk/v2/sessionStop
+
+##### Request Method: `GET`
+
+##### Parameters
+| Parameter Name | Type | Pass Method | Parameter Description |
+| -------- | -------- | ----- | -------- |
+|uuid|String|Query|sessionId returned in the start-complete event|
+
+
+
+
+#### Request
+
+The Duix platform sends each **user question** as a `POST` request to your remote endpoint using the format below.
+
+##### Request Parameters
+
+| Field | Type | Description | Required |
+|--------|------|-------------|-----------|
+| sid | String | User ID generated during account creation (visible in account info). | Y |
+| dh-code | String | Digital human code, unique per digital human (viewable in the avatar overview). | Y |
+| dh-question | String | The user’s question text. | Y |
+| dh-conversation-id | String | Conversation ID — unique identifier for the session. | Y |
+| dh-context | String | Conversation context, formatted as a stringified JSON object. | N |
+| dh-context.q.context | String | Previous user question text (context). | N |
+| dh-context.a.context | String | Previous digital human answer text (context). | N |
+| uuid | String | Request ID used for tracking and troubleshooting. | N |
+
+##### Example Request
+
+```json
+{
+  "sid": "100003",
+  "dh-code": "187265485019156480",
+  "dh-question": "Who are you?",
+  "dh-conversation-id": "0513e935-041f-48e0-9330-652ef4194511",
+  "dh-context": [
+    {
+      "q": { "context": "user question" },
+      "a": { "context": "answer" }
+    }
+  ]
+}
+
+```
+
+Response: Reply using the format below.
+
+| Field    | Type    | Required | Description         |
+|---------| ------- | -------- |-----------------|
+| code    | String  | Y        | Response status code|
+| msg     | String  | N        | Optional success or error message|
+| data    | object  | N        | Data payload (see below)|
+| success | Boolean | Y        | Whether the request succeeded|
+
+Valid response codes
+
+| Code | Status       | Response                         |
+| ---- | ------------ | -------------------------------- |
+| 200  | OK           | Successful response |
+| 400  | Bad Request  | Invalid body or headers |
+| 401  | Unauthorized | Invalid authentication token |
+| 403  | Forbidden    | Authentication failed |
+| 500  | Server Error | Service exception |
+
+Response body
+
+| Field          | Type   | Description                                                  | Required |
+| -------------- | ------ | ------------------------------------------------------------ | -------- |
+| conversationId | String | Conversation ID (matches the dh-conversation-id in the request). | Y        |
+| question       | String | The user’s question.                               | N        |
+| answer         | String | The digital human’s response, as a stringified JSON object. | Y        |
+| errorMsg       | String | Description of any exception or error                         | N        |
+
+Example Response
+
+```json
+{
+  "code": "200",
+  "msg": "SUCCESS",
+  "success": true,
+  "data": {
+    "conversationId": "0513e935-041f-48e0-9330-652ef4194511",
+    "question": "who are you?",
+    "answer": {
+      "answer": "Welcome to UneeQ, how can I help?"
+    },
+    "errorMsg": ""
+  }
+}
+```
+
+Expected response time: Digital human interactions are latency‑sensitive. 95% of requests should complete within 20 seconds. If the response exceeds 20s, a timeout is reported, but the digital human will continue processing and respond once available.
+
+#### Request
+
+The Duix platform sends each user question to your remote URL via an HTTP `POST` request in the following format.
+
+##### Parameters
+
+| Field | Type | Description | Required |
+|--------|------|-------------|-----------|
+| sid | String | User ID generated during user creation (visible in account information). | Y |
+| dh-code | String | Digital human code, unique per digital human (viewable in the avatar overview). | Y |
+| dh-question | String | The question text sent by the user. | Y |
+| dh-conversation-id | String | Unique identifier for the conversation. | Y |
+| dh-context | String | Conversation context as a stringified JSON object. | N |
+| dh-context.q.context | String | Previous question text in the conversation context. | N |
+| dh-context.a.context | String | Previous answer text in the conversation context. | N |
+| uuid | String | Request ID for tracking and debugging purposes. | N |
+
+##### Example Request
+
+```json
+{
+  "sid": "100003",
+  "dh-code": "187265485019156480",
+  "dh-question": "Who are you?",
+  "dh-conversation-id": "0513e935-041f-48e0-9330-652ef4194511",
+  "dh-context": [
+    {
+      "q": { "context": "user question" },
+      "a": { "context": "answer" }
+    }
+  ]
+}
+
+
+
+Response body
+
+| Field  | Type   | Description | Required |
+| ------ | ------ | ----------- | -------- |
+| answer | String | Partial or complete answer returned by the digital human | Y        |
+| isEnd  | boolean | Indicates whether the current response is the final one | Y        |
+
+Example Response
+
+```json
+{
+    "answer": "Let the Cowherd and Weaver Girl meet on the Milky Way.",
+    "isEnd": false
+}
+```
+
+Expected response time: Digital human interactions are latency‑sensitive. 95% of requests should complete within 20 seconds. If the response exceeds 20s, a timeout is reported, but the digital human will continue to respond.
+
