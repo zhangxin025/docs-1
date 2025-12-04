@@ -55,18 +55,19 @@
    * 初始化导航菜单
    */
   function initNavigation() {
-    // 添加图标到菜单项
-    addIconsToMenuItems();
+    setTimeout(() => {
+      addIconsToMenuItems();
 
-    // 为分组标题添加点击事件
-    setupGroupClickHandlers();
+      // 为分组标题添加点击事件
+      setupGroupClickHandlers();
 
-    // 监听页面变化
-    setupPageClickHandlerChange();
-    linkUrlChange();
+      // 监听页面变化
+      setupPageClickHandlerChange();
+      linkUrlChange();
 
-    // 监听路由变化
-    setupRouteChangeListener();
+      // 监听路由变化
+      setupRouteChangeListener();
+    }, 500);
   }
 
   /**
@@ -87,7 +88,7 @@
               doc = items.doc;
             }
           });
-          // if (!doc) return;
+          if (!doc) return;
           const icon = document.createElement("span");
           icon.className = "nav-item-icon";
           icon.innerHTML = doc;
@@ -142,13 +143,13 @@
               linkDiv.style.display = "flex";
               linkDiv.style.alignItems = "center";
               linkDiv.style.marginLeft = "4px";
-              
+
               const innerDiv = document.createElement("div");
               innerDiv.style.display = "flex";
               innerDiv.style.alignItems = "center";
               innerDiv.style.width = "10px";
               innerDiv.style.height = "10px";
-              
+
               innerDiv.innerHTML =
                 '<svg style="width: 100%; height: 100%; fill: currentColor;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M328 96c13.3 0 24 10.7 24 24V360c0 13.3-10.7 24-24 24s-24-10.7-24-24V177.9L73 409c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l231-231H88c-13.3 0-24-10.7-24-24s10.7-24 24-24H328z"></path></svg>';
               linkDiv.appendChild(innerDiv);
