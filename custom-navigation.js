@@ -64,7 +64,7 @@
     // 监听页面变化
     setupPageClickHandlerChange();
     linkUrlChange();
-    
+
     // 监听路由变化
     setupRouteChangeListener();
   }
@@ -120,13 +120,32 @@
    */
   function linkUrlChange() {
     linkUrlChangeList.forEach((item) => {
-      const liElement = document.querySelector(`li[data-title="${item.title}"]`);
+      const liElement = document.querySelector(
+        `li[data-title="${item.title}"]`
+      );
       if (liElement) {
         const aElement = liElement.querySelector("a");
-        if (aElement) {
+        const textContent = aElement.textContent;
+        if (aElement && textContent.includes(item.title)) {
           aElement.href = item.url;
           aElement.target = "_blank";
           aElement.rel = "noopener noreferrer";
+
+          // 找到 <a> 标签下的第一个 <div>
+          const firstDiv = aElement.querySelector("div");
+          if (firstDiv) {
+            // 检查是否已有 link 类，没有则加
+            if (!firstDiv.querySelector(".link")) {
+              const linkDiv = document.createElement("div");
+              linkDiv.className = "link";
+              const innerDiv = document.createElement("div");
+              innerDiv.innerHTML =
+                '<svg class="h-2.5 text-gray-400 overflow-visible group-hover:text-gray-600 dark:text-gray-600 dark:group-hover:text-gray-400 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" fill="currentColor"><path d="M328 96c13.3 0 24 10.7 24 24V360c0 13.3-10.7 24-24 24s-24-10.7-24-24V177.9L73 409c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l231-231H88c-13.3 0-24-10.7-24-24s10.7-24 24-24H328z"></path></svg>';
+              linkDiv.appendChild(innerDiv);
+              // 插入到该 <div> 内部
+              firstDiv.appendChild(linkDiv);
+            }
+          }
         }
       }
     });
@@ -298,7 +317,7 @@
    */
   function setupRouteChangeListener() {
     let lastUrl = location.href;
-    
+
     // 监听 popstate 事件（浏览器前进后退）
     window.addEventListener("popstate", function () {
       onRouteChange();
